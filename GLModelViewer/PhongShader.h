@@ -1,0 +1,25 @@
+//
+//  SimpleShader.h
+//  ModelViewer
+//
+//  Created by Mattias Bergström on 2014-01-28.
+//  Copyright (c) 2014 Mattias Bergström. All rights reserved.
+//
+
+#ifndef ModelViewer_PhongShader_h
+#define ModelViewer_PhongShader_h
+
+
+#include "glm/gtc/type_ptr.hpp"
+#include "Shader.h"
+#include "Material.h"
+
+
+class PhongShader : public Shader {
+public:
+    void setMaterial(Material material);
+    void init();
+    void setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model);
+};
+
+#endif
