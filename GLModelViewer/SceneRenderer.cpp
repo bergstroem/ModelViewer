@@ -14,6 +14,8 @@
 void SceneRenderer::init(int width, int height) {
     //blurPass.init(width, height);
     buf.init(width, height);
+    shader.init();
+    shader.setupAttributes();
 }
 
 void SceneRenderer::updateResolution(int width, int height) {
@@ -26,12 +28,15 @@ void SceneRenderer::renderScene() {
     
     //buf.bind();
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    renderNodes();
-    //buf.unbind();
-}
-
-void SceneRenderer::renderNodes() {
+    
     for (auto it = this->nodes.begin(); it != this->nodes.end(); it++) {
+        std::shared_ptr<SceneNode> node = (*it);
+        shader.use();
+        shader.setMaterial(node->mesh->material);
+        
+        shader.setUniforms(proj, view, node->modelMatrix);
+        
         (*it)->render(proj, view);
     }
+    //buf.unbind();
 }

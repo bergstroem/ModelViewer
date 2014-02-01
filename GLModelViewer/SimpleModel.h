@@ -14,7 +14,7 @@
 
 class SimpleModel : public SceneNode {
 public:
-    void init(std::shared_ptr<Mesh> mesh, std::shared_ptr<PhongShader> shaderProgram);
+    void init(std::shared_ptr<Mesh> mesh);
     void render(glm::mat4 proj, glm::mat4 view);
 };
 

@@ -42,6 +42,7 @@ public:
     
     unsigned int bufferId;
     unsigned int indexId;
+    unsigned int vaoId;
     
     Material material;
     

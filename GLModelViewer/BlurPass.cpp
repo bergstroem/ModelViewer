@@ -32,7 +32,7 @@ void BlurPass::init(int width, int height) {
     
     // Init shader and model
     blurShader->init();
-    unitQuad.init(mesh, blurShader);
+    unitQuad.init(mesh);
 }
 
 void BlurPass::resize(int width, int height) {

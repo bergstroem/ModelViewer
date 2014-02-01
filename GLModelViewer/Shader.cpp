@@ -49,20 +49,11 @@ void Shader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
 }
 
 void Shader::setupAttributes() {
-    // Enable position location and set offset of position in buffer
-    glEnableVertexAttribArray(SHADER_POSITION_LOCATION);
+    
+    // Bind attrib locations
     glBindAttribLocation(programId, SHADER_POSITION_LOCATION, "position");
-    glVertexAttribPointer(SHADER_POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-    
-    // Enable normal location and set offset of normal in buffer
-    glEnableVertexAttribArray(SHADER_NORMAL_LOCATION);
     glBindAttribLocation(programId, SHADER_NORMAL_LOCATION, "normal");
-    glVertexAttribPointer(SHADER_NORMAL_LOCATION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3)));
-    
-    // Enable color location and set offset of color in buffer
-    glEnableVertexAttribArray(SHADER_COLOR_LOCATION);
     glBindAttribLocation(programId, SHADER_COLOR_LOCATION, "color");
-    glVertexAttribPointer(SHADER_COLOR_LOCATION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3)*2));
     
     // Bind frag locations
     glBindFragDataLocation(programId, DIFFUSE_TEXTURE_INDEX, "outColor");
@@ -76,6 +67,7 @@ void Shader::setupAttributes() {
     // Link everything!
     glLinkProgram(programId);
     
+    // Must be performed on a linked program
     this->setupBufferBindings();
 }
 

@@ -19,8 +19,7 @@
 class SceneRenderer {
     BlurPass blurPass;
     FrameBuffer buf;
-    
-    void renderNodes();
+    PhongShader shader;
     
 public:
     glm::mat4 proj;

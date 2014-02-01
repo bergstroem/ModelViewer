@@ -39,6 +39,5 @@ void main() {
     outColor = max(diffuse * intensity +  spec, vec4(0.0)).xyz;
     
     
-    
     outNormal = VertexIn.normal;
 }

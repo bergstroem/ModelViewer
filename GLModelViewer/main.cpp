@@ -144,12 +144,6 @@ int main(void)
         exit(EXIT_FAILURE);
     }
     
-    std::shared_ptr<PhongShader> simpleShader(new PhongShader);
-    std::shared_ptr<PhongShader> newShader(new PhongShader);
-
-    simpleShader->init();
-    newShader->init();
-    
     std::shared_ptr<Mesh> mesh1 = std::make_shared<Mesh>(OFFReader::read(file1));
     std::shared_ptr<Mesh> mesh2 = std::make_shared<Mesh>(OFFReader::read(file2));
     std::shared_ptr<SimpleModel> test = std::shared_ptr<SimpleModel>(new SimpleModel());
@@ -162,13 +156,13 @@ int main(void)
     mesh1->material.specular = glm::vec4(0.7f, 0.7f, 0.7f, 1.0f);
     mesh2->material.specular = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
     mesh1->material.shininess = 10.0f;
-    mesh2->material.shininess = 0.2f;
+    mesh2->material.shininess = 1.0f;
     
-    dragon->init(mesh1, simpleShader);
+    dragon->init(mesh1);
     dragon->position = glm::vec3(0.0f, -0.2f, -2.0f);
     
     
-    test->init(mesh2, newShader);
+    test->init(mesh2);
     test->position = glm::vec3(1.0f, 0.0f, -4.0f);
     
     int width, height;
