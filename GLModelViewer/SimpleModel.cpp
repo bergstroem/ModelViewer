@@ -9,7 +9,7 @@
 #include "SimpleModel.h"
 #include <GLFW/glfw3.h>
 
-void SimpleModel::init(std::shared_ptr<Mesh> mesh, std::shared_ptr<GeometryShader> shaderProgram) {
+void SimpleModel::init(std::shared_ptr<Mesh> mesh, std::shared_ptr<PhongShader> shaderProgram) {
     SceneNode::init(mesh, shaderProgram);
     
     shaderProgram->setMaterial(mesh->material);

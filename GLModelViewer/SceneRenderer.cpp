@@ -24,10 +24,10 @@ void SceneRenderer::updateResolution(int width, int height) {
 void SceneRenderer::renderScene() {
     //blurPass.render(proj, view, nodes);
     
-    buf.bind();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //buf.bind();
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     renderNodes();
-    buf.unbind();
+    //buf.unbind();
 }
 
 void SceneRenderer::renderNodes() {

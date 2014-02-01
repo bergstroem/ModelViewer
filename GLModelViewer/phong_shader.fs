@@ -14,27 +14,31 @@ out vec3 outNormal;
 
 in VertexData {
     vec3 normal;
-    vec3 color; // Not used anymore
-    vec4 eye;
+    vec4 eyePosition;
 } VertexIn;
 
 void main() {
     vec4 spec = vec4(0.0);
-    vec3 l_dir = (view * vec4(1.0, 0.0, 2.0, 0.0)).xyz;
     
-    // Normalize input, since it is interpolated
-    vec3 e = normalize(vec3(VertexIn.eye));
     vec3 n = normalize(VertexIn.normal);
     
-    float intensity = max(dot(n, normalize(l_dir)), 0.0);
+    // Calculate direction to light
+    vec3 l = normalize((view * vec4(-1.0, 1.0, 1.0, 1.0)) - VertexIn.eyePosition).xyz;
+    
+    float intensity = max(dot(n, l), 0.0);
     
     if(intensity > 0.0) {
-        vec3 h = normalize(normalize(l_dir) + e);
+        // Vector to camera
+        vec3 e = normalize(- vec3(VertexIn.eyePosition));
+        vec3 h = normalize(l + e);
         
         float intSpec = max(dot(h, n), 0.0);
         spec = specular * pow(intSpec, shininess);
     }
     
-    outColor =  max(intensity * diffuse + spec, ambient).xyz;
+    outColor = max(diffuse * intensity +  spec, vec4(0.0)).xyz;
+    
+    
+    
     outNormal = VertexIn.normal;
 }

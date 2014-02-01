@@ -144,8 +144,8 @@ int main(void)
         exit(EXIT_FAILURE);
     }
     
-    std::shared_ptr<GeometryShader> simpleShader(new GeometryShader);
-    std::shared_ptr<GeometryShader> newShader(new GeometryShader);
+    std::shared_ptr<PhongShader> simpleShader(new PhongShader);
+    std::shared_ptr<PhongShader> newShader(new PhongShader);
 
     simpleShader->init();
     newShader->init();
@@ -155,13 +155,13 @@ int main(void)
     std::shared_ptr<SimpleModel> test = std::shared_ptr<SimpleModel>(new SimpleModel());
     std::shared_ptr<SimpleModel> dragon = std::shared_ptr<SimpleModel>(new SimpleModel());
     
-    mesh1->material.diffuse = glm::vec4(1.0f, 0.6f, 5.0f, 1.0f);
-    mesh2->material.diffuse = glm::vec4(0.7f, 0.5f, 0.8f, 1.0f);
+    mesh1->material.diffuse = glm::vec4(0.2f, 0.4f, 1.0f, 1.0f);
+    mesh2->material.diffuse = glm::vec4(0.4f, 0.8f, 0.6f, 1.0f);
     mesh1->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
     mesh2->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-    mesh1->material.specular = glm::vec4(0.3f, 0.3f, 0.3f, 1.0f);
+    mesh1->material.specular = glm::vec4(0.7f, 0.7f, 0.7f, 1.0f);
     mesh2->material.specular = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
-    mesh1->material.shininess = 0.8f;
+    mesh1->material.shininess = 10.0f;
     mesh2->material.shininess = 0.2f;
     
     dragon->init(mesh1, simpleShader);
@@ -189,7 +189,7 @@ int main(void)
         glfwGetFramebufferSize(window, &width, &height);
         float ratio = width / (float)height;
         
-        renderer.proj = glm::perspective(75.0f, ratio, 1.0f, 1000.0f);
+        renderer.proj = glm::perspective(75.0f, ratio, 0.1f, 1000.0f);
         
         // Rotation Up/Down
         renderer.view = glm::rotate(glm::mat4(1.0f), rotationYaw, glm::vec3(1.0f, 0.0f, 0.0f));
