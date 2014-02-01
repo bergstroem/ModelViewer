@@ -24,7 +24,7 @@ void SceneNode::init(std::shared_ptr<Mesh> mesh) {
     mesh->loadBufferData();
 }
 
-void SceneNode::render(glm::mat4 proj, glm::mat4 view) {
+void SceneNode::render() {
     
     modelMatrix = glm::translate(glm::mat4(1.0f), position);
     modelMatrix = modelMatrix * rotation;

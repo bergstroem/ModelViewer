@@ -28,11 +28,13 @@ void BlurPass::init(int width, int height) {
     
     // Create mesh and shader to render blur with
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
-    blurShader = std::shared_ptr<BlurShader>(new BlurShader);
     
     // Init shader and model
-    blurShader->init();
+    blurShader.init();
     unitQuad.init(mesh);
+    
+    shader.init();
+    shader.setupAttributes();
 }
 
 void BlurPass::resize(int width, int height) {
@@ -47,28 +49,35 @@ void BlurPass::resize(int width, int height) {
 }
 
 void BlurPass::horizontalBlur() {
-    
-    blurShader->direction = BlurShader::HORIZONTAL;
-    
+    glm::mat4 matrix(1.0f);
     // Draw horizontal blur into the vertical blur buffer
     pass2Buffer->bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // Bind texture from horizontal buffer to sample from it
     pass1Buffer->bindTextures();
     
-    unitQuad.render(glm::mat4(1.0f), glm::mat4(1.0f));
+    blurShader.use();
+    
+    blurShader.setUniforms(matrix, matrix, matrix);
+    blurShader.direction = BlurShader::HORIZONTAL;
+    
+    unitQuad.render();
     
     pass1Buffer->unbindTextures();
     pass2Buffer->unbind();
 }
 
 void BlurPass::verticalBlur() {
-    
-    blurShader->direction = BlurShader::VERTICAL;
-    
+    glm::mat4 matrix(1.0f);
     // Render image with vertical blur to screen
     pass2Buffer->bindTextures();
-    unitQuad.render(glm::mat4(1.0f), glm::mat4(1.0f));
+    
+    blurShader.use();
+    
+    blurShader.setUniforms(matrix, matrix, matrix);
+    blurShader.direction = BlurShader::VERTICAL;
+    
+    unitQuad.render();
     pass2Buffer->unbindTextures();
 }
 
@@ -78,7 +87,7 @@ void BlurPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_pt
     pass1Buffer->bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (auto it = nodes.begin(); it != nodes.end(); it++) {
-        (*it)->render(proj, view);
+        (*it)->render();
     }
     
     pass1Buffer->unbind();

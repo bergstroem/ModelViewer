@@ -9,15 +9,11 @@
 #include "SimpleModel.h"
 #include <GLFW/glfw3.h>
 
-void SimpleModel::init(std::shared_ptr<Mesh> mesh) {
-    SceneNode::init(mesh);
-}
-
-void SimpleModel::render(glm::mat4 proj, glm::mat4 view) {
+void SimpleModel::render() {
     //Rotate the model around its y-axis
     glm::vec3 v_rotation = glm::vec3(0.0f, 1.0f, 0.0f);
     modelMatrix = glm::translate(glm::mat4(1.0f), position);
     //rotation = glm::rotate(glm::mat4(1.0f), 50.0f * (float)glfwGetTime(), v_rotation);
     
-    SceneNode::render(proj, view);
+    SceneNode::render();
 }

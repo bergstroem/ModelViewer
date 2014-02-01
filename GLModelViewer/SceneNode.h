@@ -34,7 +34,7 @@ public:
     
     // Methods
     virtual void init(std::shared_ptr<Mesh> mesh);
-    virtual void render(glm::mat4 proj, glm::mat4 view);
+    virtual void render();
 };
 
 #endif

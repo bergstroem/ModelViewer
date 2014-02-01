@@ -18,7 +18,7 @@
 
 class SceneRenderer {
     BlurPass blurPass;
-    FrameBuffer buf;
+    FrameBuffer gBuffer;
     PhongShader shader;
     
 public:

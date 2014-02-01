@@ -13,13 +13,16 @@
 #include "FrameBuffer.h"
 #include "SceneNode.h"
 #include "BlurShader.h"
+#include "glm/glm.hpp"
 
+// TODO: Rewrite to take a framebuffer or texture instead of nodes
 class BlurPass : public IRenderPass {
     FrameBuffer* pass1Buffer;
     FrameBuffer* pass2Buffer;
-    SceneNode unitQuad;
     
-    std::shared_ptr<BlurShader> blurShader;
+    SceneNode unitQuad;
+    BlurShader blurShader;
+    PhongShader shader;
     
     void horizontalBlur();
     void verticalBlur();

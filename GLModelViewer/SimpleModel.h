@@ -14,8 +14,7 @@
 
 class SimpleModel : public SceneNode {
 public:
-    void init(std::shared_ptr<Mesh> mesh);
-    void render(glm::mat4 proj, glm::mat4 view);
+    void render();
 };
 
 #endif
