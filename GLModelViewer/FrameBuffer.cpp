@@ -46,8 +46,8 @@ bool FrameBuffer::init(int width, int height) {
     // Create buffers for all vertex data
     // TODO: Maybe add the possibility to create frame buffers that dont have all the buffers
     
-    GLenum DrawBuffers[NUM_TEXTURE_INDICES];
-    for(int i = 0; i < NUM_TEXTURE_INDICES; i++) {
+    GLenum DrawBuffers[NUM_TEXTURES];
+    for(int i = 0; i < NUM_TEXTURES; i++) {
         this->colorTextureIDs.push_back(createTextureAttachment());
         glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, colorTextureIDs[i], 0);
         
@@ -55,7 +55,7 @@ bool FrameBuffer::init(int width, int height) {
     }
     createDepthBuffer();
     
-    glDrawBuffers(NUM_TEXTURE_INDICES, &DrawBuffers[0]); // "2" is the size of DrawBuffers
+    glDrawBuffers(NUM_TEXTURES, &DrawBuffers[0]);
     
     // Always check that our framebuffer is ok
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
@@ -87,7 +87,8 @@ unsigned int FrameBuffer::createTextureAttachment() {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, this->width, this->height, 0, GL_RGB, GL_FLOAT, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     return texID;
 }
 
@@ -99,8 +100,8 @@ void FrameBuffer::createDepthBuffer() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE );
     glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, depthTextureID, 0);
-    
 }
 
 void FrameBuffer::bind() {
@@ -112,17 +113,53 @@ void FrameBuffer::unbind() {
 }
 
 void FrameBuffer::bindTextures() {
-    for (int i = 0; i < NUM_TEXTURE_INDICES; i++) {
-        glActiveTexture(GL_TEXTURE0 + i);
-        glBindTexture(GL_TEXTURE_2D, colorTextureIDs[i]);
-    }
+    
+
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_NORMAL_INDEX);
+    glBindTexture(GL_TEXTURE_2D, colorTextureIDs[TEXTURE_NORMAL_INDEX]);
+    
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_POSITION_INDEX);
+    glBindTexture(GL_TEXTURE_2D, colorTextureIDs[TEXTURE_POSITION_INDEX]);
+    
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_DIFFUSE_INDEX);
+    glBindTexture(GL_TEXTURE_2D, colorTextureIDs[TEXTURE_DIFFUSE_INDEX]);
+    
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_AMBIENT_INDEX);
+    glBindTexture(GL_TEXTURE_2D, colorTextureIDs[TEXTURE_AMBIENT_INDEX]);
+    
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_SPECULAR_INDEX);
+    glBindTexture(GL_TEXTURE_2D, colorTextureIDs[TEXTURE_SPECULAR_INDEX]);
+    
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_SHININESS_INDEX);
+    glBindTexture(GL_TEXTURE_2D, colorTextureIDs[TEXTURE_SHININESS_INDEX]);
+
+    
+    //Bind depth
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_DEPTH_INDEX);
+    glBindTexture(GL_TEXTURE_2D, depthTextureID);
 }
 
 void FrameBuffer::unbindTextures() {
-    glActiveTexture(GL_TEXTURE0);
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_NORMAL_INDEX);
     glBindTexture(GL_TEXTURE_2D, 0);
     
-    glActiveTexture(GL_TEXTURE1);
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_POSITION_INDEX);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_DIFFUSE_INDEX);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_AMBIENT_INDEX);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_SPECULAR_INDEX);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_SHININESS_INDEX);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    //unbind depth
+    glActiveTexture(GL_TEXTURE0 + TEXTURE_DEPTH_INDEX);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 

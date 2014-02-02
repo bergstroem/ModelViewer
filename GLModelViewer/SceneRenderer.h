@@ -16,10 +16,12 @@
 #include "BlurPass.h"
 #include "GeometryPass.h"
 #include "LightingPass.h"
+#include "PhongShader.h"
 
 class SceneRenderer {
     GeometryPass geometryPass;
     LightingPass lightingPass;
+    PhongShader phong;
     
 public:
     glm::mat4 proj;

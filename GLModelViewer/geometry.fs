@@ -12,7 +12,7 @@ in VertexAttribute {
     vec3 normal;
 } VertexIn;
 
-out vec3 outColor;
+out vec3 outDiffuse;
 out vec3 outNormal;
 out vec3 outPosition;
 out vec3 outAmbient;
@@ -21,10 +21,10 @@ out vec3 outShininess;
 
 void main()
 {
-    outColor = diffuse.xyz;
     outNormal = VertexIn.normal;
+    outDiffuse = diffuse.xyz;
     outPosition = VertexIn.viewModelPosition.xyz;
     outAmbient = ambient.xyz;
     outSpecular = specular.xyz;
-    outShininess.x = 0.5;
+    outShininess.x = shininess;
 }

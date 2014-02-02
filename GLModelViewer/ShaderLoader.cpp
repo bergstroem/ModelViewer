@@ -27,12 +27,15 @@ int ShaderLoader::loadShaderProgram(std::string vertexShader, std::string fragme
     glBindAttribLocation(shaderProgram, SHADER_COLOR_LOCATION, "color");
     
     // Bind frag locations
-    glBindFragDataLocation(shaderProgram, DIFFUSE_TEXTURE_INDEX, "outColor");
-    glBindFragDataLocation(shaderProgram, NORMAL_TEXTURE_INDEX, "outNormal");
-    glBindFragDataLocation(shaderProgram, POSITION_TEXTURE_INDEX, "outPosition");
-    glBindFragDataLocation(shaderProgram, AMBIENT_TEXTURE_INDEX, "outAmbient");
-    glBindFragDataLocation(shaderProgram, SPECULAR_TEXTURE_INDEX, "outSpecular");
-    glBindFragDataLocation(shaderProgram, SHININESS_TEXTURE_INDEX, "outShininess");
+    glBindFragDataLocation(shaderProgram, TEXTURE_DIFFUSE_INDEX, "outDiffuse"); // WHY U NO WORK!?
+    glBindFragDataLocation(shaderProgram, TEXTURE_NORMAL_INDEX, "outNormal");
+    glBindFragDataLocation(shaderProgram, TEXTURE_POSITION_INDEX, "outPosition");
+    glBindFragDataLocation(shaderProgram, TEXTURE_AMBIENT_INDEX, "outAmbient");
+    glBindFragDataLocation(shaderProgram, TEXTURE_SPECULAR_INDEX, "outSpecular");
+    glBindFragDataLocation(shaderProgram, TEXTURE_SHININESS_INDEX, "outShininess");
+    
+    glBindFragDataLocation(shaderProgram, 0, "outColor");
+
     
     // Link everything!
     glLinkProgram(shaderProgram);

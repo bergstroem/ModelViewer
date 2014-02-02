@@ -46,7 +46,7 @@ void Shader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
     glUniformMatrix4fv(modelId, 1, GL_FALSE, glm::value_ptr(model));
     glUniformMatrix3fv(normalMatrixId, 1, GL_FALSE, glm::value_ptr(normalMatrix));
     glUniform1f(nearZId, 0.1f);
-    glUniform1f(farZId, 1000.0f);
+    glUniform1f(farZId, 100.0f);
 }
 
 void Shader::setupBufferBindings() {

@@ -34,7 +34,8 @@ void main() {
         
         float intSpec = max(dot(h, n), 0.0);
         spec = specular * pow(intSpec, shininess);
-    }
-    
-    outColor = max(diffuse * intensity +  spec, ambient*diffuse);
+        outColor = vec4(pow(intSpec, shininess), 0.0, 0.0, 1.0);
+    } else {
+    outColor = vec4(0.0);
+    }//max(diffuse * intensity +  spec, ambient*diffuse);
 }
