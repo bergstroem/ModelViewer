@@ -12,13 +12,13 @@ in vec3 color;
 
 out VertexData {
     vec3 normal;
-    vec4 eyePosition;
+    vec4 eyeSpacePosition;
 } VertexOut;
 
 void main() {
     vec3 _normal = normalize(normal_matrix * normal);
     
-    VertexOut.eyePosition = (view * model * vec4(position, 1.0));
+    VertexOut.eyeSpacePosition = (view * model * vec4(position, 1.0));
     VertexOut.normal = _normal;
     gl_Position = proj * view * model * vec4(position, 1.0);
 }

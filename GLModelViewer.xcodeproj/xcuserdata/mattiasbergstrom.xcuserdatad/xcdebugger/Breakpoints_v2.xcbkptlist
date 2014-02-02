@@ -25,44 +25,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GLModelViewer/Shader.cpp"
-            timestampString = "412949963.056651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "Shader::setupBufferBindings()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GLModelViewer/Shader.cpp"
-            timestampString = "412949963.056651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "Shader::setupBufferBindings()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GLModelViewer/PhongShader.cpp"
-            timestampString = "412900938.50179"
+            timestampString = "412988129.058111"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "PhongShader::setMaterial(Material material)"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,12 +58,104 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/BlurPass.cpp"
-            timestampString = "412951467.007549"
+            timestampString = "412987911.527529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "BlurPass::horizontalBlur()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/GeometryPass.cpp"
+            timestampString = "412987911.527529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt; &gt; nodes)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GeometryPass::render(glm::detail::tmat4x4&lt;float&gt;, glm::detail::tmat4x4&lt;float&gt;, std::__1::vector&lt;std::__1::shared_ptr&lt;SceneNode&gt;, std::__1::allocator&lt;std::__1::shared_ptr&lt;SceneNode&gt; &gt; &gt;)"
+                  moduleName = "GLModelViewer"
+                  urlString = "file:///Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/GeometryPass.cpp"
+                  timestampString = "412983802.417508"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "578">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GeometryPass::render(glm::detail::tmat4x4&lt;float&gt;, glm::detail::tmat4x4&lt;float&gt;, std::__1::vector&lt;std::__1::shared_ptr&lt;SceneNode&gt;, std::__1::allocator&lt;std::__1::shared_ptr&lt;SceneNode&gt; &gt; &gt;)"
+                  moduleName = "GLModelViewer"
+                  urlString = "file:///Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/GeometryPass.cpp"
+                  timestampString = "412983802.417707"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "607">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GeometryPass::render(glm::detail::tmat4x4&lt;float&gt;, glm::detail::tmat4x4&lt;float&gt;, std::__1::vector&lt;std::__1::shared_ptr&lt;SceneNode&gt;, std::__1::allocator&lt;std::__1::shared_ptr&lt;SceneNode&gt; &gt; &gt;)"
+                  moduleName = "GLModelViewer"
+                  urlString = "file:///Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/GeometryPass.cpp"
+                  timestampString = "412983802.417863"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "628">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/GeometryPass.cpp"
+            timestampString = "412987911.527529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt; &gt; nodes)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/GeometryPass.cpp"
+            timestampString = "412987911.527529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt; &gt; nodes)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

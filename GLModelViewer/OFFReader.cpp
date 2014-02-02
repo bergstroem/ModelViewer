@@ -17,7 +17,7 @@
 #include "glm/glm.hpp"
 #include "OFFReader.h"
 
-Mesh OFFReader::read(std::istream& stream) {
+std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
     
     std::map<Vertex*, std::list<glm::vec3>> normalizationInfo;
     
@@ -34,15 +34,15 @@ Mesh OFFReader::read(std::istream& stream) {
         throw fileReadError + " Did not contain numVertices, numFaces and numEdges";
     }
     
-    Mesh mesh;
+    std::shared_ptr<Mesh> mesh(new Mesh);
     
-    mesh.vertexBuffer.resize(numVerts);
+    mesh->vertexBuffer.resize(numVerts);
     float x, y, z;
     for(int i = 0; i < numVerts; i++) {
         if(!(stream >> x >> y >> z)) {
             throw fileReadError + " Could not read coordinates";
         }
-        mesh.vertexBuffer[i] = Vertex{{x, y, z},{0.0f,0.0f,0.0f},{1.0f,1.0f,1.0f}};
+        mesh->vertexBuffer[i] = Vertex{{x, y, z},{0.0f,0.0f,0.0f},{1.0f,1.0f,1.0f}};
     }
     
     int numPolygonIndices;
@@ -61,15 +61,15 @@ Mesh OFFReader::read(std::istream& stream) {
         
         // Triangulate polygon
         for (int j = 2; j < numPolygonIndices; j++) {
-            mesh.indexBuffer.push_back(polygonIndices[0]);
-            mesh.indexBuffer.push_back(polygonIndices[j-1]);
-            mesh.indexBuffer.push_back(polygonIndices[j]);
+            mesh->indexBuffer.push_back(polygonIndices[0]);
+            mesh->indexBuffer.push_back(polygonIndices[j-1]);
+            mesh->indexBuffer.push_back(polygonIndices[j]);
             
             
             // Create normal per triangle
-            Vertex* vertex1 = &mesh.vertexBuffer[polygonIndices[0]];
-            Vertex* vertex2 = &mesh.vertexBuffer[polygonIndices[j-1]];
-            Vertex* vertex3 = &mesh.vertexBuffer[polygonIndices[j]];
+            Vertex* vertex1 = &mesh->vertexBuffer[polygonIndices[0]];
+            Vertex* vertex2 = &mesh->vertexBuffer[polygonIndices[j-1]];
+            Vertex* vertex3 = &mesh->vertexBuffer[polygonIndices[j]];
             
             // Convert to glm vectors and create normal
             glm::vec3 vec1 = glm::vec3(vertex2->position.x - vertex1->position.x,
@@ -125,7 +125,7 @@ Mesh OFFReader::read(std::istream& stream) {
                 }
                 
                 for(unsigned int& index : polygonIndices) {
-                    mesh.vertexBuffer[index].color = Color{r, g, b};
+                    mesh->vertexBuffer[index].color = Color{r, g, b};
                 }
                 break;
             default:

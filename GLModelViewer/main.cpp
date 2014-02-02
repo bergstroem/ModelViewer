@@ -18,7 +18,6 @@
 #include <OpenGL/glu.h>
 #include "OFFReader.h"
 #include "ShaderLoader.h"
-#include "SimpleModel.h"
 #include "SceneRenderer.h"
 #include "Constants.h"
 #include "GeometryShader.h"
@@ -122,6 +121,8 @@ GLFWwindow* initGLWindow() {
     return window;
 }
 
+
+
 int main(void)
 {
     GLFWwindow* window = initGLWindow();
@@ -137,30 +138,29 @@ int main(void)
     }
     
     std::ifstream file2;
-    file2.open("/Users/mattiasbergstrom/Desktop/cooldragon.off");
+    file2.open("/Users/mattiasbergstrom/Desktop/sphere.off");
     
     if(!file2.is_open()) {
         std::cerr << "Could not open file" << std::endl;
         exit(EXIT_FAILURE);
     }
     
-    std::shared_ptr<Mesh> mesh1 = std::make_shared<Mesh>(OFFReader::read(file1));
-    std::shared_ptr<Mesh> mesh2 = std::make_shared<Mesh>(OFFReader::read(file2));
-    std::shared_ptr<SimpleModel> test = std::shared_ptr<SimpleModel>(new SimpleModel());
-    std::shared_ptr<SimpleModel> dragon = std::shared_ptr<SimpleModel>(new SimpleModel());
+    std::shared_ptr<Mesh> mesh1 = OFFReader::read(file1);
+    std::shared_ptr<Mesh> mesh2 = OFFReader::read(file2);
+    auto test = std::shared_ptr<SceneNode>(new SceneNode());
+    auto dragon = std::shared_ptr<SceneNode>(new SceneNode());
     
-    mesh1->material.diffuse = glm::vec4(0.2f, 0.4f, 1.0f, 1.0f);
+    mesh1->material.diffuse = glm::vec4(0.6f, 0.4f, 1.0f, 1.0f);
     mesh2->material.diffuse = glm::vec4(0.4f, 0.8f, 0.6f, 1.0f);
     mesh1->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
     mesh2->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
     mesh1->material.specular = glm::vec4(0.7f, 0.7f, 0.7f, 1.0f);
     mesh2->material.specular = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
-    mesh1->material.shininess = 10.0f;
+    mesh1->material.shininess = 50.0f;
     mesh2->material.shininess = 1.0f;
     
     dragon->init(mesh1);
-    dragon->position = glm::vec3(0.0f, -0.2f, -2.0f);
-    
+    dragon->position = glm::vec3(-2.0f, 0.0f, -3.0f);
     
     test->init(mesh2);
     test->position = glm::vec3(1.0f, 0.0f, -4.0f);
@@ -168,17 +168,17 @@ int main(void)
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
     
-    // Init renderer and add nodes
     
     renderer.init(width, height);
-    renderer.nodes.push_back(dragon);
+    
     renderer.nodes.push_back(test);
+    renderer.nodes.push_back(dragon);
     
     while (!glfwWindowShouldClose(window))
     {
         updateInput(window);
         
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         
         glfwGetFramebufferSize(window, &width, &height);
         float ratio = width / (float)height;

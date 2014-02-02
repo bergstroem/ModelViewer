@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Mattias Bergström. All rights reserved.
 //
 
+#include <iostream>
 #include "GeometryShader.h"
 #include "ShaderLoader.h"
 
@@ -13,10 +14,11 @@ void GeometryShader::init() {
     ShaderLoader& loader = ShaderLoader::getInstance();
     
     this->programId = loader.loadShaderProgram("/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/geometry.vs", "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/geometry.fs");
+    
+    this->setupBufferBindings();
 }
 
 void GeometryShader::setMaterial(Material material) {
-    //TODO: update material
     glBindBuffer(GL_UNIFORM_BUFFER, materialBuffer);
     glBufferData(GL_UNIFORM_BUFFER, sizeof(Material), &material, GL_DYNAMIC_DRAW);
 }

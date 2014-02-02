@@ -11,15 +11,15 @@
 
 #include <deque>
 #include "glm/glm.hpp"
-#include "SimpleModel.h"
 #include "UnitQuad.h"
 #include "FrameBuffer.h"
 #include "BlurPass.h"
+#include "GeometryPass.h"
+#include "LightingPass.h"
 
 class SceneRenderer {
-    BlurPass blurPass;
-    FrameBuffer gBuffer;
-    PhongShader shader;
+    GeometryPass geometryPass;
+    LightingPass lightingPass;
     
 public:
     glm::mat4 proj;

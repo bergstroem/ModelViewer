@@ -16,7 +16,7 @@ class FrameBuffer {
 private:
     unsigned int fbID;
     std::vector<unsigned int> colorTextureIDs;
-    unsigned int depthBufferID;
+    unsigned int depthTextureID;
     int width;
     int height;
     bool initialized;

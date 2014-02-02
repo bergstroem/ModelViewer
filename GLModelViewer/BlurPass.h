@@ -9,14 +9,14 @@
 #ifndef GLModelViewer_BlurPass_h
 #define GLModelViewer_BlurPass_h
 
-#include "IRenderPass.h"
+#include "RenderPass.h"
 #include "FrameBuffer.h"
 #include "SceneNode.h"
 #include "BlurShader.h"
 #include "glm/glm.hpp"
 
 // TODO: Rewrite to take a framebuffer or texture instead of nodes
-class BlurPass : public IRenderPass {
+class BlurPass : public RenderPass {
     FrameBuffer* pass1Buffer;
     FrameBuffer* pass2Buffer;
     

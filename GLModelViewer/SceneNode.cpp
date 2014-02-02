@@ -15,7 +15,6 @@ SceneNode::SceneNode() {
 }
 
 SceneNode::~SceneNode() {
-    
 }
 
 void SceneNode::init(std::shared_ptr<Mesh> mesh) {

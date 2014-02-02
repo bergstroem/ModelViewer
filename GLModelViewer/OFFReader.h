@@ -10,10 +10,11 @@
 #define ModelViewer_OFFReader_h
 
 #include <istream>
+#include <memory>
 #include "Mesh.h"
 
 namespace OFFReader {
-    Mesh read(std::istream& stream);
+    std::shared_ptr<Mesh> read(std::istream& stream);
 }
 
 #endif

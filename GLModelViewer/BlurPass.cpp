@@ -34,7 +34,6 @@ void BlurPass::init(int width, int height) {
     unitQuad.init(mesh);
     
     shader.init();
-    shader.setupAttributes();
 }
 
 void BlurPass::resize(int width, int height) {

@@ -9,12 +9,12 @@ layout (std140) uniform Material {
     float shininess;
 };
 
-out vec3 outColor;
-out vec3 outNormal;
+out vec4 outColor;
+out vec4 outNormal;
 
 in VertexData {
     vec3 normal;
-    vec4 eyePosition;
+    vec4 eyeSpacePosition;
 } VertexIn;
 
 void main() {
@@ -23,21 +23,18 @@ void main() {
     vec3 n = normalize(VertexIn.normal);
     
     // Calculate direction to light
-    vec3 l = normalize((view * vec4(-1.0, 1.0, 1.0, 1.0)) - VertexIn.eyePosition).xyz;
+    vec3 l = normalize((view * vec4(1.0, 1.0, 1.0, 1.0)) - VertexIn.eyeSpacePosition).xyz;
     
     float intensity = max(dot(n, l), 0.0);
     
     if(intensity > 0.0) {
         // Vector to camera
-        vec3 e = normalize(- vec3(VertexIn.eyePosition));
+        vec3 e = normalize(- vec3(VertexIn.eyeSpacePosition));
         vec3 h = normalize(l + e);
         
         float intSpec = max(dot(h, n), 0.0);
         spec = specular * pow(intSpec, shininess);
     }
     
-    outColor = max(diffuse * intensity +  spec, vec4(0.0)).xyz;
-    
-    
-    outNormal = VertexIn.normal;
+    outColor = max(diffuse * intensity +  spec, ambient*diffuse);
 }

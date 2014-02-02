@@ -12,6 +12,7 @@
 #include <math.h>
 #include "Constants.h"
 #include "Mesh.h"
+#include <iostream>
 
 Shader::Shader() {
     // Setup default values
@@ -46,29 +47,6 @@ void Shader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
     glUniformMatrix3fv(normalMatrixId, 1, GL_FALSE, glm::value_ptr(normalMatrix));
     glUniform1f(nearZId, 0.1f);
     glUniform1f(farZId, 1000.0f);
-}
-
-void Shader::setupAttributes() {
-    
-    // Bind attrib locations
-    glBindAttribLocation(programId, SHADER_POSITION_LOCATION, "position");
-    glBindAttribLocation(programId, SHADER_NORMAL_LOCATION, "normal");
-    glBindAttribLocation(programId, SHADER_COLOR_LOCATION, "color");
-    
-    // Bind frag locations
-    glBindFragDataLocation(programId, DIFFUSE_TEXTURE_INDEX, "outColor");
-    glBindFragDataLocation(programId, NORMAL_TEXTURE_INDEX, "outNormal");
-    glBindFragDataLocation(programId, DEPTH_TEXTURE_INDEX, "outDepth");
-    glBindFragDataLocation(programId, POSITION_TEXTURE_INDEX, "outPosition");
-    glBindFragDataLocation(programId, AMBIENT_TEXTURE_INDEX, "outAmbient");
-    glBindFragDataLocation(programId, SPECULAR_TEXTURE_INDEX, "outSpecular");
-    glBindFragDataLocation(programId, SHININESS_TEXTURE_INDEX, "outShininess");
-    
-    // Link everything!
-    glLinkProgram(programId);
-    
-    // Must be performed on a linked program
-    this->setupBufferBindings();
 }
 
 void Shader::setupBufferBindings() {

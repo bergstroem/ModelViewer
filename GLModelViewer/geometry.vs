@@ -13,13 +13,13 @@ in vec3 normal;
 
 out VertexAttribute {
     vec4 viewModelPosition;
-    vec4 normal;
+    vec3 normal;
 } VertexOut;
 
 void main()
 {
     vec3 _normal = normalize(normal_matrix * normal);
-    VertexOut.normal = vec4(_normal, 0.0);
-    VertexOut.viewModelPosition = proj * view * model * vec4(position, 1.0);
-    gl_Position = VertexOut.viewModelPosition;
+    VertexOut.normal = _normal;
+    VertexOut.viewModelPosition = view * model * vec4(position, 1.0);
+    gl_Position = proj * VertexOut.viewModelPosition;
 }

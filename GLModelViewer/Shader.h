@@ -37,7 +37,6 @@ public:
     virtual void init() = 0;
     void use();
     virtual void setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model);
-    virtual void setupAttributes();
     
 };
 

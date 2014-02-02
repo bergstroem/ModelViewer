@@ -16,6 +16,8 @@ void PhongShader::init() {
     ShaderLoader& loader = ShaderLoader::getInstance();
     
     this->programId = loader.loadShaderProgram("/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/phong_shader.vs", "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/phong_shader.fs");
+    
+    this->setupBufferBindings();
 }
 
 void PhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {

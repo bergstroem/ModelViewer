@@ -12,14 +12,22 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "SceneNode.h"
+#include "FrameBuffer.h"
 
-class IRenderPass {
+/*
+ * Abstract class for render passes
+ */
+class RenderPass {
     
 public:
-    virtual void init(int width, int height) = 0;
-    virtual void resize(int width, int height) = 0;
-    // TODO: CHANGE INTO SINGLE NODE WHEN NODES START TO HAVE CHILDREN
-    virtual void render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes) = 0;
+    FrameBuffer* buffer;
+    
+    ~RenderPass();
+    
+    virtual void init(int width, int height);
+    virtual void resize(int width, int height);
+    void bindBufferTextures();
+    void unbindBufferTextures();
 };
 
 #endif

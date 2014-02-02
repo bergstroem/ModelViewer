@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02D0DDB0189D53F300CC1BE6 /* LightingPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */; };
+		02D0DDB6189DB42F00CC1BE6 /* deferred_phong.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */; };
+		02D0DDB9189DB53100CC1BE6 /* DeferredPhongShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB8189DB53100CC1BE6 /* DeferredPhongShader.cpp */; };
 		02DB27FE189B2CCC0055B56F /* GLModelViewer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */; };
 		02DB2922189B2CE10055B56F /* blur_shader.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2804189B2CE00055B56F /* blur_shader.fs */; };
 		02DB2923189B2CE10055B56F /* BlurShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2805189B2CE00055B56F /* BlurShader.cpp */; };
@@ -21,7 +24,6 @@
 		02DB292E189B2CE10055B56F /* ShaderLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2918189B2CE10055B56F /* ShaderLoader.cpp */; };
 		02DB292F189B2CE10055B56F /* phong_shader.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02DB291A189B2CE10055B56F /* phong_shader.fs */; };
 		02DB2930189B2CE10055B56F /* phong_shader.vs in Sources */ = {isa = PBXBuildFile; fileRef = 02DB291B189B2CE10055B56F /* phong_shader.vs */; };
-		02DB2931189B2CE10055B56F /* SimpleModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB291C189B2CE10055B56F /* SimpleModel.cpp */; };
 		02DB2932189B2CE10055B56F /* PhongShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB291E189B2CE10055B56F /* PhongShader.cpp */; };
 		02DB2933189B2CE10055B56F /* UnitQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2920189B2CE10055B56F /* UnitQuad.cpp */; };
 		02DB2935189B2F2E0055B56F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DB2934189B2F2E0055B56F /* OpenGL.framework */; };
@@ -31,6 +33,8 @@
 		02DB2945189C5CC40055B56F /* geometry.vs in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2944189C5CC40055B56F /* geometry.vs */; };
 		02DB2947189C5CD30055B56F /* geometry.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2946189C5CD30055B56F /* geometry.fs */; };
 		02DB294A189C64130055B56F /* GeometryShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2949189C64130055B56F /* GeometryShader.cpp */; };
+		02DB294D189D283F0055B56F /* GeometryPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB294C189D283F0055B56F /* GeometryPass.cpp */; };
+		02DB294F189D2A2E0055B56F /* RenderPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB294E189D2A2E0055B56F /* RenderPass.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +51,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightingPass.cpp; sourceTree = "<group>"; };
+		02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_phong.fs; sourceTree = "<group>"; };
+		02D0DDB7189DB4B000CC1BE6 /* DeferredPhongShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeferredPhongShader.h; sourceTree = "<group>"; };
+		02D0DDB8189DB53100CC1BE6 /* DeferredPhongShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeferredPhongShader.cpp; sourceTree = "<group>"; };
 		02DB27F8189B2CCC0055B56F /* GLModelViewer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GLModelViewer; sourceTree = BUILT_PRODUCTS_DIR; };
 		02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = GLModelViewer.1; sourceTree = "<group>"; };
 		02DB2804189B2CE00055B56F /* blur_shader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blur_shader.fs; sourceTree = "<group>"; };
@@ -73,8 +81,6 @@
 		02DB2919189B2CE10055B56F /* ShaderLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderLoader.h; sourceTree = "<group>"; };
 		02DB291A189B2CE10055B56F /* phong_shader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = phong_shader.fs; sourceTree = "<group>"; };
 		02DB291B189B2CE10055B56F /* phong_shader.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = phong_shader.vs; sourceTree = "<group>"; };
-		02DB291C189B2CE10055B56F /* SimpleModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleModel.cpp; sourceTree = "<group>"; };
-		02DB291D189B2CE10055B56F /* SimpleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleModel.h; sourceTree = "<group>"; };
 		02DB291E189B2CE10055B56F /* PhongShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhongShader.cpp; sourceTree = "<group>"; };
 		02DB291F189B2CE10055B56F /* PhongShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhongShader.h; sourceTree = "<group>"; };
 		02DB2920189B2CE10055B56F /* UnitQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnitQuad.cpp; sourceTree = "<group>"; };
@@ -82,13 +88,17 @@
 		02DB2934189B2F2E0055B56F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		02DB2936189B2F510055B56F /* libglfw3.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.0.dylib; path = ../../../../../usr/local/Cellar/glfw3/3.0.3/lib/libglfw3.3.0.dylib; sourceTree = "<group>"; };
 		02DB2938189B2F650055B56F /* libGLEW.1.10.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.10.0.dylib; path = ../../../../../usr/local/Cellar/glew/1.10.0/lib/libGLEW.1.10.0.dylib; sourceTree = "<group>"; };
-		02DB293A189BB8E30055B56F /* IRenderPass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRenderPass.h; sourceTree = "<group>"; };
+		02DB293A189BB8E30055B56F /* RenderPass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderPass.h; sourceTree = "<group>"; };
 		02DB293C189BBADA0055B56F /* BlurPass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlurPass.h; sourceTree = "<group>"; };
 		02DB293D189BBB0E0055B56F /* BlurPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlurPass.cpp; sourceTree = "<group>"; };
 		02DB2944189C5CC40055B56F /* geometry.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = geometry.vs; sourceTree = "<group>"; };
 		02DB2946189C5CD30055B56F /* geometry.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = geometry.fs; sourceTree = "<group>"; };
 		02DB2948189C62D20055B56F /* GeometryShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeometryShader.h; sourceTree = "<group>"; };
 		02DB2949189C64130055B56F /* GeometryShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryShader.cpp; sourceTree = "<group>"; };
+		02DB294B189D25520055B56F /* GeometryPass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeometryPass.h; sourceTree = "<group>"; };
+		02DB294C189D283F0055B56F /* GeometryPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryPass.cpp; sourceTree = "<group>"; };
+		02DB294E189D2A2E0055B56F /* RenderPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderPass.cpp; sourceTree = "<group>"; };
+		02DB2950189D4A350055B56F /* LightingPass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightingPass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +115,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02D0DDB1189DAFC400CC1BE6 /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				02DB2912189B2CE10055B56F /* SceneNode.cpp */,
+				02DB2913189B2CE10055B56F /* SceneNode.h */,
+				02DB2914189B2CE10055B56F /* SceneRenderer.cpp */,
+				02DB2915189B2CE10055B56F /* SceneRenderer.h */,
+			);
+			name = scene;
+			sourceTree = "<group>";
+		};
+		02D0DDB2189DAFD200CC1BE6 /* mesh */ = {
+			isa = PBXGroup;
+			children = (
+				02DB290C189B2CE10055B56F /* Mesh.cpp */,
+				02DB290D189B2CE10055B56F /* Mesh.h */,
+				02DB290F189B2CE10055B56F /* OFFReader.cpp */,
+				02DB2910189B2CE10055B56F /* OFFReader.h */,
+				02DB2920189B2CE10055B56F /* UnitQuad.cpp */,
+				02DB2921189B2CE10055B56F /* UnitQuad.h */,
+			);
+			name = mesh;
+			sourceTree = "<group>";
+		};
+		02D0DDB3189DB01800CC1BE6 /* passes */ = {
+			isa = PBXGroup;
+			children = (
+				02DB293A189BB8E30055B56F /* RenderPass.h */,
+				02DB294E189D2A2E0055B56F /* RenderPass.cpp */,
+				02DB293C189BBADA0055B56F /* BlurPass.h */,
+				02DB293D189BBB0E0055B56F /* BlurPass.cpp */,
+				02DB294B189D25520055B56F /* GeometryPass.h */,
+				02DB294C189D283F0055B56F /* GeometryPass.cpp */,
+				02DB2950189D4A350055B56F /* LightingPass.h */,
+				02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */,
+			);
+			name = passes;
+			sourceTree = "<group>";
+		};
+		02D0DDB4189DB01F00CC1BE6 /* rendering */ = {
+			isa = PBXGroup;
+			children = (
+				02DB293B189BBA090055B56F /* shaders */,
+				02D0DDB2189DAFD200CC1BE6 /* mesh */,
+				02D0DDB1189DAFC400CC1BE6 /* scene */,
+				02D0DDB3189DB01800CC1BE6 /* passes */,
+			);
+			name = rendering;
+			sourceTree = "<group>";
+		};
 		02DB27EF189B2CCC0055B56F = {
 			isa = PBXGroup;
 			children = (
@@ -127,29 +187,14 @@
 		02DB27FA189B2CCC0055B56F /* GLModelViewer */ = {
 			isa = PBXGroup;
 			children = (
-				02DB293B189BBA090055B56F /* shaders */,
+				02D0DDB4189DB01F00CC1BE6 /* rendering */,
 				02DB2807189B2CE00055B56F /* Constants.h */,
 				02DB2808189B2CE00055B56F /* FrameBuffer.cpp */,
 				02DB2809189B2CE00055B56F /* FrameBuffer.h */,
 				02DB290A189B2CE10055B56F /* main.cpp */,
 				02DB290B189B2CE10055B56F /* Material.h */,
-				02DB290C189B2CE10055B56F /* Mesh.cpp */,
-				02DB290D189B2CE10055B56F /* Mesh.h */,
 				02DB290E189B2CE10055B56F /* ModelViewer.1 */,
-				02DB290F189B2CE10055B56F /* OFFReader.cpp */,
-				02DB2910189B2CE10055B56F /* OFFReader.h */,
-				02DB2912189B2CE10055B56F /* SceneNode.cpp */,
-				02DB2913189B2CE10055B56F /* SceneNode.h */,
-				02DB2914189B2CE10055B56F /* SceneRenderer.cpp */,
-				02DB2915189B2CE10055B56F /* SceneRenderer.h */,
-				02DB291C189B2CE10055B56F /* SimpleModel.cpp */,
-				02DB291D189B2CE10055B56F /* SimpleModel.h */,
-				02DB2920189B2CE10055B56F /* UnitQuad.cpp */,
-				02DB2921189B2CE10055B56F /* UnitQuad.h */,
 				02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */,
-				02DB293A189BB8E30055B56F /* IRenderPass.h */,
-				02DB293C189BBADA0055B56F /* BlurPass.h */,
-				02DB293D189BBB0E0055B56F /* BlurPass.cpp */,
 			);
 			path = GLModelViewer;
 			sourceTree = "<group>";
@@ -168,6 +213,8 @@
 				02DB2806189B2CE00055B56F /* BlurShader.h */,
 				02DB2949189C64130055B56F /* GeometryShader.cpp */,
 				02DB2948189C62D20055B56F /* GeometryShader.h */,
+				02D0DDB7189DB4B000CC1BE6 /* DeferredPhongShader.h */,
+				02D0DDB8189DB53100CC1BE6 /* DeferredPhongShader.cpp */,
 			);
 			name = shaders;
 			sourceTree = "<group>";
@@ -189,6 +236,7 @@
 			children = (
 				02DB291B189B2CE10055B56F /* phong_shader.vs */,
 				02DB291A189B2CE10055B56F /* phong_shader.fs */,
+				02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */,
 			);
 			name = phong;
 			sourceTree = "<group>";
@@ -248,22 +296,26 @@
 				02DB293E189BBB0E0055B56F /* BlurPass.cpp in Sources */,
 				02DB294A189C64130055B56F /* GeometryShader.cpp in Sources */,
 				02DB2924189B2CE10055B56F /* FrameBuffer.cpp in Sources */,
+				02D0DDB9189DB53100CC1BE6 /* DeferredPhongShader.cpp in Sources */,
+				02DB294F189D2A2E0055B56F /* RenderPass.cpp in Sources */,
 				02DB2947189C5CD30055B56F /* geometry.fs in Sources */,
 				02DB2927189B2CE10055B56F /* main.cpp in Sources */,
 				02DB292E189B2CE10055B56F /* ShaderLoader.cpp in Sources */,
+				02DB294D189D283F0055B56F /* GeometryPass.cpp in Sources */,
 				02DB2932189B2CE10055B56F /* PhongShader.cpp in Sources */,
 				02DB2928189B2CE10055B56F /* Mesh.cpp in Sources */,
 				02DB2929189B2CE10055B56F /* OFFReader.cpp in Sources */,
 				02DB292C189B2CE10055B56F /* SceneRenderer.cpp in Sources */,
 				02DB292B189B2CE10055B56F /* SceneNode.cpp in Sources */,
 				02DB2930189B2CE10055B56F /* phong_shader.vs in Sources */,
-				02DB2931189B2CE10055B56F /* SimpleModel.cpp in Sources */,
+				02D0DDB0189D53F300CC1BE6 /* LightingPass.cpp in Sources */,
 				02DB2923189B2CE10055B56F /* BlurShader.cpp in Sources */,
 				02DB2933189B2CE10055B56F /* UnitQuad.cpp in Sources */,
 				02DB292D189B2CE10055B56F /* Shader.cpp in Sources */,
 				02DB292A189B2CE10055B56F /* passthrough.vs in Sources */,
 				02DB2945189C5CC40055B56F /* geometry.vs in Sources */,
 				02DB292F189B2CE10055B56F /* phong_shader.fs in Sources */,
+				02D0DDB6189DB42F00CC1BE6 /* deferred_phong.fs in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

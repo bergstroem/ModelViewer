@@ -33,7 +33,6 @@ void Mesh::loadBufferData() {
     // Create vertex and index buffer and load into GPU
     glGenBuffers(1, &(this->bufferId));
     glGenBuffers(1, &(this->indexId));
-    
     glBindBuffer(GL_ARRAY_BUFFER, this->bufferId);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexId);
     

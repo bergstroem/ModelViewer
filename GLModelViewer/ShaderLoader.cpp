@@ -9,6 +9,8 @@
 #include "ShaderLoader.h"
 #include <iostream>
 #include <fstream>
+#include "Constants.h"
+#include "Shader.h"
 
 int ShaderLoader::loadShaderProgram(std::string vertexShader, std::string fragmentShader) {
     
@@ -18,6 +20,22 @@ int ShaderLoader::loadShaderProgram(std::string vertexShader, std::string fragme
     unsigned int shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShaderId);
     glAttachShader(shaderProgram, fragmentShaderId);
+    
+    // Bind attrib locations
+    glBindAttribLocation(shaderProgram, SHADER_POSITION_LOCATION, "position");
+    glBindAttribLocation(shaderProgram, SHADER_NORMAL_LOCATION, "normal");
+    glBindAttribLocation(shaderProgram, SHADER_COLOR_LOCATION, "color");
+    
+    // Bind frag locations
+    glBindFragDataLocation(shaderProgram, DIFFUSE_TEXTURE_INDEX, "outColor");
+    glBindFragDataLocation(shaderProgram, NORMAL_TEXTURE_INDEX, "outNormal");
+    glBindFragDataLocation(shaderProgram, POSITION_TEXTURE_INDEX, "outPosition");
+    glBindFragDataLocation(shaderProgram, AMBIENT_TEXTURE_INDEX, "outAmbient");
+    glBindFragDataLocation(shaderProgram, SPECULAR_TEXTURE_INDEX, "outSpecular");
+    glBindFragDataLocation(shaderProgram, SHININESS_TEXTURE_INDEX, "outShininess");
+    
+    // Link everything!
+    glLinkProgram(shaderProgram);
     
     return shaderProgram;
 }
@@ -76,6 +94,7 @@ int ShaderLoader::loadShader(GLenum shaderType, std::string shader) {
     
     return shaderId;
 }
+
 
 bool ShaderLoader::shaderStatusOK(int shaderId) {
     GLint status;
