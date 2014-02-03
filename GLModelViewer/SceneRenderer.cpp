@@ -14,7 +14,14 @@
 void SceneRenderer::init(int width, int height) {
     geometryPass.init(width, height);
     lightingPass.init(width, height);
-    phong.init();
+    blurPass.init(width, height);
+    passthrough.init();
+    
+    std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
+    screenNode.init(mesh);
+    
+    this->width = width;
+    this->height = height;
 }
 
 void SceneRenderer::updateResolution(int width, int height) {
@@ -22,24 +29,35 @@ void SceneRenderer::updateResolution(int width, int height) {
     
     geometryPass.resize(width, height);
     lightingPass.resize(width, height);
+    blurPass.resize(width, height);
+    
+    this->width = width;
+    this->height = height;
 }
 
 void SceneRenderer::renderScene() {
     if(!isDeferred) {
-        phong.use();
-    
-        for (auto it = nodes.begin(); it != nodes.end(); it++) {
-            std::shared_ptr<SceneNode> node = (*it);
-            phong.setMaterial(node->mesh->material);
-            phong.setUniforms(proj, view, node->modelMatrix);
-        
-            (*it)->render();
-        }
+        lightingPass.render(proj, view, nodes);
     } else {
-    
         // Deferred lighting
         geometryPass.render(proj, view, nodes);
-        lightingPass.render(proj, view, geometryPass.buffer);
+        lightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer());
     }
+    // Draw final pass to screen
+    //blurPass.render(proj, view, lightingPass.getBuffer());
+    
+    lightingPass.bindBufferTextures();
+    
+    passthrough.use();
+    
+    glDepthMask(GL_FALSE);
+    
+    passthrough.setUniforms(proj, view, screenNode.modelMatrix);
+    
+    screenNode.render();
+    
+    glDepthMask(GL_TRUE);
+    
+    lightingPass.unbindBufferTextures();
 }
 

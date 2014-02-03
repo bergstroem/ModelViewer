@@ -22,7 +22,6 @@ void DeferredPhongShader::init() {
 void DeferredPhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
     Shader::setUniforms(proj, view, model);
     
-    GLint positionSamplerId = glGetUniformLocation(this->programId, "position_sampler");
     GLint normalSamplerId = glGetUniformLocation(this->programId, "normal_sampler");
     GLint diffuseSamplerId = glGetUniformLocation(this->programId, "diffuse_sampler");
     GLint ambientSamplerId = glGetUniformLocation(this->programId, "ambient_sampler");
@@ -31,7 +30,6 @@ void DeferredPhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat
     GLint depthSamplerId = glGetUniformLocation(this->programId, "depth_sampler");
     
     glUniform1i(normalSamplerId, TEXTURE_NORMAL_INDEX);
-    glUniform1i(positionSamplerId, TEXTURE_POSITION_INDEX);
     glUniform1i(depthSamplerId, TEXTURE_DEPTH_INDEX);
     
     //Materials
@@ -40,12 +38,6 @@ void DeferredPhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat
     glUniform1i(specularSamplerId, TEXTURE_SPECULAR_INDEX);
     glUniform1i(shininessSamplerId, TEXTURE_SHININESS_INDEX);
     
-    /*glUniform1i(positionSamplerId, POSITION_TEXTURE_INDEX);
-    glUniform1i(normalSamplerId, NORMAL_TEXTURE_INDEX);
-    glUniform1i(diffuseSamplerId, DIFFUSE_TEXTURE_INDEX);
-    glUniform1i(ambientSamplerId, AMBIENT_TEXTURE_INDEX);
-    glUniform1i(specularSamplerId, SPECULAR_TEXTURE_INDEX);
-    glUniform1f(depthSamplerId, SHININESS_TEXTURE_INDEX);*/
     
     
 }

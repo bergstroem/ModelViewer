@@ -12,19 +12,20 @@
 
 
 BlurPass::~BlurPass() {
-    if(pass1Buffer) {
-        delete pass1Buffer;
+    if(blurBuffer) {
+        delete blurBuffer;
     }
-    if(pass2Buffer) {
-        delete pass2Buffer;
+    if(resultBuffer) {
+        delete resultBuffer;
     }
 }
 
 void BlurPass::init(int width, int height) {
-    pass1Buffer = new FrameBuffer();
-    pass2Buffer = new FrameBuffer();
-    pass1Buffer->init(width, height);
-    pass2Buffer->init(width, height);
+    blurBuffer = new ColorBuffer();
+    blurBuffer->init(width, height);
+    
+    resultBuffer = new ColorBuffer();
+    resultBuffer->init(width, height);
     
     // Create mesh and shader to render blur with
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
@@ -32,66 +33,83 @@ void BlurPass::init(int width, int height) {
     // Init shader and model
     blurShader.init();
     unitQuad.init(mesh);
-    
-    shader.init();
 }
 
 void BlurPass::resize(int width, int height) {
-    //Recreate buffers
-    delete pass1Buffer;
-    delete pass2Buffer;
-    pass1Buffer = new FrameBuffer();
-    pass2Buffer = new FrameBuffer();
     
-    pass1Buffer->init(width, height);
-    pass2Buffer->init(width, height);
+    //Recreate buffers
+    delete blurBuffer;
+    blurBuffer = new ColorBuffer();
+    blurBuffer->init(width, height);
+    
+    delete resultBuffer;
+    resultBuffer = new ColorBuffer();
+    resultBuffer->init(width, height);
+    
+    
 }
 
 void BlurPass::horizontalBlur() {
     glm::mat4 matrix(1.0f);
-    // Draw horizontal blur into the vertical blur buffer
-    pass2Buffer->bind();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // Bind texture from horizontal buffer to sample from it
-    pass1Buffer->bindTextures();
     
+    // Draw horizontal blur into the blur buffer
+    blurBuffer->bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glDepthMask(GL_FALSE);
+
     blurShader.use();
     
-    blurShader.setUniforms(matrix, matrix, matrix);
     blurShader.direction = BlurShader::HORIZONTAL;
+    blurShader.setUniforms(matrix, matrix, matrix);
     
     unitQuad.render();
-    
-    pass1Buffer->unbindTextures();
-    pass2Buffer->unbind();
+    glDepthMask(GL_TRUE);
+
+    blurBuffer->unbind();
 }
 
 void BlurPass::verticalBlur() {
     glm::mat4 matrix(1.0f);
-    // Render image with vertical blur to screen
-    pass2Buffer->bindTextures();
     
+    // Render image to buffer with vertical blur to screen
+    resultBuffer->bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glDepthMask(GL_FALSE);
+
+    blurBuffer->bindTextures();
     blurShader.use();
-    
-    blurShader.setUniforms(matrix, matrix, matrix);
     blurShader.direction = BlurShader::VERTICAL;
+    blurShader.setUniforms(matrix, matrix, matrix);
     
     unitQuad.render();
-    pass2Buffer->unbindTextures();
+    
+    glDepthMask(GL_TRUE);
+
+    blurBuffer->unbindTextures();
+    resultBuffer->unbind();
 }
 
-void BlurPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes) {
+void BlurPass::render(glm::mat4 proj, glm::mat4 view, FrameBuffer* bufferToBlur) {
+        // Bind buffer textures to blur
+    bufferToBlur->bindTextures();
     
-    // Draw image to buffer
-    pass1Buffer->bind();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    for (auto it = nodes.begin(); it != nodes.end(); it++) {
-        (*it)->render();
-    }
-    
-    pass1Buffer->unbind();
-    
+    // Blur texture
     horizontalBlur();
+    
+    bufferToBlur->unbindTextures();
+    
     verticalBlur();
+}
+
+FrameBuffer* BlurPass::getBuffer() {
+    return resultBuffer;
+}
+
+void BlurPass::bindBufferTextures() {
+    this->resultBuffer->bindTextures();
+}
+
+void BlurPass::unbindBufferTextures() {
+    this->resultBuffer->unbindTextures();
 }
 

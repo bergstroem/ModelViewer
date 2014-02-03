@@ -13,9 +13,8 @@
 #include <vector>
 
 class FrameBuffer {
-private:
+protected:
     unsigned int fbID;
-    std::vector<unsigned int> colorTextureIDs;
     unsigned int depthTextureID;
     int width;
     int height;
@@ -23,17 +22,16 @@ private:
     
     unsigned int createTextureAttachment();
     void createDepthBuffer();
-    void release();
 
 public:
     FrameBuffer();
-    ~FrameBuffer();
+    virtual ~FrameBuffer();
     
-    bool init(int width, int height);
+    virtual bool init(int width, int height) = 0;
     void bind();
     void unbind();
-    void bindTextures();
-    void unbindTextures();
+    virtual void bindTextures() = 0;
+    virtual void unbindTextures() = 0;
     
 };
 

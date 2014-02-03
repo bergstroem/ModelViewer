@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/FrameBuffer.cpp"
-            timestampString = "412899380.642902"
+            timestampString = "413130938.160731"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "FrameBuffer::~FrameBuffer()"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,27 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/BlurPass.cpp"
-            timestampString = "412949962.680576"
+            timestampString = "413136843.054278"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "BlurPass::~BlurPass()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GLModelViewer/BlurPass.cpp"
-            timestampString = "412987911.527529"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "BlurPass::horizontalBlur()"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/GeometryPass.cpp"
-            timestampString = "412987911.527529"
+            timestampString = "413135783.91193"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt; &gt; nodes)"
             landmarkType = "5">
             <Locations>
@@ -134,11 +118,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/GeometryPass.cpp"
-            timestampString = "412987911.527529"
+            timestampString = "413135783.91193"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt; &gt; nodes)"
             landmarkType = "5">
          </BreakpointContent>
@@ -150,11 +134,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/GeometryPass.cpp"
-            timestampString = "412987911.527529"
+            timestampString = "413135783.91193"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt; &gt; nodes)"
             landmarkType = "5">
          </BreakpointContent>

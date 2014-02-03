@@ -23,10 +23,8 @@ void BlurShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model)
     Shader::setUniforms(proj, view, model);
     
     GLint textureSamplerId = glGetUniformLocation(this->programId, "texture_sampler");
-    GLint depthSamplerId = glGetUniformLocation(this->programId, "depth_sampler");
     GLint directionId = glGetUniformLocation(this->programId, "direction");
     
     glUniform1i(textureSamplerId, 0);
-    glUniform1i(depthSamplerId, 1);
     glUniform1i(directionId, direction);
 }

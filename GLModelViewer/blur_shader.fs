@@ -5,7 +5,6 @@ in vec2 uv;
 out vec4 outColor;
 
 uniform sampler2D texture_sampler;
-uniform sampler2D depth_sampler;
 uniform int direction;
 
 const float blurSize = 1.0/512.0;

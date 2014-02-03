@@ -10,19 +10,18 @@
 #define GLModelViewer_BlurPass_h
 
 #include "RenderPass.h"
-#include "FrameBuffer.h"
+#include "ColorBuffer.h"
 #include "SceneNode.h"
 #include "BlurShader.h"
 #include "glm/glm.hpp"
 
 // TODO: Rewrite to take a framebuffer or texture instead of nodes
 class BlurPass : public RenderPass {
-    FrameBuffer* pass1Buffer;
-    FrameBuffer* pass2Buffer;
+    ColorBuffer* blurBuffer;
+    ColorBuffer* resultBuffer;
     
     SceneNode unitQuad;
     BlurShader blurShader;
-    PhongShader shader;
     
     void horizontalBlur();
     void verticalBlur();
@@ -31,7 +30,10 @@ public:
     
     void init(int width, int height);
     void resize(int width, int height);
-    void render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes);
+    void render(glm::mat4 proj, glm::mat4 view, FrameBuffer* bufferToBlur);
+    FrameBuffer* getBuffer();
+    void bindBufferTextures();
+    void unbindBufferTextures();
 };
 
 #endif

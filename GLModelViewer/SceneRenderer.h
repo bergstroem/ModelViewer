@@ -17,11 +17,17 @@
 #include "GeometryPass.h"
 #include "LightingPass.h"
 #include "PhongShader.h"
+#include "PassthroughShader.h"
 
 class SceneRenderer {
     GeometryPass geometryPass;
     LightingPass lightingPass;
-    PhongShader phong;
+    BlurPass blurPass;
+    PassthroughShader passthrough;
+    SceneNode screenNode;
+    
+    int width;
+    int height;
     
 public:
     glm::mat4 proj;

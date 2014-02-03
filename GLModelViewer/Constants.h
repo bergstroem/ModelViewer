@@ -17,7 +17,6 @@
 
 enum TextureIndices {
     TEXTURE_NORMAL_INDEX,
-    TEXTURE_POSITION_INDEX,
     
     // Material
     TEXTURE_DIFFUSE_INDEX,
@@ -29,7 +28,7 @@ enum TextureIndices {
 
 //Not counted, handled separately
 #define TEXTURE_DEPTH_INDEX 8
-
+#define TEXTURE_COLOR_INDEX 0
 
 
 #endif

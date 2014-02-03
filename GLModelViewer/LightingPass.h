@@ -13,6 +13,8 @@
 #include "PhongShader.h"
 #include "DeferredPhongShader.h"
 #include "SceneNode.h"
+#include "ColorBuffer.h"
+#include "GBuffer.h"
 
 // TODO: Implementera vanlig forward phong lighting först, sen deferred
 
@@ -23,12 +25,16 @@ class LightingPass : public RenderPass {
     PhongShader phong;
     DeferredPhongShader deferredPhong;
     SceneNode unitQuad;
+    ColorBuffer* resultBuffer;
 public:
     
     void init(int width, int height);
     void resize(int width, int height);
     void render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes);
-    void render(glm::mat4 proj, glm::mat4 view, FrameBuffer* gBuffer);
+    void render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer);
+    FrameBuffer* getBuffer();
+    void bindBufferTextures();
+    void unbindBufferTextures();
 };
 
 #endif

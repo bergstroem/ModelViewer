@@ -6,7 +6,6 @@ uniform mat4 proj;
 uniform mat4 view;
 uniform mat4 inverse_proj;
 
-uniform sampler2D position_sampler;
 uniform sampler2D normal_sampler;
 uniform sampler2D depth_sampler;
 
@@ -25,6 +24,11 @@ void main() {
     vec3 normal = normalize(texture(normal_sampler, uv).xyz);
     float depth = texture(depth_sampler, uv).x * 2.0 -1.0;
     
+    if(depth == 1.0) {
+        outColor = vec4(0.0,0.0,0.0,1.0);
+        return;
+    }
+    
     // Materials
     vec4 diffuse = texture(diffuse_sampler, uv);
     vec4 ambient = texture(ambient_sampler, uv);
@@ -35,7 +39,7 @@ void main() {
     vec3 viewSpace;
     viewSpace.xy = uv * 2.0 -1.0; // uv coords are in [0-1], we need [-1, 1] for screen coords
     viewSpace.z=depth;
-    vec4 worldSpace = inverse_proj* vec4(viewSpace,1.0);
+    vec4 worldSpace = inverse_proj * vec4(viewSpace,1.0);
     worldSpace.xyz/=worldSpace.w;
     
     //Lighting

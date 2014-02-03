@@ -136,7 +136,7 @@ std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
     mesh->material.diffuse = glm::vec4(0.6f, 0.4f, 1.0f, 1.0f);
     mesh->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
     mesh->material.specular = glm::vec4(0.7f, 0.7f, 0.7f, 1.0f);
-    mesh->material.shininess = 50.0f;
+    mesh->material.shininess = 150.0f;
     
     node->init(mesh);
     
@@ -155,9 +155,9 @@ int main(void)
     
     renderer.init(width, height);
     
-    for(int i = 0; i < 1000; i++) {
+    for(int i = 0; i < 10; i++) {
     
-        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/sphere.off");
+        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/cooldragon.off");
         node->position = glm::vec3(-2.0f, 0.0f, -3.0f * (i + 1));
         
         renderer.nodes.push_back(node);   

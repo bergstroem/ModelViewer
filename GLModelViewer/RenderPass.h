@@ -20,14 +20,12 @@
 class RenderPass {
     
 public:
-    FrameBuffer* buffer;
     
-    ~RenderPass();
-    
-    virtual void init(int width, int height);
-    virtual void resize(int width, int height);
-    void bindBufferTextures();
-    void unbindBufferTextures();
+    virtual void init(int width, int height) = 0;
+    virtual void resize(int width, int height) = 0;
+    virtual FrameBuffer* getBuffer() = 0;
+    virtual void bindBufferTextures() = 0;
+    virtual void unbindBufferTextures() = 0;
 };
 
 #endif

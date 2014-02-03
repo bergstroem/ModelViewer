@@ -13,17 +13,22 @@
 #include "SceneNode.h"
 
 void GeometryPass::init(int width, int height) {
-    RenderPass::init(width, height);
     geometryShader.init();
+    
+    resultBuffer = new GBuffer();
+    resultBuffer->init(width, height);
 }
 
 void GeometryPass::resize(int width, int height) {
-    RenderPass::resize(width, height);
+    
+    delete resultBuffer;
+    resultBuffer = new GBuffer();
+    resultBuffer->init(width, height);
 }
 
 void GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode> > nodes) {
     
-    buffer->bind();
+    resultBuffer->bind();
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     
     geometryShader.use();
@@ -37,5 +42,17 @@ void GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::share
         (*it)->render();
     }
     
-    buffer->unbind();
+    resultBuffer->unbind();
+}
+
+FrameBuffer* GeometryPass::getBuffer() {
+    return resultBuffer;
+}
+
+void GeometryPass::bindBufferTextures() {
+    this->resultBuffer->bindTextures();
+}
+
+void GeometryPass::unbindBufferTextures() {
+    this->resultBuffer->unbindTextures();
 }

@@ -8,9 +8,11 @@
 
 #include "LightingPass.h"
 #include "UnitQuad.h"
+#include <iostream>
 
 void LightingPass::init(int width, int height) {
-    RenderPass::init(width, height);
+    resultBuffer = new ColorBuffer();
+    resultBuffer->init(width, height);
     
     phong.init();
     deferredPhong.init();
@@ -20,15 +22,16 @@ void LightingPass::init(int width, int height) {
 }
 
 void LightingPass::resize(int width, int height) {
-    RenderPass::resize(width, height);
+    delete resultBuffer;
+    resultBuffer = new ColorBuffer();
+    resultBuffer->init(width, height);
 }
 
 void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes) {
     
-    buffer->bind();
+    resultBuffer->bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     phong.use();
-    
     for (auto it = nodes.begin(); it != nodes.end(); it++) {
         std::shared_ptr<SceneNode> node = (*it);
         phong.setMaterial(node->mesh->material);
@@ -37,16 +40,20 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::share
         (*it)->render();
     }
     
-    buffer->unbind();
+    resultBuffer->unbind();
 }
 
-void LightingPass::render(glm::mat4 proj, glm::mat4 view, FrameBuffer* gBuffer) {
+void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer) {
     //Render lighting from data in gbuffer
+    
+    resultBuffer->bind();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     
     gBuffer->bindTextures();
     
     deferredPhong.use();
     
+    // Dont write to the depth buffer on light pass
     glDepthMask(GL_FALSE);
     
     glm::mat4 mat1 = glm::mat4(1.0f);
@@ -57,4 +64,18 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, FrameBuffer* gBuffer) 
     glDepthMask(GL_TRUE);
     gBuffer->unbindTextures();
     
+    resultBuffer->unbind();
+    
+}
+
+FrameBuffer* LightingPass::getBuffer() {
+    return resultBuffer;
+}
+
+void LightingPass::bindBufferTextures() {
+    this->resultBuffer->bindTextures();
+}
+
+void LightingPass::unbindBufferTextures() {
+    this->resultBuffer->unbindTextures();
 }
