@@ -46,10 +46,9 @@ public:
     
     Material material;
     
-    ~Mesh();
-    
     void init(std::size_t numVertices, Vertex* vertexData);
     void loadBufferData();
+    void unloadBufferData();
     
     void bind();
     void unbind();

@@ -16,15 +16,9 @@ void Mesh::init(std::size_t numVertices, Vertex* vertexData) {
     }
 }
 
-Mesh::~Mesh() {
-    // Unload from buffer
-    glDeleteBuffers(1, &bufferId);
-    glDeleteBuffers(1, &indexId);
-    glDeleteVertexArrays(1, &vaoId);
-}
+
 
 void Mesh::loadBufferData() {
-    
     // Create VAO to keep buffer and attribute states
     glGenVertexArrays(1, &vaoId);
     
@@ -51,6 +45,12 @@ void Mesh::loadBufferData() {
     
     // Unbind vao so that we dont make changes to it outside of here
     unbind();
+}
+
+void Mesh::unloadBufferData() {
+    glDeleteBuffers(1, &bufferId);
+    glDeleteBuffers(1, &indexId);
+    glDeleteVertexArrays(1, &vaoId);
 }
 
 void Mesh::bind() {

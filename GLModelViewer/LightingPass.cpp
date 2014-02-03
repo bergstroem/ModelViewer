@@ -47,11 +47,14 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, FrameBuffer* gBuffer) 
     
     deferredPhong.use();
     
+    glDepthMask(GL_FALSE);
+    
     glm::mat4 mat1 = glm::mat4(1.0f);
     deferredPhong.setUniforms(proj, view, mat1);
     
     unitQuad.render();
     
+    glDepthMask(GL_TRUE);
     gBuffer->unbindTextures();
     
 }

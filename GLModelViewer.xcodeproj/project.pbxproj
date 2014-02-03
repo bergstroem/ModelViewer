@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02C8ACE8189FAE67002DC3C6 /* MeshLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C8ACE7189FAE67002DC3C6 /* MeshLoader.cpp */; };
 		02D0DDB0189D53F300CC1BE6 /* LightingPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */; };
 		02D0DDB6189DB42F00CC1BE6 /* deferred_phong.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */; };
 		02D0DDB9189DB53100CC1BE6 /* DeferredPhongShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB8189DB53100CC1BE6 /* DeferredPhongShader.cpp */; };
@@ -51,6 +52,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02C8ACE6189FABE7002DC3C6 /* MeshLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeshLoader.h; sourceTree = "<group>"; };
+		02C8ACE7189FAE67002DC3C6 /* MeshLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoader.cpp; sourceTree = "<group>"; };
 		02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightingPass.cpp; sourceTree = "<group>"; };
 		02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_phong.fs; sourceTree = "<group>"; };
 		02D0DDB7189DB4B000CC1BE6 /* DeferredPhongShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeferredPhongShader.h; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 		02D0DDB2189DAFD200CC1BE6 /* mesh */ = {
 			isa = PBXGroup;
 			children = (
+				02C8ACE7189FAE67002DC3C6 /* MeshLoader.cpp */,
+				02C8ACE6189FABE7002DC3C6 /* MeshLoader.h */,
 				02DB290C189B2CE10055B56F /* Mesh.cpp */,
 				02DB290D189B2CE10055B56F /* Mesh.h */,
 				02DB290F189B2CE10055B56F /* OFFReader.cpp */,
@@ -314,6 +319,7 @@
 				02DB292D189B2CE10055B56F /* Shader.cpp in Sources */,
 				02DB292A189B2CE10055B56F /* passthrough.vs in Sources */,
 				02DB2945189C5CC40055B56F /* geometry.vs in Sources */,
+				02C8ACE8189FAE67002DC3C6 /* MeshLoader.cpp in Sources */,
 				02DB292F189B2CE10055B56F /* phong_shader.fs in Sources */,
 				02D0DDB6189DB42F00CC1BE6 /* deferred_phong.fs in Sources */,
 			);

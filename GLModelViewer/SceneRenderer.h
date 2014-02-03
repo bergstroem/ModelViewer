@@ -27,6 +27,7 @@ public:
     glm::mat4 proj;
     glm::mat4 view;
     std::vector<std::shared_ptr<SceneNode>> nodes;
+    bool isDeferred;
     
     void init(int width, int height);
     void updateResolution(int width, int height);

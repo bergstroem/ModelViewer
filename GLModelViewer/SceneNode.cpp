@@ -19,8 +19,6 @@ SceneNode::~SceneNode() {
 
 void SceneNode::init(std::shared_ptr<Mesh> mesh) {
     this->mesh = mesh;
-    
-    mesh->loadBufferData();
 }
 
 void SceneNode::render() {

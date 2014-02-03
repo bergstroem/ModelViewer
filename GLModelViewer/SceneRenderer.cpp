@@ -25,18 +25,21 @@ void SceneRenderer::updateResolution(int width, int height) {
 }
 
 void SceneRenderer::renderScene() {
-
-    /*phong.use();
+    if(!isDeferred) {
+        phong.use();
     
-    for (auto it = nodes.begin(); it != nodes.end(); it++) {
-        std::shared_ptr<SceneNode> node = (*it);
-        phong.setMaterial(node->mesh->material);
-        phong.setUniforms(proj, view, node->modelMatrix);
+        for (auto it = nodes.begin(); it != nodes.end(); it++) {
+            std::shared_ptr<SceneNode> node = (*it);
+            phong.setMaterial(node->mesh->material);
+            phong.setUniforms(proj, view, node->modelMatrix);
         
-        (*it)->render();
-    }*/
-    // Deferred lighting
-    geometryPass.render(proj, view, nodes);
-    lightingPass.render(proj, view, geometryPass.buffer);
+            (*it)->render();
+        }
+    } else {
+    
+        // Deferred lighting
+        geometryPass.render(proj, view, nodes);
+        lightingPass.render(proj, view, geometryPass.buffer);
+    }
 }
 

@@ -21,6 +21,7 @@
 #include "SceneRenderer.h"
 #include "Constants.h"
 #include "GeometryShader.h"
+#include "MeshLoader.h"
 
 SceneRenderer renderer;
 glm::vec3 move;
@@ -36,6 +37,12 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
+    
+    if(key == GLFW_KEY_U && action == GLFW_PRESS) {
+        renderer.isDeferred = !renderer.isDeferred;
+
+        std::cout << "Deferred " << renderer.isDeferred << std::endl;
+    }
 }
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -121,7 +128,20 @@ GLFWwindow* initGLWindow() {
     return window;
 }
 
+std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
+    auto& meshLoader = MeshLoader::getInstance();
+    std::shared_ptr<Mesh> mesh = meshLoader.loadMesh(meshName);
 
+    auto node = std::shared_ptr<SceneNode>(new SceneNode());
+    mesh->material.diffuse = glm::vec4(0.6f, 0.4f, 1.0f, 1.0f);
+    mesh->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+    mesh->material.specular = glm::vec4(0.7f, 0.7f, 0.7f, 1.0f);
+    mesh->material.shininess = 50.0f;
+    
+    node->init(mesh);
+    
+    return node;
+}
 
 int main(void)
 {
@@ -129,50 +149,19 @@ int main(void)
     
     initGL();
     
-    std::ifstream file1;
-    file1.open("/Users/mattiasbergstrom/Desktop/cooldragon.off");
-    
-    if(!file1.is_open()) {
-        std::cerr << "Could not open file" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-    
-    std::ifstream file2;
-    file2.open("/Users/mattiasbergstrom/Desktop/sphere.off");
-    
-    if(!file2.is_open()) {
-        std::cerr << "Could not open file" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-    
-    std::shared_ptr<Mesh> mesh1 = OFFReader::read(file1);
-    std::shared_ptr<Mesh> mesh2 = OFFReader::read(file2);
-    auto test = std::shared_ptr<SceneNode>(new SceneNode());
-    auto dragon = std::shared_ptr<SceneNode>(new SceneNode());
-    
-    mesh1->material.diffuse = glm::vec4(0.6f, 0.4f, 1.0f, 1.0f);
-    mesh2->material.diffuse = glm::vec4(0.4f, 0.8f, 0.6f, 1.0f);
-    mesh1->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-    mesh2->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-    mesh1->material.specular = glm::vec4(0.7f, 0.7f, 0.7f, 1.0f);
-    mesh2->material.specular = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
-    mesh1->material.shininess = 50.0f;
-    mesh2->material.shininess = 1.0f;
-    
-    dragon->init(mesh1);
-    dragon->position = glm::vec3(-2.0f, 0.0f, -3.0f);
-    
-    test->init(mesh2);
-    test->position = glm::vec3(1.0f, 0.0f, -4.0f);
-    
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
     
     
     renderer.init(width, height);
     
-    renderer.nodes.push_back(test);
-    renderer.nodes.push_back(dragon);
+    for(int i = 0; i < 1000; i++) {
+    
+        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/sphere.off");
+        node->position = glm::vec3(-2.0f, 0.0f, -3.0f * (i + 1));
+        
+        renderer.nodes.push_back(node);   
+    }
     
     while (!glfwWindowShouldClose(window))
     {

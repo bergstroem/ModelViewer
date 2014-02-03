@@ -28,5 +28,7 @@ Mesh UnitQuad::CreateUnitQuad() {
     mesh.indexBuffer.push_back(2);
     mesh.indexBuffer.push_back(1);
     
+    mesh.loadBufferData();
+    
     return mesh;
 }

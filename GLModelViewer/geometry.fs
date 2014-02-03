@@ -21,10 +21,10 @@ out vec3 outShininess;
 
 void main()
 {
-    outNormal = VertexIn.normal;
+    outNormal = normalize(VertexIn.normal);
     outDiffuse = diffuse.xyz;
     outPosition = VertexIn.viewModelPosition.xyz;
     outAmbient = ambient.xyz;
     outSpecular = specular.xyz;
-    outShininess.x = shininess;
+    outShininess.x = shininess / 100;
 }
