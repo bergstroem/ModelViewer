@@ -15,12 +15,11 @@
 #define SHADER_NORMAL_LOCATION      1
 #define SHADER_COLOR_LOCATION       2
 
-//TODO: Gör om med defines så att depth alltid är först
-
 enum TextureIndices {
     TEXTURE_NORMAL_INDEX,
     TEXTURE_POSITION_INDEX,
-    // MaterialData
+    
+    // Material
     TEXTURE_DIFFUSE_INDEX,
     TEXTURE_AMBIENT_INDEX,
     TEXTURE_SPECULAR_INDEX,

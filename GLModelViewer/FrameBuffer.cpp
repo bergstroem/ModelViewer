@@ -114,7 +114,6 @@ void FrameBuffer::unbind() {
 
 void FrameBuffer::bindTextures() {
     
-
     glActiveTexture(GL_TEXTURE0 + TEXTURE_NORMAL_INDEX);
     glBindTexture(GL_TEXTURE_2D, colorTextureIDs[TEXTURE_NORMAL_INDEX]);
     
@@ -140,6 +139,7 @@ void FrameBuffer::bindTextures() {
 }
 
 void FrameBuffer::unbindTextures() {
+    
     glActiveTexture(GL_TEXTURE0 + TEXTURE_NORMAL_INDEX);
     glBindTexture(GL_TEXTURE_2D, 0);
     
