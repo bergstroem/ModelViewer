@@ -66,7 +66,7 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer) {
     glDepthMask(GL_FALSE);
     
     resultBuffer->bind();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     
     gBuffer->bindAttachments();
     
