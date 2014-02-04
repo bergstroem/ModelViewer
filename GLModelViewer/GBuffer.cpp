@@ -10,125 +10,39 @@
 #include "GBuffer.h"
 #include "Constants.h"
 
-
-GBuffer::GBuffer() {
-    this->initialized = false;
+void GBuffer::init(int width, int height) {
+    std::shared_ptr<DepthAttachment> depthTexture(new DepthAttachment);
+    depthTexture->init(width, height);
+    
+    init(width, height, depthTexture);
 }
 
-GBuffer::~GBuffer() {
-    release();
-}
-
-/*
- * Inits the Framebuffer, can safely be called multiple times to reinitialize
- */
-bool GBuffer::init(int width, int height) {
+void GBuffer::init(int width, int height, std::shared_ptr<DepthAttachment> depthTexture) {
+    // Normal texture
+    std::shared_ptr<ColorAttachment> normalTexture(new ColorAttachment);
+    normalTexture->init(width, height, TEXTURE_NORMAL_INDEX);
+    attachColorTexture(normalTexture);
     
-    // If the framebuffer already was initialized, release it.
-    if(initialized) {
-        release();
-    }
+    // Diffuse texture
+    std::shared_ptr<ColorAttachment> diffuseTexture(new ColorAttachment);
+    diffuseTexture->init(width, height, TEXTURE_DIFFUSE_INDEX);
+    attachColorTexture(diffuseTexture);
     
-    this->width = width;
-    this->height = height;
+    // Ambient texture
+    std::shared_ptr<ColorAttachment> ambientTexture(new ColorAttachment);
+    ambientTexture->init(width, height, TEXTURE_AMBIENT_INDEX);
+    attachColorTexture(ambientTexture);
     
-    glGenFramebuffers(1, &fbID);
-    this->bind();
+    // Specular texture
+    std::shared_ptr<ColorAttachment> specularTexture(new ColorAttachment);
+    specularTexture->init(width, height, TEXTURE_SPECULAR_INDEX);
+    attachColorTexture(specularTexture);
     
-    // Create buffers for all vertex data
-    // TODO: Maybe add the possibility to create frame buffers that dont have all the buffers
+    // Shininess texture
+    std::shared_ptr<ColorAttachment> shininessTexture(new ColorAttachment);
+    shininessTexture->init(width, height, TEXTURE_SHININESS_INDEX);
+    attachColorTexture(shininessTexture);
     
-    GLenum DrawBuffers[NUM_TEXTURES];
-    for(int i = 0; i < NUM_TEXTURES; i++) {
-        this->colorTextureIDs.push_back(createTextureAttachment());
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, colorTextureIDs[i], 0);
-        
-        DrawBuffers[i] = GL_COLOR_ATTACHMENT0 + i;
-    }
-    
-    createDepthBuffer();
-    
-    glDrawBuffers(NUM_TEXTURES, &DrawBuffers[0]);
-    
-    // Always check that our framebuffer is ok
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        this->unbind();
-        throw "Framebuffer not complete!";
-    } else {
-        this->unbind();
-        this->initialized = true;
-        return true;
-    }
-}
-
-bool GBuffer::init(int width, int height, unsigned int depthTexId) {
-    // If the framebuffer already was initialized, release it.
-    if(initialized) {
-        release();
-    }
-    
-    this->width = width;
-    this->height = height;
-    
-    glGenFramebuffers(1, &fbID);
-    this->bind();
-    
-    GLenum DrawBuffers[NUM_TEXTURES];
-    for(int i = 0; i < NUM_TEXTURES; i++) {
-        this->colorTextureIDs.push_back(createTextureAttachment());
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, colorTextureIDs[i], 0);
-        
-        DrawBuffers[i] = GL_COLOR_ATTACHMENT0 + i;
-    }
-    
-    this->depthTextureID = depthTexId;
-    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, depthTexId, 0);
-    
-    glDrawBuffers(NUM_TEXTURES, &DrawBuffers[0]);
-    
-    // Always check that our framebuffer is ok
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        this->unbind();
-        throw "Framebuffer not complete!";
-    } else {
-        this->unbind();
-        this->initialized = true;
-        return true;
-    }
-
-}
-
-void GBuffer::release() {
-    // Only delete from GPU if actually initialized
-    if(initialized) {
-        if(!colorTextureIDs.empty()) {
-            std::cout << "Goodbye from GBuffer " << this << std::endl;
-            glDeleteTextures((int)colorTextureIDs.size(), &(colorTextureIDs[0]));
-        }
-    }
-}
-
-void GBuffer::bindTextures() {
-    // Bind color textures
-    for(int i = 0; i < NUM_TEXTURES; i++) {
-        glActiveTexture(GL_TEXTURE0 + i);
-        glBindTexture(GL_TEXTURE_2D, colorTextureIDs[i]);
-    }
-    
-    //Bind depth
-    glActiveTexture(GL_TEXTURE0 + TEXTURE_DEPTH_INDEX);
-    glBindTexture(GL_TEXTURE_2D, depthTextureID);
-}
-
-void GBuffer::unbindTextures() {
-    
-    // unbind color textures
-    for(int i = 0; i < NUM_TEXTURES; i++) {
-        glActiveTexture(GL_TEXTURE0 + i);
-        glBindTexture(GL_TEXTURE_2D, 0);
-    }
-    
-    //unbind depth
-    glActiveTexture(GL_TEXTURE0 + TEXTURE_DEPTH_INDEX);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    // Attach depth texture
+    setDepthAttachment(depthTexture);
 }

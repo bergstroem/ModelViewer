@@ -38,6 +38,4 @@ void DeferredPhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat
     glUniform1i(specularSamplerId, TEXTURE_SPECULAR_INDEX);
     glUniform1i(shininessSamplerId, TEXTURE_SHININESS_INDEX);
     
-    
-    
 }

@@ -15,19 +15,10 @@
 
 class ColorBuffer : public FrameBuffer {
 protected:
-    unsigned int colorTextureID;
-    
-    void release();
     
 public:
-    ColorBuffer();
-    ~ColorBuffer();
-    
-    bool init(int width, int height);
-    bool init(int width, int height, unsigned int depthTexId);
-    void bindTextures();
-    void unbindTextures();
-    
+    void init(int width, int height);
+    void init(int width, int height, std::shared_ptr<DepthAttachment> depthTexture);
 };
 
 #endif 

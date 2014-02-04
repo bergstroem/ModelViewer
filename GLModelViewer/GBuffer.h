@@ -15,19 +15,11 @@
 
 class GBuffer : public FrameBuffer {
 private:
-    std::vector<unsigned int> colorTextureIDs;
     
-    void release();
     
 public:
-    GBuffer();
-    ~GBuffer();
-    
-    bool init(int width, int height);
-    bool init(int width, int height, unsigned int depthTexId);
-    void bindTextures();
-    void unbindTextures();
-    
+    void init(int width, int height);
+    void init(int width, int height, std::shared_ptr<DepthAttachment> depthTexture);
 };
 
 #endif /* defined(__GLModelViewer__GBuffer__) */

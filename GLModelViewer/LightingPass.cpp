@@ -45,11 +45,10 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::share
 
 void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer) {
     //Render lighting from data in gbuffer
-    
     resultBuffer->bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     
-    gBuffer->bindTextures();
+    gBuffer->bindAttachments();
     
     deferredPhong.use();
     
@@ -62,7 +61,7 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer) {
     unitQuad.render();
     
     glDepthMask(GL_TRUE);
-    gBuffer->unbindTextures();
+    gBuffer->unbindAttachments();
     
     resultBuffer->unbind();
     
@@ -73,9 +72,9 @@ FrameBuffer* LightingPass::getBuffer() {
 }
 
 void LightingPass::bindBufferTextures() {
-    this->resultBuffer->bindTextures();
+    this->resultBuffer->bindAttachments();
 }
 
 void LightingPass::unbindBufferTextures() {
-    this->resultBuffer->unbindTextures();
+    this->resultBuffer->unbindAttachments();
 }

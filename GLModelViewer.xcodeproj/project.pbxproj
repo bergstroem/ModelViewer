@@ -11,7 +11,8 @@
 		027ACB2D189FEE5000B52103 /* GBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027ACB2B189FEE5000B52103 /* GBuffer.cpp */; };
 		02C8ACE8189FAE67002DC3C6 /* MeshLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C8ACE7189FAE67002DC3C6 /* MeshLoader.cpp */; };
 		02C8ACEC189FD501002DC3C6 /* PassthroughShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C8ACEB189FD501002DC3C6 /* PassthroughShader.cpp */; };
-		02C9108F18A10ED7004A6C91 /* DepthTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C9108D18A10ED7004A6C91 /* DepthTexture.cpp */; };
+		02C9108F18A10ED7004A6C91 /* DepthAttachment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C9108D18A10ED7004A6C91 /* DepthAttachment.cpp */; };
+		02CB52C918A12F6600083115 /* ColorAttachment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CB52C718A12F6600083115 /* ColorAttachment.cpp */; };
 		02D0DDB0189D53F300CC1BE6 /* LightingPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */; };
 		02D0DDB6189DB42F00CC1BE6 /* deferred_phong.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */; };
 		02D0DDB9189DB53100CC1BE6 /* DeferredPhongShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB8189DB53100CC1BE6 /* DeferredPhongShader.cpp */; };
@@ -64,8 +65,10 @@
 		02C8ACE9189FD467002DC3C6 /* passthrough.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = passthrough.fs; sourceTree = "<group>"; };
 		02C8ACEA189FD4F3002DC3C6 /* PassthroughShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassthroughShader.h; sourceTree = "<group>"; };
 		02C8ACEB189FD501002DC3C6 /* PassthroughShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PassthroughShader.cpp; sourceTree = "<group>"; };
-		02C9108D18A10ED7004A6C91 /* DepthTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DepthTexture.cpp; sourceTree = "<group>"; };
-		02C9108E18A10ED7004A6C91 /* DepthTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepthTexture.h; sourceTree = "<group>"; };
+		02C9108D18A10ED7004A6C91 /* DepthAttachment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DepthAttachment.cpp; sourceTree = "<group>"; };
+		02C9108E18A10ED7004A6C91 /* DepthAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepthAttachment.h; sourceTree = "<group>"; };
+		02CB52C718A12F6600083115 /* ColorAttachment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorAttachment.cpp; sourceTree = "<group>"; };
+		02CB52C818A12F6600083115 /* ColorAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorAttachment.h; sourceTree = "<group>"; };
 		02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightingPass.cpp; sourceTree = "<group>"; };
 		02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_phong.fs; sourceTree = "<group>"; };
 		02D0DDB7189DB4B000CC1BE6 /* DeferredPhongShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeferredPhongShader.h; sourceTree = "<group>"; };
@@ -138,8 +141,10 @@
 				02652E3A189FECF3003C9868 /* ColorBuffer.h */,
 				027ACB2B189FEE5000B52103 /* GBuffer.cpp */,
 				027ACB2C189FEE5000B52103 /* GBuffer.h */,
-				02C9108D18A10ED7004A6C91 /* DepthTexture.cpp */,
-				02C9108E18A10ED7004A6C91 /* DepthTexture.h */,
+				02C9108D18A10ED7004A6C91 /* DepthAttachment.cpp */,
+				02C9108E18A10ED7004A6C91 /* DepthAttachment.h */,
+				02CB52C718A12F6600083115 /* ColorAttachment.cpp */,
+				02CB52C818A12F6600083115 /* ColorAttachment.h */,
 			);
 			name = buffers;
 			sourceTree = "<group>";
@@ -339,7 +344,7 @@
 				02DB2928189B2CE10055B56F /* Mesh.cpp in Sources */,
 				02DB2929189B2CE10055B56F /* OFFReader.cpp in Sources */,
 				02DB292C189B2CE10055B56F /* SceneRenderer.cpp in Sources */,
-				02C9108F18A10ED7004A6C91 /* DepthTexture.cpp in Sources */,
+				02C9108F18A10ED7004A6C91 /* DepthAttachment.cpp in Sources */,
 				02DB292B189B2CE10055B56F /* SceneNode.cpp in Sources */,
 				02DB2930189B2CE10055B56F /* phong_shader.vs in Sources */,
 				02D0DDB0189D53F300CC1BE6 /* LightingPass.cpp in Sources */,
@@ -350,6 +355,7 @@
 				02DB2945189C5CC40055B56F /* geometry.vs in Sources */,
 				02C8ACE8189FAE67002DC3C6 /* MeshLoader.cpp in Sources */,
 				02DB292F189B2CE10055B56F /* phong_shader.fs in Sources */,
+				02CB52C918A12F6600083115 /* ColorAttachment.cpp in Sources */,
 				02D0DDB6189DB42F00CC1BE6 /* deferred_phong.fs in Sources */,
 				02C8ACEC189FD501002DC3C6 /* PassthroughShader.cpp in Sources */,
 			);

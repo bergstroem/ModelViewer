@@ -74,7 +74,7 @@ void BlurPass::verticalBlur() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glDepthMask(GL_FALSE);
 
-    blurBuffer->bindTextures();
+    blurBuffer->bindAttachments();
     blurShader.use();
     blurShader.direction = BlurShader::VERTICAL;
     blurShader.setUniforms(matrix, matrix, matrix);
@@ -83,18 +83,18 @@ void BlurPass::verticalBlur() {
     
     glDepthMask(GL_TRUE);
 
-    blurBuffer->unbindTextures();
+    blurBuffer->unbindAttachments();
     resultBuffer->unbind();
 }
 
 void BlurPass::render(glm::mat4 proj, glm::mat4 view, FrameBuffer* bufferToBlur) {
         // Bind buffer textures to blur
-    bufferToBlur->bindTextures();
+    bufferToBlur->bindAttachments();
     
     // Blur texture
     horizontalBlur();
     
-    bufferToBlur->unbindTextures();
+    bufferToBlur->unbindAttachments();
     
     verticalBlur();
 }
@@ -104,10 +104,10 @@ FrameBuffer* BlurPass::getBuffer() {
 }
 
 void BlurPass::bindBufferTextures() {
-    this->resultBuffer->bindTextures();
+    this->resultBuffer->bindAttachments();
 }
 
 void BlurPass::unbindBufferTextures() {
-    this->resultBuffer->unbindTextures();
+    this->resultBuffer->unbindAttachments();
 }
 

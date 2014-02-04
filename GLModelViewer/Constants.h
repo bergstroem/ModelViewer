@@ -15,20 +15,18 @@
 #define SHADER_NORMAL_LOCATION      1
 #define SHADER_COLOR_LOCATION       2
 
-enum TextureIndices {
+enum TextureIndex {
+    TEXTURE_COLOR_INDEX,
+    TEXTURE_DEPTH_INDEX,
     TEXTURE_NORMAL_INDEX,
     
-    // Material
+    // Material attributes
     TEXTURE_DIFFUSE_INDEX,
     TEXTURE_AMBIENT_INDEX,
     TEXTURE_SPECULAR_INDEX,
     TEXTURE_SHININESS_INDEX,
     NUM_TEXTURES
 };
-
-//Not counted, handled separately
-#define TEXTURE_DEPTH_INDEX 8
-#define TEXTURE_COLOR_INDEX 0
 
 
 #endif

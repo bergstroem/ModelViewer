@@ -9,22 +9,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GLModelViewer/FrameBuffer.cpp"
-            timestampString = "413208608.130669"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "FrameBuffer::~FrameBuffer()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GLModelViewer/PhongShader.cpp"
             timestampString = "412988129.058111"
             startingColumnNumber = "9223372036854775807"
@@ -58,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/GeometryPass.cpp"
-            timestampString = "413135783.91193"
+            timestampString = "413235433.433448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt; &gt; nodes)"
             landmarkType = "5">
             <Locations>
@@ -118,11 +102,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/GeometryPass.cpp"
-            timestampString = "413135783.91193"
+            timestampString = "413235433.433448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt; &gt; nodes)"
             landmarkType = "5">
          </BreakpointContent>
@@ -134,11 +118,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/GeometryPass.cpp"
-            timestampString = "413135783.91193"
+            timestampString = "413235433.433448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt; &gt; nodes)"
             landmarkType = "5">
          </BreakpointContent>
@@ -204,6 +188,22 @@
             startingLineNumber = "31"
             endingLineNumber = "31"
             landmarkName = "SceneRenderer::updateResolution(int width, int height)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/FrameBuffer.cpp"
+            timestampString = "413236758.963498"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "FrameBuffer::attachColorTexture(std::shared_ptr&lt;ColorAttachment&gt; colorTexture)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -27,7 +27,6 @@ void GeometryPass::resize(int width, int height) {
 }
 
 void GeometryPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode> > nodes) {
-    
     resultBuffer->bind();
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     
@@ -50,9 +49,9 @@ FrameBuffer* GeometryPass::getBuffer() {
 }
 
 void GeometryPass::bindBufferTextures() {
-    this->resultBuffer->bindTextures();
+    this->resultBuffer->bindAttachments();
 }
 
 void GeometryPass::unbindBufferTextures() {
-    this->resultBuffer->unbindTextures();
+    this->resultBuffer->unbindAttachments();
 }

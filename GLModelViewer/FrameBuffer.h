@@ -11,28 +11,43 @@
 
 #include <GL/glew.h>
 #include <vector>
+#include <memory>
+#include "ColorAttachment.h"
+#include "DepthAttachment.h"
 
 class FrameBuffer {
 protected:
-    unsigned int fbID;
-    unsigned int depthTextureID;
+    unsigned int fboId;
     int width;
     int height;
-    bool initialized;
     
-    unsigned int createTextureAttachment();
-    void createDepthBuffer();
-
+    // Attachments
+    std::vector<std::shared_ptr<ColorAttachment>> colorAttachments;
+    std::shared_ptr<DepthAttachment> depthAttachment;
+    
+    // Methods
+    void updateDrawBuffers();
+    
+    
 public:
+    FrameBuffer();
     virtual ~FrameBuffer();
     
-    virtual bool init(int width, int height) = 0;
-    virtual bool init(int width, int height, unsigned int depthTexId) = 0;
+    virtual void init(int width, int height) = 0;
     void bind();
     void unbind();
-    virtual void bindTextures() = 0;
-    virtual void unbindTextures() = 0;
     
+    // Color attachments
+    void attachColorTexture(std::shared_ptr<ColorAttachment> colorTexture);
+    void detachColorTexture(std::shared_ptr<ColorAttachment> colorTexture);
+    std::vector<std::shared_ptr<ColorAttachment>> getColorAttachments();
+    
+    // Depth attachment
+    void setDepthAttachment(std::shared_ptr<DepthAttachment> depthTexture);
+    std::shared_ptr<DepthAttachment> getDepthAttachment();
+    
+    void bindAttachments();
+    void unbindAttachments();
 };
 
 #endif

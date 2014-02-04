@@ -7,44 +7,88 @@
 //
 
 #include <iostream>
+#include <algorithm>
 #include "FrameBuffer.h"
 #include "Constants.h"
 
+FrameBuffer::FrameBuffer() {
+    glGenFramebuffers(1, &fboId);
+}
+
 FrameBuffer::~FrameBuffer() {
-    if(initialized) {
-        std::cout << "Goodbye from " << this << std::endl;
-        glDeleteRenderbuffers(1, &depthTextureID);
-        glDeleteFramebuffers(1, &fbID);
+    glDeleteFramebuffers(1, &fboId);
+}
+
+void FrameBuffer::attachColorTexture(std::shared_ptr<ColorAttachment> colorTexture) {
+    bind();
+    // Add to FBO
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + colorTexture->index, GL_TEXTURE_2D, colorTexture->textureId, 0);
+    
+    colorAttachments.push_back(colorTexture);
+    
+    updateDrawBuffers();
+    
+    unbind();
+}
+
+void FrameBuffer::detachColorTexture(std::shared_ptr<ColorAttachment> colorTexture) {
+    //TODO: implement
+    /*bind();
+    // Remove from FBO
+    
+    // Remove from attachments list
+    auto position = std::find(colorAttachments.begin(), colorAttachments.end(), colorTexture);
+    if (position != colorAttachments.end()) {
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + std:, GL_TEXTURE_2D, 0, 0);
+        colorAttachments.erase(position);
     }
+    
+    updateDrawBuffers();
+    
+    unbind();*/
 }
 
-
-unsigned int FrameBuffer::createTextureAttachment() {
-    unsigned int texID;
-    glGenTextures(1, &texID);
-    glBindTexture(GL_TEXTURE_2D, texID);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, this->width, this->height, 0, GL_RGB, GL_FLOAT, 0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    return texID;
+void FrameBuffer::updateDrawBuffers() {
+    int numberOfDrawBuffers = NUM_TEXTURES;
+    GLuint drawBuffers[numberOfDrawBuffers];
+    for(int i = 0; i < numberOfDrawBuffers; i++) {
+        drawBuffers[i] = GL_COLOR_ATTACHMENT0 + i;
+    }
+    
+    glDrawBuffers(numberOfDrawBuffers, &drawBuffers[0]);
 }
 
-void FrameBuffer::createDepthBuffer() {
-    glGenTextures(1, &depthTextureID);
-    glBindTexture(GL_TEXTURE_2D, depthTextureID);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH32F_STENCIL8, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE );
-    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, depthTextureID, 0);
+std::vector<std::shared_ptr<ColorAttachment>> FrameBuffer::getColorAttachments() {
+    return colorAttachments;
+}
+
+void FrameBuffer::setDepthAttachment(std::shared_ptr<DepthAttachment> depthTexture) {
+    bind();
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, depthTexture->textureId, 0);
+    this->depthAttachment = depthTexture;
+    unbind();
+}
+
+std::shared_ptr<DepthAttachment> FrameBuffer::getDepthAttachment() {
+    return depthAttachment;
+}
+
+void FrameBuffer::bindAttachments() {
+    for(auto it = colorAttachments.begin(); it != colorAttachments.end(); it++) {
+        (*it)->bind();
+    }
+    depthAttachment->bind();
+}
+
+void FrameBuffer::unbindAttachments() {
+    for(auto it = colorAttachments.begin(); it != colorAttachments.end(); it++) {
+        (*it)->unbind();
+    }
+    depthAttachment->unbind();
 }
 
 void FrameBuffer::bind() {
-    glBindFramebuffer(GL_FRAMEBUFFER, fbID);
+    glBindFramebuffer(GL_FRAMEBUFFER, fboId);
 }
 
 void FrameBuffer::unbind() {

@@ -14,7 +14,6 @@ in VertexAttribute {
 
 out vec3 outDiffuse;
 out vec3 outNormal;
-out vec3 outPosition;
 out vec3 outAmbient;
 out vec3 outSpecular;
 out vec3 outShininess;
@@ -23,7 +22,6 @@ void main()
 {
     outNormal = normalize(VertexIn.normal);
     outDiffuse = diffuse.xyz;
-    outPosition = VertexIn.viewModelPosition.xyz;
     outAmbient = ambient.xyz;
     outSpecular = specular.xyz;
     outShininess.x = shininess / 500;
