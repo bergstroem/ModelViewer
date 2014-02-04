@@ -32,23 +32,23 @@ void FrameBuffer::attachColorTexture(std::shared_ptr<ColorAttachment> colorTextu
 }
 
 void FrameBuffer::detachColorTexture(std::shared_ptr<ColorAttachment> colorTexture) {
-    //TODO: implement
-    /*bind();
-    // Remove from FBO
+    bind();
     
-    // Remove from attachments list
     auto position = std::find(colorAttachments.begin(), colorAttachments.end(), colorTexture);
     if (position != colorAttachments.end()) {
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + std:, GL_TEXTURE_2D, 0, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + (*position)->index, GL_TEXTURE_2D, 0, 0);
         colorAttachments.erase(position);
     }
     
     updateDrawBuffers();
     
-    unbind();*/
+    unbind();
 }
 
 void FrameBuffer::updateDrawBuffers() {
+    // A bit ugly, but currently an offset bug occurs when the draw buffers don't include the first attachments
+    // (even though they arent actually used).
+    // TODO: See if there is a way to make this nicer
     int numberOfDrawBuffers = NUM_TEXTURES;
     GLuint drawBuffers[numberOfDrawBuffers];
     for(int i = 0; i < numberOfDrawBuffers; i++) {
