@@ -11,8 +11,15 @@
 #include <iostream>
 
 void LightingPass::init(int width, int height) {
+    std::shared_ptr<DepthAttachment> depthTexture(new DepthAttachment);
+    depthTexture->init(width, height);
+    
+    init(width, height, depthTexture);
+}
+
+void LightingPass::init(int width, int height, std::shared_ptr<DepthAttachment> depthTexture) {
     resultBuffer = new ColorBuffer();
-    resultBuffer->init(width, height);
+    resultBuffer->init(width, height, depthTexture);
     
     phong.init();
     deferredPhong.init();
@@ -22,6 +29,15 @@ void LightingPass::init(int width, int height) {
 }
 
 void LightingPass::resize(int width, int height) {
+    std::shared_ptr<DepthAttachment> depthTexture(new DepthAttachment);
+    depthTexture->init(width, height);
+    
+    init(width, height, depthTexture);
+}
+
+void LightingPass::resize(int width, int height, std::shared_ptr<DepthAttachment> depthTexture) {
+    
+    
     delete resultBuffer;
     resultBuffer = new ColorBuffer();
     resultBuffer->init(width, height);
@@ -45,6 +61,10 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::share
 
 void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer) {
     //Render lighting from data in gbuffer
+    
+    // Dont write to the depth buffer on light pass
+    glDepthMask(GL_FALSE);
+    
     resultBuffer->bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     
@@ -52,19 +72,15 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer) {
     
     deferredPhong.use();
     
-    // Dont write to the depth buffer on light pass
-    glDepthMask(GL_FALSE);
-    
     glm::mat4 mat1 = glm::mat4(1.0f);
     deferredPhong.setUniforms(proj, view, mat1);
     
     unitQuad.render();
     
-    glDepthMask(GL_TRUE);
     gBuffer->unbindAttachments();
     
     resultBuffer->unbind();
-    
+    glDepthMask(GL_TRUE);
 }
 
 FrameBuffer* LightingPass::getBuffer() {

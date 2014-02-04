@@ -13,7 +13,8 @@
 
 void SceneRenderer::init(int width, int height) {
     geometryPass.init(width, height);
-    lightingPass.init(width, height);
+    auto buffer = geometryPass.getBuffer();
+    lightingPass.init(width, height, buffer->getDepthAttachment());
     blurPass.init(width, height);
     passthrough.init();
     
@@ -28,7 +29,8 @@ void SceneRenderer::updateResolution(int width, int height) {
     // Update everything that needs to be updated when resolution changes
     
     geometryPass.resize(width, height);
-    lightingPass.resize(width, height);
+    auto buffer = geometryPass.getBuffer();
+    lightingPass.resize(width, height, buffer->getDepthAttachment());
     blurPass.resize(width, height);
     
     this->width = width;
