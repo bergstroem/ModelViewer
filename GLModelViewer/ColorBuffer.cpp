@@ -57,9 +57,46 @@ bool ColorBuffer::init(int width, int height) {
     }
 }
 
+bool ColorBuffer::init(int width, int height, unsigned int depthTexId) {
+    // If the framebuffer already was initialized, release it.
+    if(initialized) {
+        release();
+    }
+    
+    this->width = width;
+    this->height = height;
+    
+    glGenFramebuffers(1, &fbID);
+    this->bind();
+    
+    // Create buffers for all vertex data
+    // TODO: Maybe add the possibility to create frame buffers that dont have all the buffers
+    
+    GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
+    
+    colorTextureID = createTextureAttachment();
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, colorTextureID, 0);
+    
+    this->depthTextureID = depthTexId;
+    glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, depthTexId, 0);
+    
+    glDrawBuffers(1, &DrawBuffers[0]);
+    
+    // Always check that our framebuffer is ok
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        this->unbind();
+        throw "Framebuffer not complete!";
+    } else {
+        this->unbind();
+        this->initialized = true;
+        return true;
+    }
+}
+
 void ColorBuffer::release() {
     // Only delete from GPU if actually initialized
     if(initialized) {
+        std::cout << "Goodbye from ColorBuffer " << this << std::endl;
         glDeleteTextures(1, &colorTextureID);
     }
 }

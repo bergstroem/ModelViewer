@@ -24,6 +24,7 @@ public:
     ~ColorBuffer();
     
     bool init(int width, int height);
+    bool init(int width, int height, unsigned int depthTexId);
     void bindTextures();
     void unbindTextures();
     

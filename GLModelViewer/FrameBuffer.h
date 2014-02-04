@@ -24,10 +24,10 @@ protected:
     void createDepthBuffer();
 
 public:
-    FrameBuffer();
     virtual ~FrameBuffer();
     
     virtual bool init(int width, int height) = 0;
+    virtual bool init(int width, int height, unsigned int depthTexId) = 0;
     void bind();
     void unbind();
     virtual void bindTextures() = 0;

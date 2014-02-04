@@ -26,5 +26,5 @@ void main()
     outPosition = VertexIn.viewModelPosition.xyz;
     outAmbient = ambient.xyz;
     outSpecular = specular.xyz;
-    outShininess.x = shininess / 100;
+    outShininess.x = shininess / 500;
 }

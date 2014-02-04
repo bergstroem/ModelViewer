@@ -45,8 +45,6 @@ void BlurPass::resize(int width, int height) {
     delete resultBuffer;
     resultBuffer = new ColorBuffer();
     resultBuffer->init(width, height);
-    
-    
 }
 
 void BlurPass::horizontalBlur() {

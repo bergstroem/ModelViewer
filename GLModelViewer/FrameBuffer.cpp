@@ -10,16 +10,14 @@
 #include "FrameBuffer.h"
 #include "Constants.h"
 
-FrameBuffer::FrameBuffer() {
-    this->initialized = false;
-}
-
 FrameBuffer::~FrameBuffer() {
     if(initialized) {
+        std::cout << "Goodbye from " << this << std::endl;
         glDeleteRenderbuffers(1, &depthTextureID);
         glDeleteFramebuffers(1, &fbID);
     }
 }
+
 
 unsigned int FrameBuffer::createTextureAttachment() {
     unsigned int texID;
@@ -52,5 +50,7 @@ void FrameBuffer::bind() {
 void FrameBuffer::unbind() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
+
+
 
 

@@ -33,7 +33,7 @@ void main() {
     vec4 diffuse = texture(diffuse_sampler, uv);
     vec4 ambient = texture(ambient_sampler, uv);
     vec4 specular = texture(specular_sampler, uv);
-    float shininess = texture(shininess_sampler, uv).x * 100;
+    float shininess = texture(shininess_sampler, uv).x * 500;
     
     // Restore eye space position
     vec3 viewSpace;
