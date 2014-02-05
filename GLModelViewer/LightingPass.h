@@ -25,17 +25,16 @@
  */
 class LightingPass : public RenderPass {
     PhongShader phong;
-    DeferredPhongShader deferredPhong;
-    SceneNode unitQuad;
     ColorBuffer* resultBuffer;
+    
 public:
+    bool shouldWriteDepth = true;
     
     void init(int width, int height);
     void init(int width, int height, std::shared_ptr<DepthAttachment> depthTexture);
     void resize(int width, int height);
     void resize(int width, int height, std::shared_ptr<DepthAttachment> depthTexture);
     void render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes, std::vector<std::shared_ptr<Light>> lights);
-    void render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector<std::shared_ptr<Light>> lights);
     FrameBuffer* getBuffer();
     void bindBufferTextures();
     void unbindBufferTextures();

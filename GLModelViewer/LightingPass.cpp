@@ -22,83 +22,56 @@ void LightingPass::init(int width, int height, std::shared_ptr<DepthAttachment> 
     resultBuffer->init(width, height, depthTexture);
     
     phong.init();
-    deferredPhong.init();
-    
-    std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
-    unitQuad.init(mesh);
 }
 
 void LightingPass::resize(int width, int height) {
     std::shared_ptr<DepthAttachment> depthTexture(new DepthAttachment);
     depthTexture->init(width, height);
     
-    init(width, height, depthTexture);
+    resize(width, height, depthTexture);
 }
 
 void LightingPass::resize(int width, int height, std::shared_ptr<DepthAttachment> depthTexture) {
     
-    
     delete resultBuffer;
     resultBuffer = new ColorBuffer();
-    resultBuffer->init(width, height);
+    resultBuffer->init(width, height, depthTexture);
 }
 
 void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes, std::vector<std::shared_ptr<Light>> lights) {
     
     resultBuffer->bind();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    
+    // Disable depth write
+    if(!shouldWriteDepth) {
+        glDepthMask(GL_FALSE);
+        glClear(GL_COLOR_BUFFER_BIT);
+    } else {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    }
+    
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE);
+    
     phong.use();
     for (auto it = nodes.begin(); it != nodes.end(); it++) {
         std::shared_ptr<SceneNode> node = (*it);
         phong.setUniforms(proj, view, node->modelMatrix);
         phong.setMaterial(node->mesh->material);
         
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE);
         for(auto it = lights.begin(); it != lights.end(); it++) {
             phong.setLight(*(*it));
             
-            
             node->render();
         }
-        glDisable(GL_BLEND);
     }
+    
+    glDepthMask(GL_TRUE);
+    glDisable(GL_BLEND);
     
     resultBuffer->unbind();
 }
 
-void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector<std::shared_ptr<Light>> lights) {
-    //Render lighting from data in gbuffer
-    
-    // Dont write to the depth buffer on light pass
-    
-    
-    resultBuffer->bind();
-    glClear(GL_COLOR_BUFFER_BIT);
-    glDepthMask(GL_FALSE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_ONE);
-    
-    gBuffer->bindAttachments();
-    
-    deferredPhong.use();
-    
-    glm::mat4 mat1 = glm::mat4(1.0f);
-    deferredPhong.setUniforms(proj, view, mat1);
-    
-    for(auto it = lights.begin(); it != lights.end(); it++) {
-        deferredPhong.setLight(*(*it));
-        
-        unitQuad.render();
-    }
-    
-    gBuffer->unbindAttachments();
-    
-    glDepthMask(GL_TRUE);
-    glDisable(GL_BLEND);
-    resultBuffer->unbind();
-    
-}
 
 FrameBuffer* LightingPass::getBuffer() {
     return resultBuffer;

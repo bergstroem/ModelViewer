@@ -18,11 +18,18 @@
 #include "LightingPass.h"
 #include "PhongShader.h"
 #include "PassthroughShader.h"
+#include "DepthPass.h"
+#include "DeferredLightingPass.h"
 
 class SceneRenderer {
+    
+    // Render passes
+    DepthPass depthPass;
     GeometryPass geometryPass;
     LightingPass lightingPass;
+    DeferredLightingPass deferredLightingPass;
     BlurPass blurPass;
+    
     PassthroughShader passthrough;
     SceneNode screenNode;
     

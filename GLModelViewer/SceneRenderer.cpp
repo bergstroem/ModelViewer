@@ -10,11 +10,19 @@
 #include "SceneRenderer.h"
 #include "BlurShader.h"
 
-
 void SceneRenderer::init(int width, int height) {
+    depthPass.init(width, height);
     geometryPass.init(width, height);
-    auto buffer = geometryPass.getBuffer();
+    
+    // Init lighting
+    auto buffer = depthPass.getBuffer();
     lightingPass.init(width, height, buffer->getDepthAttachment());
+    lightingPass.shouldWriteDepth = false;
+    
+    // Init deferred lighting
+    buffer = geometryPass.getBuffer();
+    deferredLightingPass.init(width, height, buffer->getDepthAttachment());
+    
     blurPass.init(width, height);
     passthrough.init();
     
@@ -28,9 +36,15 @@ void SceneRenderer::init(int width, int height) {
 void SceneRenderer::updateResolution(int width, int height) {
     // Update everything that needs to be updated when resolution changes
     
+    depthPass.resize(width, height);
     geometryPass.resize(width, height);
+    
     auto buffer = geometryPass.getBuffer();
     lightingPass.resize(width, height, buffer->getDepthAttachment());
+    
+    buffer = geometryPass.getBuffer();
+    deferredLightingPass.resize(width, height, buffer->getDepthAttachment());
+    
     blurPass.resize(width, height);
     
     this->width = width;
@@ -38,17 +52,26 @@ void SceneRenderer::updateResolution(int width, int height) {
 }
 
 void SceneRenderer::renderScene() {
+    RenderPass* pass;
+    
+    // Do a depth pass
+    depthPass.render(proj, view, nodes);
+    
     if(!isDeferred) {
         lightingPass.render(proj, view, nodes, lights);
+        
+        pass = &lightingPass;
     } else {
         // Deferred lighting
         geometryPass.render(proj, view, nodes);
-        lightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer(), lights);
+        deferredLightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer(), lights);
+        
+        pass = &deferredLightingPass;
     }
     // Draw final pass to screen
-    //blurPass.render(proj, view, lightingPass.getBuffer());
+    //blurPass.render(proj, view, pass->getBuffer());
     
-    lightingPass.bindBufferTextures();
+    pass->bindBufferTextures();
     
     passthrough.use();
     
@@ -60,6 +83,6 @@ void SceneRenderer::renderScene() {
     
     glDepthMask(GL_TRUE);
     
-    lightingPass.unbindBufferTextures();
+    pass->unbindBufferTextures();
 }
 

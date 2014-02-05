@@ -28,6 +28,7 @@ SceneRenderer renderer;
 glm::vec3 move;
 float rotationY;
 float rotationYaw;
+float lastTime = 0.0;
 
 static void error_callback(int error, const char* description)
 {
@@ -52,6 +53,9 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 }
 
 void updateInput(GLFWwindow* window) {
+    double currentTime = glfwGetTime();
+    float deltaTime = float(currentTime - lastTime);
+    
     glm::vec3 velocity;
     if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         velocity.z += cosf(rotationY * M_PI / 180);
@@ -70,9 +74,9 @@ void updateInput(GLFWwindow* window) {
     }
     
     if(glm::length(velocity) > 0) {
-        velocity = glm::normalize(velocity)*0.1f;
+        velocity = glm::normalize(velocity)* 4.0f;
         
-        move += velocity;
+        move += velocity * deltaTime;
     }
     
     if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
@@ -85,6 +89,8 @@ void updateInput(GLFWwindow* window) {
     } else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
         rotationYaw += 3.0;
     }
+    
+    lastTime = currentTime;
 }
 
 void initGL() {
@@ -137,7 +143,7 @@ std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
     mesh->material.diffuse = glm::vec4(0.9f, 0.4f, 0.1f, 1.0f);
     mesh->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
     mesh->material.specular = glm::vec4(0.9f, 0.6f, 0.5f, 1.0f);
-    mesh->material.shininess = 150.0f;
+    mesh->material.shininess = 250.0f;
     
     node->init(mesh);
     
@@ -170,10 +176,11 @@ int main(void)
     
     std::shared_ptr<Light> light(new Light);
     light->intensity = glm::vec4(0.9, 0.7, 0.7, 1.0);
-    light->position = glm::vec4(-10.0, 0.0, 0.0, 1.0);
+    light->position = glm::vec4(-1.0, 0.0, 0.0, 1.0);
     light->Attenuation.exponential = 0.02f;
     light->Attenuation.linear = 0.1f;
     light->Attenuation.constant = 1.0f;
+    renderer.lights.push_back(light);
     
     std::shared_ptr<Light> light1(new Light);
     light1->intensity = glm::vec4(0.1, 0.6, 1.0, 1.0);
@@ -181,16 +188,17 @@ int main(void)
     light1->Attenuation.exponential = 0.02f;
     light1->Attenuation.linear = 0.1f;
     light1->Attenuation.constant = 1.0f;
-
+    renderer.lights.push_back(light1);
+    
     
     renderer.init(width, height);
     
-    renderer.lights.push_back(light);
-    renderer.lights.push_back(light1);
+    
+    lastTime = glfwGetTime();
     
     for(int i = 0; i < 10; i++) {
     
-        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/cooldragon.off");
+        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/sphere.off");
         
         node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
         
