@@ -6,15 +6,16 @@
 //  Copyright (c) 2014 Mattias Bergström. All rights reserved.
 //
 
+#include <iostream>
 #include "UnitQuad.h"
 #include "Constants.h"
 #include "glm/gtc/matrix_transform.hpp"
 
 static Vertex g_quad_vertex_buffer_data[] = {
-    {{-1.0f, -1.0f, 0.0f}, {0,0,0}, {0,0,0}},
-    {{-1.0f, 1.0f, 0.0f}, {0,0,0}, {0,0,0}},
-    {{1.0f, 1.0f, 0.0f}, {0,0,0}, {0,0,0}},
-    {{1.0f, -1.0f, 0.0f}, {0,0,0}, {0,0,0}},
+    {{-1.0f, -1.0f, 0.0f},  {0.0f,0.0f,1.0f}, {0,0,0}},
+    {{-1.0f, 1.0f, 0.0f},   {0.0f,0.0f,1.0f}, {0,0,0}},
+    {{1.0f, 1.0f, 0.0f},    {0.0f,0.0f,1.0f}, {0,0,0}},
+    {{1.0f, -1.0f, 0.0f},   {0.0f,0.0f,1.0f}, {0,0,0}},
 };
 
 

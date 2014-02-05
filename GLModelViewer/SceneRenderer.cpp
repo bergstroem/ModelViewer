@@ -39,11 +39,11 @@ void SceneRenderer::updateResolution(int width, int height) {
 
 void SceneRenderer::renderScene() {
     if(!isDeferred) {
-        lightingPass.render(proj, view, nodes);
+        lightingPass.render(proj, view, nodes, lights);
     } else {
         // Deferred lighting
         geometryPass.render(proj, view, nodes);
-        lightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer());
+        lightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer(), lights);
     }
     // Draw final pass to screen
     //blurPass.render(proj, view, lightingPass.getBuffer());

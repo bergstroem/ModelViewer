@@ -24,6 +24,8 @@ public:
     // Members
     glm::vec3 position;
     glm::mat4 rotation;
+    glm::mat4 scale;
+    
     glm::mat4 modelMatrix;
     
     std::shared_ptr<Mesh> mesh;

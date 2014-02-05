@@ -10,11 +10,13 @@
 #define GLModelViewer_DeferredPhongShader_h
 
 #include "Shader.h"
+#include "Light.h"
 
 class DeferredPhongShader : public Shader {
 public:
     void init();
     void setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model);
+    void setLight(Light light);
 };
 
 #endif

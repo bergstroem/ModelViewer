@@ -39,3 +39,9 @@ void DeferredPhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat
     glUniform1i(shininessSamplerId, TEXTURE_SHININESS_INDEX);
     
 }
+
+void DeferredPhongShader::setLight(Light light) {
+    glBindBuffer(GL_UNIFORM_BUFFER, lightBuffer);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(Light), &light, GL_DYNAMIC_DRAW);
+}
+

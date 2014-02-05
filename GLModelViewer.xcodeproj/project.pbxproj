@@ -69,6 +69,7 @@
 		02C9108E18A10ED7004A6C91 /* DepthAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepthAttachment.h; sourceTree = "<group>"; };
 		02CB52C718A12F6600083115 /* ColorAttachment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorAttachment.cpp; sourceTree = "<group>"; };
 		02CB52C818A12F6600083115 /* ColorAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorAttachment.h; sourceTree = "<group>"; };
+		02CB52CA18A19E8A00083115 /* Light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
 		02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightingPass.cpp; sourceTree = "<group>"; };
 		02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_phong.fs; sourceTree = "<group>"; };
 		02D0DDB7189DB4B000CC1BE6 /* DeferredPhongShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeferredPhongShader.h; sourceTree = "<group>"; };
@@ -227,6 +228,7 @@
 				02DB2807189B2CE00055B56F /* Constants.h */,
 				02DB290A189B2CE10055B56F /* main.cpp */,
 				02DB290B189B2CE10055B56F /* Material.h */,
+				02CB52CA18A19E8A00083115 /* Light.h */,
 				02DB290E189B2CE10055B56F /* ModelViewer.1 */,
 				02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */,
 			);

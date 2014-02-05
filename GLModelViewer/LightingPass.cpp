@@ -43,30 +43,41 @@ void LightingPass::resize(int width, int height, std::shared_ptr<DepthAttachment
     resultBuffer->init(width, height);
 }
 
-void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes) {
+void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes, std::vector<std::shared_ptr<Light>> lights) {
     
     resultBuffer->bind();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     phong.use();
     for (auto it = nodes.begin(); it != nodes.end(); it++) {
         std::shared_ptr<SceneNode> node = (*it);
-        phong.setMaterial(node->mesh->material);
         phong.setUniforms(proj, view, node->modelMatrix);
+        phong.setMaterial(node->mesh->material);
         
-        (*it)->render();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE);
+        for(auto it = lights.begin(); it != lights.end(); it++) {
+            phong.setLight(*(*it));
+            
+            
+            node->render();
+        }
+        glDisable(GL_BLEND);
     }
     
     resultBuffer->unbind();
 }
 
-void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer) {
+void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector<std::shared_ptr<Light>> lights) {
     //Render lighting from data in gbuffer
     
     // Dont write to the depth buffer on light pass
-    glDepthMask(GL_FALSE);
+    
     
     resultBuffer->bind();
     glClear(GL_COLOR_BUFFER_BIT);
+    glDepthMask(GL_FALSE);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE);
     
     gBuffer->bindAttachments();
     
@@ -75,12 +86,18 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer) {
     glm::mat4 mat1 = glm::mat4(1.0f);
     deferredPhong.setUniforms(proj, view, mat1);
     
-    unitQuad.render();
+    for(auto it = lights.begin(); it != lights.end(); it++) {
+        deferredPhong.setLight(*(*it));
+        
+        unitQuad.render();
+    }
     
     gBuffer->unbindAttachments();
     
-    resultBuffer->unbind();
     glDepthMask(GL_TRUE);
+    glDisable(GL_BLEND);
+    resultBuffer->unbind();
+    
 }
 
 FrameBuffer* LightingPass::getBuffer() {

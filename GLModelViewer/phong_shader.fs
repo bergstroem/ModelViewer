@@ -9,6 +9,16 @@ layout (std140) uniform Material {
     float shininess;
 };
 
+layout (std140) uniform Light {
+    vec4 position;
+    vec4 intensity;
+    struct {
+        float constant;
+        float linear;
+        float exponential;
+    } Attenuation;
+} LightIn;
+
 out vec4 outColor;
 
 in VertexData {
@@ -16,13 +26,20 @@ in VertexData {
     vec4 eyeSpacePosition;
 } VertexIn;
 
+
 void main() {
     vec4 spec = vec4(0.0);
     
     vec3 n = normalize(VertexIn.normal);
     
     // Calculate direction to light
-    vec3 l = normalize((view * vec4(1.0, 1.0, 1.0, 1.0)) - VertexIn.eyeSpacePosition).xyz;
+    vec3 l = ((view * LightIn.position) - VertexIn.eyeSpacePosition).xyz;
+    
+    // Get distance to light before normalizing
+    float lightDistance = length(l);
+    float att = 1 / (LightIn.Attenuation.constant + LightIn.Attenuation.linear*lightDistance + LightIn.Attenuation.exponential*lightDistance*lightDistance);
+
+    l = normalize(l);
     
     float intensity = max(dot(n, l), 0.0);
     
@@ -35,5 +52,8 @@ void main() {
         spec = specular * pow(intSpec, shininess);
     }
     
-    outColor = max(diffuse * intensity +  spec, ambient*diffuse);
+    vec4 totalColor = (diffuse * intensity +  spec) * att * LightIn.intensity;
+    
+    outColor = max(totalColor, ambient*diffuse * att);
 }
+

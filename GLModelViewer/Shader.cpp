@@ -50,10 +50,12 @@ void Shader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
     glUniformMatrix4fv(inverseProjId, 1, GL_FALSE, glm::value_ptr(inverseProj));
     glUniform1f(nearZId, 0.1f);
     glUniform1f(farZId, 100.0f);
+    
+    glBindBufferBase(GL_UNIFORM_BUFFER, Shader::MATERIAL, materialBuffer);
+    glBindBufferBase(GL_UNIFORM_BUFFER, Shader::LIGHT, lightBuffer);
 }
 
 void Shader::setupBufferBindings() {
-    // No buffers in base class, override in subclass if buffer bindings are needed
     GLuint bindingPoint = Shader::MATERIAL;
     GLuint blockIndex;
     
@@ -65,4 +67,16 @@ void Shader::setupBufferBindings() {
         glBindBuffer(GL_UNIFORM_BUFFER, materialBuffer);
         glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, materialBuffer);
     }
+    
+    bindingPoint = Shader::LIGHT;
+    
+    blockIndex = glGetUniformBlockIndex(programId, "Light");
+    if(blockIndex != GL_INVALID_INDEX) {
+        glUniformBlockBinding(programId, blockIndex, bindingPoint);
+        
+        glGenBuffers(1, &lightBuffer);
+        glBindBuffer(GL_UNIFORM_BUFFER, lightBuffer);
+        glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, lightBuffer);
+    }
+    
 }

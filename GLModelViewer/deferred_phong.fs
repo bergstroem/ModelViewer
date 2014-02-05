@@ -2,6 +2,16 @@
 
 in vec2 uv;
 
+layout (std140) uniform Light {
+    vec4 position;
+    vec4 intensity;
+    struct {
+        float constant;
+        float linear;
+        float exponential;
+    } Attenuation;
+} LightIn;
+
 uniform mat4 proj;
 uniform mat4 view;
 uniform mat4 inverse_proj;
@@ -45,7 +55,13 @@ void main() {
     //Lighting
     vec4 spec = vec4(0.0);
     
-    vec3 l = normalize((view * vec4(1.0, 1.0, 1.0, 1.0)) - worldSpace).xyz;
+    vec3 l = ((view * LightIn.position) - worldSpace).xyz;
+    
+    float lightDistance = length(l);
+    float att = 1 / (LightIn.Attenuation.constant + LightIn.Attenuation.linear*lightDistance + LightIn.Attenuation.exponential*lightDistance*lightDistance);
+    
+    l = normalize(l);
+    
     float intensity = max(dot(l, normal), 0.0);
     if(intensity > 0.0f) {
         vec3 e = normalize(- vec3(worldSpace));
@@ -54,6 +70,10 @@ void main() {
         float intSpec = max(dot(h, normal), 0.0);
         spec = specular * pow(intSpec, shininess);
     }
-    outColor = max(diffuse * intensity +  spec, ambient*diffuse);
+    
+    vec4 totalColor = (diffuse * intensity +  spec) * att * LightIn.intensity;
+    
+    outColor = max(totalColor, ambient * diffuse * att);
+
 }
 

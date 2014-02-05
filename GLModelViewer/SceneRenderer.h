@@ -33,6 +33,7 @@ public:
     glm::mat4 proj;
     glm::mat4 view;
     std::vector<std::shared_ptr<SceneNode>> nodes;
+    std::vector<std::shared_ptr<Light>> lights;
     bool isDeferred;
     
     void init(int width, int height);

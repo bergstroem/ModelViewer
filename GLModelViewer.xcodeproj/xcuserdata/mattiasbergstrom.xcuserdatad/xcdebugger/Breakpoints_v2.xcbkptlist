@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/PhongShader.cpp"
-            timestampString = "412988129.058111"
+            timestampString = "413245666.690404"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "PhongShader::setMaterial(Material material)"
             landmarkType = "5">
          </BreakpointContent>
@@ -205,6 +205,22 @@
             endingLineNumber = "29"
             landmarkName = "FrameBuffer::attachColorTexture(std::shared_ptr&lt;ColorAttachment&gt; colorTexture)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/LightingPass.h"
+            timestampString = "413245666.690404"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "class LightingPass"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

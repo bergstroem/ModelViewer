@@ -23,8 +23,8 @@ void SceneNode::init(std::shared_ptr<Mesh> mesh) {
 
 void SceneNode::render() {
     
-    modelMatrix = glm::translate(glm::mat4(1.0f), position);
-    modelMatrix = modelMatrix * rotation;
+    modelMatrix = glm::translate(glm::mat4(1.0), position);
+    modelMatrix = modelMatrix * rotation * scale;
     
     mesh->bind();
     

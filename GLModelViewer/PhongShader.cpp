@@ -17,18 +17,15 @@ void PhongShader::init() {
     
     this->programId = loader.loadShaderProgram("/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/phong_shader.vs", "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/phong_shader.fs");
     
-    this->setupBufferBindings();
-}
-
-void PhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
-    Shader::setUniforms(proj, view, model);
-    
-    // Move to base class?
-    glBindBufferBase(GL_UNIFORM_BUFFER, Shader::MATERIAL, materialBuffer);
+    setupBufferBindings();
 }
 
 void PhongShader::setMaterial(Material material) {
-    //TODO: update material
     glBindBuffer(GL_UNIFORM_BUFFER, materialBuffer);
     glBufferData(GL_UNIFORM_BUFFER, sizeof(Material), &material, GL_DYNAMIC_DRAW);
+}
+
+void PhongShader::setLight(Light light) {
+    glBindBuffer(GL_UNIFORM_BUFFER, lightBuffer);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(Light), &light, GL_DYNAMIC_DRAW);
 }
