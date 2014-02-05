@@ -1,15 +1,19 @@
 #version 150
 
+#define M_PI 3.1415926535897932384626433832795
+
+
 in vec2 uv;
 
 layout (std140) uniform Light {
     vec4 position;
     vec4 intensity;
-    struct {
-        float constant;
-        float linear;
-        float exponential;
-    } Attenuation;
+    vec3 direction;
+    float angle;
+    float spotExponent;
+    float constantAtt;
+    float linearAtt;
+    float exponentialAtt;
 } LightIn;
 
 uniform mat4 proj;
@@ -31,6 +35,8 @@ uniform float farZ;
 out vec4 outColor;
 
 void main() {
+    vec4 color = vec4(0.0);
+    
     vec3 normal = normalize(texture(normal_sampler, uv).xyz);
     float depth = texture(depth_sampler, uv).x * 2.0 -1.0;
     
@@ -43,7 +49,7 @@ void main() {
     vec4 diffuse = texture(diffuse_sampler, uv);
     vec4 ambient = texture(ambient_sampler, uv);
     vec4 specular = texture(specular_sampler, uv);
-    float shininess = texture(shininess_sampler, uv).x * 500;
+    float shininess = texture(shininess_sampler, uv).x;
     
     // Restore eye space position
     vec3 viewSpace;
@@ -58,22 +64,30 @@ void main() {
     vec3 l = ((view * LightIn.position) - worldSpace).xyz;
     
     float lightDistance = length(l);
-    float att = 1 / (LightIn.Attenuation.constant + LightIn.Attenuation.linear*lightDistance + LightIn.Attenuation.exponential*lightDistance*lightDistance);
+    
     
     l = normalize(l);
     
     float intensity = max(dot(l, normal), 0.0);
     if(intensity > 0.0f) {
-        vec3 e = normalize(- vec3(worldSpace));
-        vec3 h = normalize(l + e);
+        vec4 viewSpaceLightDir = view * vec4(LightIn.direction, 0.0);
+        float spotEffect = dot(normalize(viewSpaceLightDir.xyz), normalize(-l));
+        float spotCutOff = cos(LightIn.angle*M_PI/180);
         
-        float intSpec = max(dot(h, normal), 0.0);
-        spec = specular * pow(intSpec, shininess);
+        if(spotEffect > spotCutOff) {
+            spotEffect = pow(spotEffect, LightIn.spotExponent);
+            float att = spotEffect / (LightIn.constantAtt + LightIn.linearAtt*lightDistance + LightIn.exponentialAtt*lightDistance*lightDistance);
+            
+            color += diffuse * intensity * att * LightIn.intensity;
+            
+            vec3 e = normalize(- vec3(worldSpace));
+            vec3 h = normalize(l + e);
+        
+            float intSpec = max(dot(h, normal), 0.0);
+            color += specular * pow(intSpec, shininess) * att * LightIn.intensity;
+        }
     }
     
-    vec4 totalColor = (diffuse * intensity +  spec) * att * LightIn.intensity;
-    
-    outColor = max(totalColor, ambient * diffuse * att);
-
+    outColor = max(color, ambient);
 }
 

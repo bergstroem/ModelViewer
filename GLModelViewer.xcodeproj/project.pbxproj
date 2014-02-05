@@ -168,6 +168,17 @@
 			name = buffers;
 			sourceTree = "<group>";
 		};
+		02CEA18918A2733800D026F8 /* passthroughs */ = {
+			isa = PBXGroup;
+			children = (
+				02DB2911189B2CE10055B56F /* passthrough.vs */,
+				02C8ACE9189FD467002DC3C6 /* passthrough.fs */,
+				029D103F18A25B92009BC5DE /* perspective_passthrough.fs */,
+				029D103D18A25B84009BC5DE /* perspective_passthrough.vs */,
+			);
+			name = passthroughs;
+			sourceTree = "<group>";
+		};
 		02D0DDB1189DAFC400CC1BE6 /* scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,14 +295,11 @@
 		02DB293F189BD04B0055B56F /* glsl */ = {
 			isa = PBXGroup;
 			children = (
+				02CEA18918A2733800D026F8 /* passthroughs */,
 				02DB2941189C49E10055B56F /* phong */,
 				02DB2804189B2CE00055B56F /* blur_shader.fs */,
-				02DB2911189B2CE10055B56F /* passthrough.vs */,
-				02C8ACE9189FD467002DC3C6 /* passthrough.fs */,
 				02DB2944189C5CC40055B56F /* geometry.vs */,
 				02DB2946189C5CD30055B56F /* geometry.fs */,
-				029D103D18A25B84009BC5DE /* perspective_passthrough.vs */,
-				029D103F18A25B92009BC5DE /* perspective_passthrough.fs */,
 			);
 			name = glsl;
 			sourceTree = "<group>";

@@ -24,5 +24,5 @@ void main()
     outDiffuse = diffuse.xyz;
     outAmbient = ambient.xyz;
     outSpecular = specular.xyz;
-    outShininess.x = shininess / 500;
+    outShininess.x = shininess;
 }

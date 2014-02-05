@@ -141,7 +141,7 @@ std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
 
     auto node = std::shared_ptr<SceneNode>(new SceneNode());
     mesh->material.diffuse = glm::vec4(0.9f, 0.4f, 0.1f, 1.0f);
-    mesh->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+    mesh->material.ambient = glm::vec4(0.01f, 0.01f, 0.01f, 1.0f);
     mesh->material.specular = glm::vec4(0.9f, 0.6f, 0.5f, 1.0f);
     mesh->material.shininess = 250.0f;
     
@@ -162,7 +162,7 @@ int main(void)
     //Floor
     std::shared_ptr<Mesh> floorMesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
     floorMesh->material.diffuse = glm::vec4(0.3f, 0.6f, 0.7f, 1.0f);
-    floorMesh->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+    floorMesh->material.ambient = glm::vec4(0.01f, 0.01f, 0.01f, 1.0f);
     floorMesh->material.specular = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
     floorMesh->material.shininess = 10.0f;
     
@@ -172,24 +172,18 @@ int main(void)
     floor->rotation = glm::rotate(glm::mat4(1.0f),-90.0f, glm::vec3(1.0, 0.0, 0.0));
     floor->scale = glm::scale(glm::mat4(1.0), glm::vec3(100.0f));
     
-    
-    
-    std::shared_ptr<Light> light(new Light);
-    light->intensity = glm::vec4(0.9, 0.7, 0.7, 1.0);
-    light->position = glm::vec4(-1.0, 0.0, 0.0, 1.0);
-    light->Attenuation.exponential = 0.02f;
-    light->Attenuation.linear = 0.1f;
-    light->Attenuation.constant = 1.0f;
-    renderer.lights.push_back(light);
-    
-    std::shared_ptr<Light> light1(new Light);
-    light1->intensity = glm::vec4(0.1, 0.6, 1.0, 1.0);
-    light1->position = glm::vec4(-1.0, -0.5, -2.8, 1.0);
-    light1->Attenuation.exponential = 0.02f;
-    light1->Attenuation.linear = 0.1f;
-    light1->Attenuation.constant = 1.0f;
+    std::shared_ptr<Light> light1 = std::make_shared<Light>(LightFactory::Bright(glm::vec3(0.2, 0.5, 1.0)));
+    light1->position = glm::vec4(2.0, 2.0, -3.0, 1.0);
+    light1->direction = glm::vec3(-1.0, -1.0, 0.0);
     renderer.lights.push_back(light1);
     
+    std::shared_ptr<Light> light2 = std::make_shared<Light>(LightFactory::Medium(glm::vec3(0.0, 1.0, 0.4)));
+    light2->position = glm::vec4(-1.0, 2.0, -10.0, 1.0);
+    renderer.lights.push_back(light2);
+    
+    std::shared_ptr<Light> light3 = std::make_shared<Light>(LightFactory::Dark(glm::vec3(1.0, 0.4, 0.2)));
+    light3->position = glm::vec4(-1.0, 2.0, -20.0, 1.0);
+    renderer.lights.push_back(light3);
     
     renderer.init(width, height);
     
@@ -198,9 +192,9 @@ int main(void)
     
     for(int i = 0; i < 10; i++) {
     
-        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/sphere.off");
+        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/crank.off");
         
-        node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
+        node->position = glm::vec3(-2.0f, -0.2f, -3.0f * (i + 1));
         
         renderer.nodes.push_back(node);
     }
@@ -216,7 +210,7 @@ int main(void)
         glfwGetFramebufferSize(window, &width, &height);
         float ratio = width / (float)height;
         
-        light->position = glm::rotate(glm::mat4(1.0), 50.0f*(float)glfwGetTime(), glm::vec3(0.0, 1.0, 0.0)) * glm::vec4(-10.0, 0.0,0.0,1.0);
+        //light->position = glm::rotate(glm::mat4(1.0), 50.0f*(float)glfwGetTime(), glm::vec3(0.0, 1.0, 0.0)) * glm::vec4(-10.0, 0.0,0.0,1.0);
         
         renderer.proj = glm::perspective(75.0f, ratio, 0.1f, 1000.0f);
         
