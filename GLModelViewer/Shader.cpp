@@ -35,10 +35,12 @@ void Shader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
     GLint projId = glGetUniformLocation(this->programId, "proj");
     GLint viewId = glGetUniformLocation(this->programId, "view");
     GLint modelId = glGetUniformLocation(this->programId, "model");
+    GLint mvpId = glGetUniformLocation(this->programId, "mvp");
     GLint normalMatrixId = glGetUniformLocation(this->programId, "normal_matrix");
     GLint inverseProjId = glGetUniformLocation(this->programId, "inverse_proj");
     GLint nearZId = glGetUniformLocation(this->programId, "nearZ");
     GLint farZId = glGetUniformLocation(this->programId, "farZ");
+    
     
     glm::mat3 normalMatrix = glm::inverseTranspose(glm::mat3(view * model));
     glm::mat4 inverseProj = glm::inverse(proj);
@@ -46,6 +48,7 @@ void Shader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
     glUniformMatrix4fv(projId, 1, GL_FALSE, glm::value_ptr(proj));
     glUniformMatrix4fv(viewId, 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(modelId, 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(mvpId, 1, GL_FALSE, glm::value_ptr(proj * view * model));
     glUniformMatrix3fv(normalMatrixId, 1, GL_FALSE, glm::value_ptr(normalMatrix));
     glUniformMatrix4fv(inverseProjId, 1, GL_FALSE, glm::value_ptr(inverseProj));
     glUniform1f(nearZId, 0.1f);

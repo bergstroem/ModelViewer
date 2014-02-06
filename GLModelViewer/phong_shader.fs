@@ -3,6 +3,8 @@
 #define M_PI 3.1415926535897932384626433832795
 
 uniform mat4 view;
+uniform mat4 light_mvp;
+
 
 layout (std140) uniform Material {
     vec4 diffuse;
@@ -14,7 +16,7 @@ layout (std140) uniform Material {
 layout (std140) uniform Light {
     vec4 position;
     vec4 intensity;
-    vec3 direction;
+    vec4 direction;
     float angle;
     float spotExponent;
     float constantAtt;
@@ -46,12 +48,12 @@ void main() {
     
     float intensity = max(dot(n, l), 0.0);
     
+    
+    
     if(intensity > 0.0) {
-        
-        vec4 viewSpaceLightDir = view * vec4(LightIn.direction, 0.0);
+        vec4 viewSpaceLightDir = view * LightIn.direction;
         
         float spotEffect = dot(normalize(viewSpaceLightDir.xyz), normalize(-l));
-        
         float cosCutOff = cos(LightIn.angle*M_PI/180);
         
         if (spotEffect > cosCutOff) {

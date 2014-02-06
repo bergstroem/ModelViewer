@@ -14,6 +14,8 @@ void SceneRenderer::init(int width, int height) {
     depthPass.init(width, height);
     geometryPass.init(width, height);
     
+    shadowPass.init(width, height);
+    
     // Init lighting
     auto buffer = depthPass.getBuffer();
     lightingPass.init(width, height, buffer->getDepthAttachment());
@@ -39,6 +41,8 @@ void SceneRenderer::updateResolution(int width, int height) {
     depthPass.resize(width, height);
     geometryPass.resize(width, height);
     
+    shadowPass.resize(width, height);
+    
     auto buffer = geometryPass.getBuffer();
     lightingPass.resize(width, height, buffer->getDepthAttachment());
     
@@ -56,6 +60,8 @@ void SceneRenderer::renderScene() {
     
     // Do a depth pass
     depthPass.render(proj, view, nodes);
+    
+    shadowPass.render(proj, view, nodes, lights);
     
     if(!isDeferred) {
         lightingPass.render(proj, view, nodes, lights);

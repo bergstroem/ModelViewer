@@ -22,7 +22,7 @@
 #include "Constants.h"
 #include "GeometryShader.h"
 #include "MeshLoader.h"
-#include "Light.h"
+#include "LightProperties.h"
 
 SceneRenderer renderer;
 glm::vec3 move;
@@ -80,14 +80,14 @@ void updateInput(GLFWwindow* window) {
     }
     
     if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-        rotationY -= 3.0f;
+        rotationY -= 100.0f * deltaTime;
     } else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
-        rotationY += 3.0f;
+        rotationY += 100.0f * deltaTime;
     }
     if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-        rotationYaw -= 3.0f;
+        rotationYaw -= 100.0f * deltaTime;
     } else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-        rotationYaw += 3.0;
+        rotationYaw += 100.0 * deltaTime;
     }
     
     lastTime = currentTime;
@@ -172,21 +172,14 @@ int main(void)
     floor->rotation = glm::rotate(glm::mat4(1.0f),-90.0f, glm::vec3(1.0, 0.0, 0.0));
     floor->scale = glm::scale(glm::mat4(1.0), glm::vec3(100.0f));
     
-    std::shared_ptr<Light> light1 = std::make_shared<Light>(LightFactory::Bright(glm::vec3(0.2, 0.5, 1.0)));
-    light1->position = glm::vec4(2.0, 2.0, -3.0, 1.0);
-    light1->direction = glm::vec3(-1.0, -1.0, 0.0);
-    renderer.lights.push_back(light1);
-    
-    std::shared_ptr<Light> light2 = std::make_shared<Light>(LightFactory::Medium(glm::vec3(0.0, 1.0, 0.4)));
-    light2->position = glm::vec4(-1.0, 2.0, -10.0, 1.0);
-    renderer.lights.push_back(light2);
-    
-    std::shared_ptr<Light> light3 = std::make_shared<Light>(LightFactory::Dark(glm::vec3(1.0, 0.4, 0.2)));
-    light3->position = glm::vec4(-1.0, 2.0, -20.0, 1.0);
-    renderer.lights.push_back(light3);
+    LightProperties lightProperties = LightFactory::Bright(glm::vec3(0.8, 0.9, 1.0));
+    lightProperties.position = glm::vec4(-1.0f, 0.0f, 0.0f, 1.0);
+    lightProperties.direction = glm::vec4(0.0, 0.0, -1.0, 0.0);
+    std::shared_ptr<Light> light(new Light);
+    light->properties = lightProperties;
+    renderer.lights.push_back(light);
     
     renderer.init(width, height);
-    
     
     lastTime = glfwGetTime();
     
@@ -194,7 +187,7 @@ int main(void)
     
         auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/crank.off");
         
-        node->position = glm::vec3(-2.0f, -0.2f, -3.0f * (i + 1));
+        node->position = glm::vec3(-2.0f, 0.0f, -3.0f * (i + 1));
         
         renderer.nodes.push_back(node);
     }
@@ -212,7 +205,7 @@ int main(void)
         
         //light->position = glm::rotate(glm::mat4(1.0), 50.0f*(float)glfwGetTime(), glm::vec3(0.0, 1.0, 0.0)) * glm::vec4(-10.0, 0.0,0.0,1.0);
         
-        renderer.proj = glm::perspective(75.0f, ratio, 0.1f, 1000.0f);
+        renderer.proj = glm::perspective(60.0f, ratio, 0.1f, 1000.0f);
         
         // Rotation Up/Down
         renderer.view = glm::rotate(glm::mat4(1.0f), rotationYaw, glm::vec3(1.0f, 0.0f, 0.0f));

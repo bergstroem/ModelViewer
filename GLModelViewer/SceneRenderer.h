@@ -20,6 +20,8 @@
 #include "PassthroughShader.h"
 #include "DepthPass.h"
 #include "DeferredLightingPass.h"
+#include "ShadowPass.h"
+#include "Light.h"
 
 class SceneRenderer {
     
@@ -29,6 +31,7 @@ class SceneRenderer {
     LightingPass lightingPass;
     DeferredLightingPass deferredLightingPass;
     BlurPass blurPass;
+    ShadowPass shadowPass;
     
     PassthroughShader passthrough;
     SceneNode screenNode;

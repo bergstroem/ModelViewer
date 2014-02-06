@@ -13,13 +13,14 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "Shader.h"
 #include "Material.h"
-#include "Light.h"
+#include "LightProperties.h"
 
 
 class PhongShader : public Shader {
 public:
+    void setLightMvp(glm::mat4 mvp);
     void setMaterial(Material material);
-    void setLight(Light light);
+    void setLight(LightProperties light);
     void init();
 };
 

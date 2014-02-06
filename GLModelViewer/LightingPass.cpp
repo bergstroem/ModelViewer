@@ -60,7 +60,7 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::share
         phong.setMaterial(node->mesh->material);
         
         for(auto it = lights.begin(); it != lights.end(); it++) {
-            phong.setLight(*(*it));
+            phong.setLight((*it)->properties);
             
             node->render();
         }

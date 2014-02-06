@@ -13,12 +13,14 @@
 		029D104018A25B92009BC5DE /* perspective_passthrough.fs in Sources */ = {isa = PBXBuildFile; fileRef = 029D103F18A25B92009BC5DE /* perspective_passthrough.fs */; };
 		029D104318A25BD7009BC5DE /* PerspectivePassthroughShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 029D104118A25BD7009BC5DE /* PerspectivePassthroughShader.cpp */; };
 		029D104618A26248009BC5DE /* DeferredLightingPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 029D104418A26248009BC5DE /* DeferredLightingPass.cpp */; };
+		02A467A218A3E712002B4164 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02A467A018A3E712002B4164 /* Light.cpp */; };
 		02C8ACE8189FAE67002DC3C6 /* MeshLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C8ACE7189FAE67002DC3C6 /* MeshLoader.cpp */; };
 		02C8ACEC189FD501002DC3C6 /* PassthroughShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C8ACEB189FD501002DC3C6 /* PassthroughShader.cpp */; };
 		02C9108F18A10ED7004A6C91 /* DepthAttachment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02C9108D18A10ED7004A6C91 /* DepthAttachment.cpp */; };
 		02CB52C918A12F6600083115 /* ColorAttachment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CB52C718A12F6600083115 /* ColorAttachment.cpp */; };
 		02CB52CD18A24A1E00083115 /* DepthBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CB52CB18A24A1E00083115 /* DepthBuffer.cpp */; };
 		02CB52D018A2564800083115 /* DepthPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CB52CE18A2564800083115 /* DepthPass.cpp */; };
+		02CEA18C18A2C80300D026F8 /* ShadowPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CEA18A18A2C80300D026F8 /* ShadowPass.cpp */; };
 		02D0DDB0189D53F300CC1BE6 /* LightingPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */; };
 		02D0DDB6189DB42F00CC1BE6 /* deferred_phong.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */; };
 		02D0DDB9189DB53100CC1BE6 /* DeferredPhongShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB8189DB53100CC1BE6 /* DeferredPhongShader.cpp */; };
@@ -72,6 +74,8 @@
 		029D104218A25BD7009BC5DE /* PerspectivePassthroughShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerspectivePassthroughShader.h; sourceTree = "<group>"; };
 		029D104418A26248009BC5DE /* DeferredLightingPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeferredLightingPass.cpp; sourceTree = "<group>"; };
 		029D104518A26248009BC5DE /* DeferredLightingPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeferredLightingPass.h; sourceTree = "<group>"; };
+		02A467A018A3E712002B4164 /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
+		02A467A118A3E712002B4164 /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
 		02C8ACE6189FABE7002DC3C6 /* MeshLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeshLoader.h; sourceTree = "<group>"; };
 		02C8ACE7189FAE67002DC3C6 /* MeshLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoader.cpp; sourceTree = "<group>"; };
 		02C8ACE9189FD467002DC3C6 /* passthrough.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = passthrough.fs; sourceTree = "<group>"; };
@@ -81,11 +85,13 @@
 		02C9108E18A10ED7004A6C91 /* DepthAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepthAttachment.h; sourceTree = "<group>"; };
 		02CB52C718A12F6600083115 /* ColorAttachment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorAttachment.cpp; sourceTree = "<group>"; };
 		02CB52C818A12F6600083115 /* ColorAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorAttachment.h; sourceTree = "<group>"; };
-		02CB52CA18A19E8A00083115 /* Light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
+		02CB52CA18A19E8A00083115 /* LightProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightProperties.h; sourceTree = "<group>"; };
 		02CB52CB18A24A1E00083115 /* DepthBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DepthBuffer.cpp; sourceTree = "<group>"; };
 		02CB52CC18A24A1E00083115 /* DepthBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepthBuffer.h; sourceTree = "<group>"; };
 		02CB52CE18A2564800083115 /* DepthPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DepthPass.cpp; sourceTree = "<group>"; };
 		02CB52CF18A2564800083115 /* DepthPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepthPass.h; sourceTree = "<group>"; };
+		02CEA18A18A2C80300D026F8 /* ShadowPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShadowPass.cpp; sourceTree = "<group>"; };
+		02CEA18B18A2C80300D026F8 /* ShadowPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowPass.h; sourceTree = "<group>"; };
 		02D0DDAF189D53F300CC1BE6 /* LightingPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightingPass.cpp; sourceTree = "<group>"; };
 		02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_phong.fs; sourceTree = "<group>"; };
 		02D0DDB7189DB4B000CC1BE6 /* DeferredPhongShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeferredPhongShader.h; sourceTree = "<group>"; };
@@ -219,6 +225,8 @@
 				02CB52CE18A2564800083115 /* DepthPass.cpp */,
 				029D104418A26248009BC5DE /* DeferredLightingPass.cpp */,
 				029D104518A26248009BC5DE /* DeferredLightingPass.h */,
+				02CEA18A18A2C80300D026F8 /* ShadowPass.cpp */,
+				02CEA18B18A2C80300D026F8 /* ShadowPass.h */,
 			);
 			name = passes;
 			sourceTree = "<group>";
@@ -261,9 +269,11 @@
 				02DB2807189B2CE00055B56F /* Constants.h */,
 				02DB290A189B2CE10055B56F /* main.cpp */,
 				02DB290B189B2CE10055B56F /* Material.h */,
-				02CB52CA18A19E8A00083115 /* Light.h */,
+				02CB52CA18A19E8A00083115 /* LightProperties.h */,
 				02DB290E189B2CE10055B56F /* ModelViewer.1 */,
 				02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */,
+				02A467A018A3E712002B4164 /* Light.cpp */,
+				02A467A118A3E712002B4164 /* Light.h */,
 			);
 			path = GLModelViewer;
 			sourceTree = "<group>";
@@ -381,6 +391,7 @@
 				02DB2932189B2CE10055B56F /* PhongShader.cpp in Sources */,
 				02DB2928189B2CE10055B56F /* Mesh.cpp in Sources */,
 				02DB2929189B2CE10055B56F /* OFFReader.cpp in Sources */,
+				02A467A218A3E712002B4164 /* Light.cpp in Sources */,
 				02DB292C189B2CE10055B56F /* SceneRenderer.cpp in Sources */,
 				029D104318A25BD7009BC5DE /* PerspectivePassthroughShader.cpp in Sources */,
 				02C9108F18A10ED7004A6C91 /* DepthAttachment.cpp in Sources */,
@@ -393,6 +404,7 @@
 				02DB292D189B2CE10055B56F /* Shader.cpp in Sources */,
 				02DB292A189B2CE10055B56F /* passthrough.vs in Sources */,
 				029D104018A25B92009BC5DE /* perspective_passthrough.fs in Sources */,
+				02CEA18C18A2C80300D026F8 /* ShadowPass.cpp in Sources */,
 				02DB2945189C5CC40055B56F /* geometry.vs in Sources */,
 				02C8ACE8189FAE67002DC3C6 /* MeshLoader.cpp in Sources */,
 				02DB292F189B2CE10055B56F /* phong_shader.fs in Sources */,

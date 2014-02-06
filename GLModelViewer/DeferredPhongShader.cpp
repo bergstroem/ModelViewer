@@ -40,8 +40,8 @@ void DeferredPhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat
     
 }
 
-void DeferredPhongShader::setLight(Light light) {
+void DeferredPhongShader::setLight(LightProperties light) {
     glBindBuffer(GL_UNIFORM_BUFFER, lightBuffer);
-    glBufferData(GL_UNIFORM_BUFFER, sizeof(Light), &light, GL_DYNAMIC_DRAW);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(LightProperties), &light, GL_DYNAMIC_DRAW);
 }
 

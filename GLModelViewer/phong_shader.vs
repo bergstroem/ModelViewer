@@ -4,6 +4,7 @@
 uniform mat4 proj;
 uniform mat4 view;
 uniform mat4 model;
+uniform mat4 mvp;
 uniform mat3 normal_matrix;
 
 in vec3 position;
@@ -20,5 +21,5 @@ void main() {
     
     VertexOut.eyeSpacePosition = (view * model * vec4(position, 1.0));
     VertexOut.normal = _normal;
-    gl_Position = proj * view * model * vec4(position, 1.0);
+    gl_Position = mvp * vec4(position, 1.0);
 }

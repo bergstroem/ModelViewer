@@ -18,9 +18,7 @@
  * Abstract class for render passes
  */
 class RenderPass {
-    
 public:
-    
     virtual void init(int width, int height) = 0;
     virtual void resize(int width, int height) = 0;
     virtual FrameBuffer* getBuffer() = 0;

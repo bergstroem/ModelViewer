@@ -20,12 +20,18 @@ void PhongShader::init() {
     setupBufferBindings();
 }
 
+void PhongShader::setLightMvp(glm::mat4 mvp) {
+    GLuint lightMvpId = glGetUniformLocation(this->programId, "light_mvp");
+    
+    glUniformMatrix4fv(lightMvpId, 1, GL_FALSE, glm::value_ptr(mvp));
+}
+
 void PhongShader::setMaterial(Material material) {
     glBindBuffer(GL_UNIFORM_BUFFER, materialBuffer);
     glBufferData(GL_UNIFORM_BUFFER, sizeof(Material), &material, GL_DYNAMIC_DRAW);
 }
 
-void PhongShader::setLight(Light light) {
+void PhongShader::setLight(LightProperties light) {
     glBindBuffer(GL_UNIFORM_BUFFER, lightBuffer);
-    glBufferData(GL_UNIFORM_BUFFER, sizeof(Light), &light, GL_DYNAMIC_DRAW);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(LightProperties), &light, GL_DYNAMIC_DRAW);
 }

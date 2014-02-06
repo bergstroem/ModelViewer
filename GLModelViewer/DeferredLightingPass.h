@@ -14,6 +14,7 @@
 #include "SceneNode.h"
 #include "ColorBuffer.h"
 #include "DeferredPhongShader.h"
+#include "Light.h"
 
 class DeferredLightingPass : public RenderPass {
     DeferredPhongShader deferredPhong;

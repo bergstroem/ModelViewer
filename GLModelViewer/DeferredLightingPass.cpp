@@ -57,7 +57,7 @@ void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuff
     deferredPhong.setUniforms(proj, view, mat1);
     
     for(auto it = lights.begin(); it != lights.end(); it++) {
-        deferredPhong.setLight(*(*it));
+        deferredPhong.setLight((*it)->properties);
         
         unitQuad.render();
     }
