@@ -18,6 +18,7 @@
 
 class PhongShader : public Shader {
 public:
+    void setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model);
     void setLightMvp(glm::mat4 mvp);
     void setMaterial(Material material);
     void setLight(LightProperties light);

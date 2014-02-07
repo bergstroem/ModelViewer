@@ -30,8 +30,8 @@ void ShadowPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_
         node->render();
     }
     
-    // TODO: Disable depth test
-    glDepthMask(GL_TRUE);
+    lights[0]->shadowTexture = shadowBuffer->getDepthAttachment();
+    
     shadowBuffer->unbind();
 }
 

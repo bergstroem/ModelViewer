@@ -26,6 +26,8 @@
 class LightingPass : public RenderPass {
     PhongShader phong;
     ColorBuffer* resultBuffer;
+    int width;
+    int height;
     
 public:
     bool shouldWriteDepth = true;

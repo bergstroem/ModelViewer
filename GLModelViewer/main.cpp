@@ -164,7 +164,7 @@ int main(void)
     floorMesh->material.diffuse = glm::vec4(0.3f, 0.6f, 0.7f, 1.0f);
     floorMesh->material.ambient = glm::vec4(0.01f, 0.01f, 0.01f, 1.0f);
     floorMesh->material.specular = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-    floorMesh->material.shininess = 10.0f;
+    floorMesh->material.shininess = 100.0f;
     
     std::shared_ptr<SceneNode> floor(new SceneNode);
     floor->init(floorMesh);
@@ -173,8 +173,8 @@ int main(void)
     floor->scale = glm::scale(glm::mat4(1.0), glm::vec3(100.0f));
     
     LightProperties lightProperties = LightFactory::Bright(glm::vec3(0.8, 0.9, 1.0));
-    lightProperties.position = glm::vec4(-1.0f, 0.0f, 0.0f, 1.0);
-    lightProperties.direction = glm::vec4(0.0, 0.0, -1.0, 0.0);
+    lightProperties.position = glm::vec4(-2.0f, 2.0f, -1.0f, 1.0);
+    lightProperties.direction = glm::vec4(0.0, -0.1, -1.0, 0.0);
     std::shared_ptr<Light> light(new Light);
     light->properties = lightProperties;
     renderer.lights.push_back(light);
@@ -185,9 +185,9 @@ int main(void)
     
     for(int i = 0; i < 10; i++) {
     
-        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/crank.off");
+        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/cooldragon.off");
         
-        node->position = glm::vec3(-2.0f, 0.0f, -3.0f * (i + 1));
+        node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
         
         renderer.nodes.push_back(node);
     }
@@ -203,7 +203,7 @@ int main(void)
         glfwGetFramebufferSize(window, &width, &height);
         float ratio = width / (float)height;
         
-        //light->position = glm::rotate(glm::mat4(1.0), 50.0f*(float)glfwGetTime(), glm::vec3(0.0, 1.0, 0.0)) * glm::vec4(-10.0, 0.0,0.0,1.0);
+        light->properties.position = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5f +  cosf(glfwGetTime()), 0.5f, -0.0f)) * glm::vec4(1.0f);
         
         renderer.proj = glm::perspective(60.0f, ratio, 0.1f, 1000.0f);
         

@@ -16,7 +16,3 @@ void PerspectivePassthroughShader::init() {
     
     this->setupBufferBindings();
 }
-
-void PerspectivePassthroughShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
-    Shader::setUniforms(proj, view, model);
-}

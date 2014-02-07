@@ -18,7 +18,6 @@ public:
     LightProperties properties;
     std::shared_ptr<DepthAttachment> shadowTexture;
     
-    
 };
 
 #endif 

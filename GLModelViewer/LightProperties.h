@@ -59,8 +59,8 @@ public:
         light.linearAtt = 0.001f;
         light.constantAtt = 1.0f;
         light.direction = glm::vec4(0.0, -1.0, 0.0, 0.0);
-        light.angle = 30.0f;
-        light.spotExponent = 2;
+        light.angle = 45.0f;
+        light.spotExponent = 4;
         return light;
     }
 };

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/PhongShader.cpp"
-            timestampString = "413394010.445293"
+            timestampString = "413395589.443135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "PhongShader::setMaterial(Material material)"
             landmarkType = "5">
          </BreakpointContent>
@@ -214,13 +214,139 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/LightingPass.h"
-            timestampString = "413296117.479178"
+            timestampString = "413403163.945295"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "class LightingPass"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/LightingPass.cpp"
+            timestampString = "413401520.157367"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "LightingPass::init(int width, int height, std::shared_ptr&lt;DepthAttachment&gt; depthTexture)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/ShadowPass.cpp"
+            timestampString = "413406545.983135"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "ShadowPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/LightingPass.cpp"
+            timestampString = "413423400.018432"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/LightingPass.cpp"
+            timestampString = "413406660.86539"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LightingPass::render(glm::detail::tmat4x4&lt;float&gt;, glm::detail::tmat4x4&lt;float&gt;, std::__1::vector&lt;std::__1::shared_ptr&lt;SceneNode&gt;, std::__1::allocator&lt;std::__1::shared_ptr&lt;SceneNode&gt; &gt; &gt;, std::__1::vector&lt;std::__1::shared_ptr&lt;Light&gt;, std::__1::allocator&lt;std::__1::shared_ptr&lt;Light&gt; &gt; &gt;)"
+                  moduleName = "GLModelViewer"
+                  urlString = "file:///Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/LightingPass.cpp"
+                  timestampString = "413406660.892574"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "231">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LightingPass::render(glm::detail::tmat4x4&lt;float&gt;, glm::detail::tmat4x4&lt;float&gt;, std::__1::vector&lt;std::__1::shared_ptr&lt;SceneNode&gt;, std::__1::allocator&lt;std::__1::shared_ptr&lt;SceneNode&gt; &gt; &gt;, std::__1::vector&lt;std::__1::shared_ptr&lt;Light&gt;, std::__1::allocator&lt;std::__1::shared_ptr&lt;Light&gt; &gt; &gt;)"
+                  moduleName = "GLModelViewer"
+                  urlString = "file:///Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/LightingPass.cpp"
+                  timestampString = "413406660.892916"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "255">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/LightingPass.cpp"
+            timestampString = "413406660.86539"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/LightingPass.cpp"
+            timestampString = "413406678.661077"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

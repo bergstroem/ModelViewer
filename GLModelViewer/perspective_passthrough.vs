@@ -7,7 +7,10 @@ uniform mat4 view;
 uniform mat4 model;
 uniform mat4 mvp;
 
+out vec4 projectedPosition;
+
 void main()
 {
-    gl_Position = mvp * vec4(position, 1.0);
+    projectedPosition = mvp * vec4(position, 1.0);
+    gl_Position = projectedPosition;
 }

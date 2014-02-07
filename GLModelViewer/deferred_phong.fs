@@ -29,8 +29,7 @@ uniform sampler2D ambient_sampler;
 uniform sampler2D specular_sampler;
 uniform sampler2D shininess_sampler;
 
-uniform float nearZ;
-uniform float farZ;
+
 
 out vec4 outColor;
 

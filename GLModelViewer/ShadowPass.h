@@ -11,8 +11,8 @@
 
 #include "RenderPass.h"
 #include "PerspectivePassthroughShader.h"
-#include "DepthBuffer.h"
 #include "Light.h"
+#include "DepthBuffer.h"
 
 class ShadowPass : public RenderPass {
     DepthBuffer* shadowBuffer;
