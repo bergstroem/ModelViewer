@@ -15,7 +15,6 @@
 #include "FrameBuffer.h"
 #include "BlurPass.h"
 #include "GeometryPass.h"
-#include "LightingPass.h"
 #include "PhongShader.h"
 #include "PassthroughShader.h"
 #include "DepthPass.h"
@@ -26,9 +25,7 @@
 class SceneRenderer {
     
     // Render passes
-    DepthPass depthPass;
     GeometryPass geometryPass;
-    LightingPass lightingPass;
     DeferredLightingPass deferredLightingPass;
     ShadowPass shadowPass;
     

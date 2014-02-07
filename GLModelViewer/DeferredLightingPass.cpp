@@ -55,7 +55,6 @@ void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuff
     glBlendFunc(GL_ONE, GL_ONE);
     
     gBuffer->bindAttachments();
-    lights[0]->shadowTexture->bind();
     
     deferredPhong.use();
     
@@ -63,10 +62,14 @@ void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuff
     deferredPhong.setUniforms(proj, view, mat1);
     
     for(auto it = lights.begin(); it != lights.end(); it++) {
-        deferredPhong.setLight((*it)->properties);
+        std::shared_ptr<Light> light = (*it);
         
-        glm::vec3 position = glm::vec3(lights[0]->properties.position);
-        glm::vec3 lightDir = glm::vec3(lights[0]->properties.direction);
+        light->shadowTexture->bind();
+        
+        deferredPhong.setLight(light->properties);
+        
+        glm::vec3 position = glm::vec3(light->properties.position);
+        glm::vec3 lightDir = glm::vec3(light->properties.direction);
         
         glm::mat4 biasMatrix(
                              0.5, 0.0, 0.0, 0.0,
@@ -75,15 +78,17 @@ void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuff
                              0.5, 0.5, 0.5, 1.0
                              );
         
-        glm::mat4 depthProjectionMatrix = glm::perspective(lights[0]->properties.angle * 2, width/(float)height, 0.1f, 50.0f);
+        glm::mat4 depthProjectionMatrix = glm::perspective(light->properties.angle * 2, width/(float)height, 0.1f, 50.0f);
         glm::mat4 depthViewMatrix = glm::lookAt(position, position + lightDir, glm::vec3(0,1,0));
         deferredPhong.setLightMvp(biasMatrix * depthProjectionMatrix * depthViewMatrix);
 
         
         unitQuad.render();
+        
+        light->shadowTexture->unbind();
     }
     
-    lights[0]->shadowTexture->unbind();
+    
     gBuffer->unbindAttachments();
     
     glDepthMask(GL_TRUE);

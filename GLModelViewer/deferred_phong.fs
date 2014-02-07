@@ -82,7 +82,7 @@ void main() {
         float visibility = 1.0;
         float bias = 0.001;
         if ( texture( shadow_sampler, shadow_coords.xy ).x  <  shadow_coords.z - bias) {
-            visibility = 0.0;
+            visibility = 0.5;
         }
         
         vec4 viewSpaceLightDir = view * LightIn.direction;

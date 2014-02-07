@@ -134,39 +134,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/SceneRenderer.cpp"
-            timestampString = "413484009.836608"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "SceneRenderer::updateResolution(int width, int height)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GLModelViewer/SceneRenderer.cpp"
-            timestampString = "413492326.114847"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "SceneRenderer::updateResolution(int width, int height)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GLModelViewer/SceneRenderer.cpp"
-            timestampString = "413484009.836608"
+            timestampString = "413503300.262876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -182,11 +150,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/SceneRenderer.cpp"
-            timestampString = "413484009.836608"
+            timestampString = "413503300.262876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "SceneRenderer::updateResolution(int width, int height)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/SceneRenderer.cpp"
+            timestampString = "413503300.262876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "SceneRenderer::updateResolution(int width, int height)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/SceneRenderer.cpp"
+            timestampString = "413503300.262876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "SceneRenderer::updateResolution(int width, int height)"
             landmarkType = "5">
          </BreakpointContent>
@@ -331,6 +331,52 @@
             endingLineNumber = "64"
             landmarkName = "LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/DeferredLightingPass.cpp"
+            timestampString = "413503422.697589"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/DeferredLightingPass.cpp"
+            timestampString = "413503422.697589"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GLModelViewer/SceneRenderer.cpp"
+            timestampString = "413503300.262876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
