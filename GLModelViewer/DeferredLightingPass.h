@@ -20,6 +20,8 @@ class DeferredLightingPass : public RenderPass {
     DeferredPhongShader deferredPhong;
     SceneNode unitQuad;
     ColorBuffer* resultBuffer;
+    int width;
+    int height;
     
 public:
     void init(int width, int height);

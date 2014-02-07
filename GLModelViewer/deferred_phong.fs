@@ -18,7 +18,14 @@ layout (std140) uniform Light {
 
 uniform mat4 proj;
 uniform mat4 view;
+uniform mat4 model;
+uniform mat4 mvp;
+uniform mat3 normal_matrix;
+uniform mat4 light_mvp;
 uniform mat4 inverse_proj;
+uniform mat4 inverse_view;
+
+uniform sampler2D shadow_sampler;
 
 uniform sampler2D normal_sampler;
 uniform sampler2D depth_sampler;
@@ -29,12 +36,9 @@ uniform sampler2D ambient_sampler;
 uniform sampler2D specular_sampler;
 uniform sampler2D shininess_sampler;
 
-
-
 out vec4 outColor;
 
 void main() {
-    
     vec4 color = vec4(0.0);
     
     vec3 normal = normalize(texture(normal_sampler, uv).xyz);
@@ -53,6 +57,14 @@ void main() {
     viewSpace.xy = uv * 2.0 -1.0; // uv coords are in [0-1], we need [-1, 1] for screen coords
     viewSpace.z=depth;
     vec4 worldSpace = inverse_proj * vec4(viewSpace,1.0);
+    
+    // Retrieve coordinates from light perspective
+    vec4 projectedPosLightPov = (light_mvp * inverse_view * worldSpace);
+    vec3 projectedPosLightPovNormal = projectedPosLightPov.xyz/projectedPosLightPov.w;
+    vec3 shadow_coords = projectedPosLightPovNormal;
+    
+    // This 'normalization' is done after using it for light perspective retrival
+    // TODO: Find out why.
     worldSpace.xyz/=worldSpace.w;
     
     // Specular Lighting
@@ -66,6 +78,13 @@ void main() {
     
     float intensity = max(dot(l, normal), 0.0);
     if(intensity > 0.0f) {
+        // Depth test for shadow
+        float visibility = 1.0;
+        float bias = 0.001;
+        if ( texture( shadow_sampler, shadow_coords.xy ).x  <  shadow_coords.z - bias) {
+            visibility = 0.0;
+        }
+        
         vec4 viewSpaceLightDir = view * LightIn.direction;
         float spotEffect = dot(normalize(viewSpaceLightDir.xyz), normalize(-l));
         float spotCutOff = cos(LightIn.angle*M_PI/180);
@@ -80,13 +99,13 @@ void main() {
             spotEffect = pow(spotEffect, LightIn.spotExponent);
             float att = spotEffect / (LightIn.constantAtt + LightIn.linearAtt*lightDistance + LightIn.exponentialAtt*lightDistance*lightDistance);
             
-            color += diffuse * intensity * att * LightIn.intensity;
+            color += diffuse * intensity * att * LightIn.intensity * visibility;
             
             vec3 e = normalize(- vec3(worldSpace));
             vec3 h = normalize(l + e);
         
             float intSpec = max(dot(h, normal), 0.0);
-            color += specular * pow(intSpec, shininess) * att * LightIn.intensity;
+            color += specular * pow(intSpec, shininess) * att * LightIn.intensity * visibility;
         }
     }
     

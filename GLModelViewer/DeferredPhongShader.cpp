@@ -28,16 +28,27 @@ void DeferredPhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat
     GLint specularSamplerId = glGetUniformLocation(this->programId, "specular_sampler");
     GLint shininessSamplerId = glGetUniformLocation(this->programId, "shininess_sampler");
     GLint depthSamplerId = glGetUniformLocation(this->programId, "depth_sampler");
+    GLint shadowSamplerId = glGetUniformLocation(this->programId, "shadow_sampler");
+    
     
     glUniform1i(normalSamplerId, TEXTURE_NORMAL_INDEX);
     glUniform1i(depthSamplerId, TEXTURE_DEPTH_INDEX);
     
-    //Materials
+    // Shadow(s)
+    glUniform1i(shadowSamplerId, TEXTURE_SHADOW0_INDEX);
+    
+    // Materials
     glUniform1i(diffuseSamplerId, TEXTURE_DIFFUSE_INDEX);
     glUniform1i(ambientSamplerId, TEXTURE_AMBIENT_INDEX);
     glUniform1i(specularSamplerId, TEXTURE_SPECULAR_INDEX);
     glUniform1i(shininessSamplerId, TEXTURE_SHININESS_INDEX);
     
+}
+
+void DeferredPhongShader::setLightMvp(glm::mat4 mvp) {
+    GLuint lightMvpId = glGetUniformLocation(this->programId, "light_mvp");
+    
+    glUniformMatrix4fv(lightMvpId, 1, GL_FALSE, glm::value_ptr(mvp));
 }
 
 void DeferredPhongShader::setLight(LightProperties light) {
