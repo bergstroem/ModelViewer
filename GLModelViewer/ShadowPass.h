@@ -22,7 +22,7 @@ class ShadowPass : public RenderPass {
     int height;
     
 public:
-    void render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes, std::vector<std::shared_ptr<Light>> lights);
+    void render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes, std::shared_ptr<Light> light);
     void init(int width, int height);
     void resize(int width, int height);
     FrameBuffer* getBuffer();

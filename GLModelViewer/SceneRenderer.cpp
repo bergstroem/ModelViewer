@@ -60,7 +60,7 @@ void SceneRenderer::renderScene() {
     
     RenderPass* pass;
     
-    shadowPass.render(proj, view, nodes, lights);
+    shadowPass.render(proj, view, nodes, lights[0]);
     
     if(!isDeferred) {
         // Do a depth pass
