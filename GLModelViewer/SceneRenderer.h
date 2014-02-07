@@ -30,7 +30,6 @@ class SceneRenderer {
     GeometryPass geometryPass;
     LightingPass lightingPass;
     DeferredLightingPass deferredLightingPass;
-    BlurPass blurPass;
     ShadowPass shadowPass;
     
     PassthroughShader passthrough;

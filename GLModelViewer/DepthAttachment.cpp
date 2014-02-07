@@ -8,19 +8,24 @@
 
 #include <iostream>
 #include "DepthAttachment.h"
-#include "Constants.h"
+
 
 DepthAttachment::~DepthAttachment() {
     glDeleteTextures(1, &textureId);
 }
 
 void DepthAttachment::init(int width, int height) {
+    init(width, height, TEXTURE_DEPTH_INDEX);
+}
+
+void DepthAttachment::init(int width, int height, TextureIndex index) {
     this->width = width;
     this->height = height;
+    this->index = index;
     
     // Generate texture
     glGenTextures(1, &textureId);
-    glActiveTexture(GL_TEXTURE0 + TEXTURE_DEPTH_INDEX);
+    glActiveTexture(GL_TEXTURE0 + index);
     glBindTexture(GL_TEXTURE_2D, textureId);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH32F_STENCIL8, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -34,12 +39,12 @@ void DepthAttachment::init(int width, int height) {
 }
 
 void DepthAttachment::bind() {
-    glActiveTexture(GL_TEXTURE0 + TEXTURE_DEPTH_INDEX);
+    glActiveTexture(GL_TEXTURE0 + index);
     glBindTexture(GL_TEXTURE_2D, textureId);
 }
 
 void DepthAttachment::unbind() {
-    glActiveTexture(GL_TEXTURE0 + TEXTURE_DEPTH_INDEX);
+    glActiveTexture(GL_TEXTURE0 + index);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 

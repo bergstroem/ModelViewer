@@ -8,6 +8,8 @@
 
 #include <iostream>
 #include "ShadowPass.h"
+#include "DepthAttachment.h"
+#include "Constants.h"
 
 void ShadowPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes, std::vector<std::shared_ptr<Light>> lights) {
     shadowBuffer->bind();
@@ -36,8 +38,11 @@ void ShadowPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_
 }
 
 void ShadowPass::init(int width, int height) {
+    std::shared_ptr<DepthAttachment> depth(new DepthAttachment);
+    depth->init(width, height, TEXTURE_SHADOW0_INDEX);
+    
     shadowBuffer = new DepthBuffer();
-    shadowBuffer->init(width, height);
+    shadowBuffer->init(width, height, depth);
     
     this->width = width;
     this->height = height;
@@ -46,9 +51,12 @@ void ShadowPass::init(int width, int height) {
 }
 
 void ShadowPass::resize(int width, int height) {
+    std::shared_ptr<DepthAttachment> depth(new DepthAttachment);
+    depth->init(width, height, TEXTURE_SHADOW0_INDEX);
+    
     delete shadowBuffer;
     shadowBuffer = new DepthBuffer();
-    shadowBuffer->init(width, height);
+    shadowBuffer->init(width, height, depth);
     
     this->width = width;
     this->height = height;

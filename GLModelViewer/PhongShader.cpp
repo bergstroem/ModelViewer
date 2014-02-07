@@ -25,7 +25,7 @@ void PhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model
     
     GLint shadowSamplerId = glGetUniformLocation(this->programId, "shadow_sampler");
     
-    glUniform1i(shadowSamplerId, TEXTURE_DEPTH_INDEX);
+    glUniform1i(shadowSamplerId, TEXTURE_SHADOW0_INDEX);
 }
 
 void PhongShader::setLightMvp(glm::mat4 mvp) {

@@ -34,21 +34,19 @@ uniform sampler2D shininess_sampler;
 out vec4 outColor;
 
 void main() {
+    
     vec4 color = vec4(0.0);
     
     vec3 normal = normalize(texture(normal_sampler, uv).xyz);
-    float depth = texture(depth_sampler, uv).x * 2.0 -1.0;
+    float depth = texture(depth_sampler, uv).x * 2.0 -1.0; // IS THIS REALLY NEEDED?
     
+    // If depht == 1 there is nothing there. No need to bother with calculations
     if(depth == 1.0) {
         outColor = vec4(0.0,0.0,0.0,1.0);
-        return;
+        discard;
     }
     
-    // Materials
-    vec4 diffuse = texture(diffuse_sampler, uv);
     vec4 ambient = texture(ambient_sampler, uv);
-    vec4 specular = texture(specular_sampler, uv);
-    float shininess = texture(shininess_sampler, uv).x;
     
     // Restore eye space position
     vec3 viewSpace;
@@ -57,14 +55,13 @@ void main() {
     vec4 worldSpace = inverse_proj * vec4(viewSpace,1.0);
     worldSpace.xyz/=worldSpace.w;
     
-    //Lighting
+    // Specular Lighting
     vec4 spec = vec4(0.0);
     
+    // Calculate light direction
     vec3 l = ((view * LightIn.position) - worldSpace).xyz;
     
     float lightDistance = length(l);
-    
-    
     l = normalize(l);
     
     float intensity = max(dot(l, normal), 0.0);
@@ -74,6 +71,12 @@ void main() {
         float spotCutOff = cos(LightIn.angle*M_PI/180);
         
         if(spotEffect > spotCutOff) {
+            
+            // Retrieve material from textures
+            vec4 diffuse = texture(diffuse_sampler, uv);
+            vec4 specular = texture(specular_sampler, uv);
+            float shininess = texture(shininess_sampler, uv).x;
+            
             spotEffect = pow(spotEffect, LightIn.spotExponent);
             float att = spotEffect / (LightIn.constantAtt + LightIn.linearAtt*lightDistance + LightIn.exponentialAtt*lightDistance*lightDistance);
             

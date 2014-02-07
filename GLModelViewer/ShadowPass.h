@@ -15,6 +15,7 @@
 #include "DepthBuffer.h"
 
 class ShadowPass : public RenderPass {
+    // TODO: Make this a collection of buffers
     DepthBuffer* shadowBuffer;
     PerspectivePassthroughShader shader;
     int width;

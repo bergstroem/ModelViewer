@@ -53,6 +53,7 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::share
         glDepthMask(GL_FALSE);
         glClear(GL_COLOR_BUFFER_BIT);
     } else {
+        glDepthMask(GL_TRUE);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     }
     
@@ -89,6 +90,7 @@ void LightingPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::share
             node->render();
         }
     }
+    
     lights[0]->shadowTexture->unbind();
     
     glDepthMask(GL_TRUE);

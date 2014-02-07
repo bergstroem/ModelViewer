@@ -9,10 +9,11 @@
 #include <iostream>
 #include "SceneRenderer.h"
 #include "BlurShader.h"
+#include <GLFW/glfw3.h>
 
 void SceneRenderer::init(int width, int height) {
     depthPass.init(width, height);
-    geometryPass.init(width, height);
+    
     
     shadowPass.init(width, height);
     
@@ -21,11 +22,13 @@ void SceneRenderer::init(int width, int height) {
     lightingPass.init(width, height, buffer->getDepthAttachment());
     lightingPass.shouldWriteDepth = false;
     
+    // Init geometry pass
+    geometryPass.init(width, height);
+    
     // Init deferred lighting
     buffer = geometryPass.getBuffer();
     deferredLightingPass.init(width, height, buffer->getDepthAttachment());
     
-    blurPass.init(width, height);
     passthrough.init();
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
@@ -49,21 +52,20 @@ void SceneRenderer::updateResolution(int width, int height) {
     buffer = geometryPass.getBuffer();
     deferredLightingPass.resize(width, height, buffer->getDepthAttachment());
     
-    blurPass.resize(width, height);
-    
     this->width = width;
     this->height = height;
 }
 
 void SceneRenderer::renderScene() {
-    RenderPass* pass;
     
-    // Do a depth pass
-    depthPass.render(proj, view, nodes);
+    RenderPass* pass;
     
     shadowPass.render(proj, view, nodes, lights);
     
     if(!isDeferred) {
+        // Do a depth pass
+        depthPass.render(proj, view, nodes);
+        
         lightingPass.render(proj, view, nodes, lights);
         
         pass = &lightingPass;
@@ -74,9 +76,7 @@ void SceneRenderer::renderScene() {
         
         pass = &deferredLightingPass;
     }
-    // Draw final pass to screen
-    //blurPass.render(proj, view, pass->getBuffer());
-    
+    // Draw final pass to screen    
     pass->bindBufferTextures();
     
     passthrough.use();

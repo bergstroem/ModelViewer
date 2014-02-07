@@ -21,6 +21,7 @@ class GeometryPass : public RenderPass {
     GBuffer* resultBuffer;
     
 public:
+    
     void init(int width, int height);
     void resize(int width, int height);
     void render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes);
