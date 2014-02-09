@@ -140,7 +140,7 @@ std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
     std::shared_ptr<Mesh> mesh = meshLoader.loadMesh(meshName);
 
     auto node = std::shared_ptr<SceneNode>(new SceneNode());
-    mesh->material.diffuse = glm::vec4(0.9f, 0.4f, 0.1f, 1.0f);
+    mesh->material.diffuse = glm::vec4(1.0f, 0.1f, 0.2f, 1.0f);
     mesh->material.ambient = glm::vec4(0.01f, 0.01f, 0.01f, 1.0f);
     mesh->material.specular = glm::vec4(0.9f, 0.6f, 0.5f, 1.0f);
     mesh->material.shininess = 250.0f;
@@ -162,9 +162,9 @@ int main(void)
     //Floor
     std::shared_ptr<Mesh> floorMesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
     floorMesh->material.diffuse = glm::vec4(0.3f, 0.6f, 0.7f, 1.0f);
-    floorMesh->material.ambient = glm::vec4(0.01f, 0.01f, 0.01f, 1.0f);
+    floorMesh->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
     floorMesh->material.specular = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-    floorMesh->material.shininess = 100.0f;
+    floorMesh->material.shininess = 1.0f;
     
     std::shared_ptr<SceneNode> floor(new SceneNode);
     floor->init(floorMesh);

@@ -17,6 +17,7 @@
 #include "GeometryPass.h"
 #include "PhongShader.h"
 #include "ToneMappingShader.h"
+#include "PassthroughShader.h"
 #include "DepthPass.h"
 #include "DeferredLightingPass.h"
 #include "Light.h"
@@ -28,6 +29,7 @@ class SceneRenderer {
     DeferredLightingPass deferredLightingPass;
     
     ToneMappingShader toneMapping;
+    PassthroughShader passthrough;
     SceneNode screenNode;
     
     int width;

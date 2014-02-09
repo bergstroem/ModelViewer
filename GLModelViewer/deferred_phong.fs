@@ -50,7 +50,8 @@ void main() {
         discard;
     }
     
-    vec4 ambient = texture(ambient_sampler, uv);
+    // Gamma correction
+    vec4 ambient = pow(texture(ambient_sampler, uv), vec4(2.2));
     
     // Restore eye space position
     vec3 viewSpace;
@@ -92,20 +93,23 @@ void main() {
         if(spotEffect > spotCutOff) {
             
             // Retrieve material from textures
-            vec4 diffuse = texture(diffuse_sampler, uv);
             vec4 specular = texture(specular_sampler, uv);
             float shininess = texture(shininess_sampler, uv).x;
+            
+            // Gamma correction
+            vec4 diffuse = pow(texture(diffuse_sampler, uv), vec4(2.2));
+            float lightIntensity = pow(LightIn.intensity.w, 2.2);
             
             spotEffect = pow(spotEffect, LightIn.spotExponent);
             float att = spotEffect / (LightIn.constantAtt + LightIn.linearAtt*lightDistance + LightIn.exponentialAtt*lightDistance*lightDistance);
             
-            color += diffuse * intensity * att * LightIn.intensity * visibility;
+            color += diffuse * intensity * att * LightIn.intensity * visibility * lightIntensity;
             
             vec3 e = normalize(- vec3(worldSpace));
             vec3 h = normalize(l + e);
         
             float intSpec = max(dot(h, normal), 0.0);
-            color += specular * pow(intSpec, shininess) * att * LightIn.intensity * visibility;
+            color += specular * pow(intSpec, shininess) * att * LightIn.intensity * visibility * lightIntensity;
         }
     }
     

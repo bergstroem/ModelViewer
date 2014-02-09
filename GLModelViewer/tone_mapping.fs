@@ -21,9 +21,8 @@ vec3 tonemap(vec3 x) {
 void main()
 {
     // Account for gamma (2.2)
-    vec3 texColor = pow(texture(color_sampler, uv).xyz, vec3(2.2));
+    vec3 texColor = texture(color_sampler, uv).xyz;
     texColor *= 16;
-    
     float ExposureBias = 2.0f;
     vec3 curr = tonemap(ExposureBias*texColor);
     
