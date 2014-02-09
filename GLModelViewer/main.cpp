@@ -179,6 +179,13 @@ int main(void)
     light->properties = lightProperties;
     renderer.lights.push_back(light);
     
+    LightProperties lightProperties1 = LightFactory::Bright(glm::vec3(0.8, 0.9, 1.0));
+    lightProperties1.position = glm::vec4(3.0f, 2.0f, -3.0f, 1.0);
+    lightProperties1.direction = glm::vec4(-1.0, -0.1, 0.0, 0.0);
+    std::shared_ptr<Light> light1(new Light);
+    light1->properties = lightProperties1;
+    renderer.lights.push_back(light1);
+    
     renderer.init(width, height);
     
     lastTime = glfwGetTime();

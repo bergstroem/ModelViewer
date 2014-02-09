@@ -13,8 +13,6 @@
 
 void SceneRenderer::init(int width, int height) {
     
-    shadowPass.init(width, height);
-    
     // Init geometry pass
     geometryPass.init(width, height);
     
@@ -36,8 +34,6 @@ void SceneRenderer::updateResolution(int width, int height) {
     
     geometryPass.resize(width, height);
     
-    shadowPass.resize(width, height);
-    
     auto buffer = geometryPass.getBuffer();
     deferredLightingPass.resize(width, height, buffer->getDepthAttachment());
     
@@ -47,11 +43,9 @@ void SceneRenderer::updateResolution(int width, int height) {
 
 void SceneRenderer::renderScene() {
     
-    shadowPass.render(proj, view, nodes, lights[0]);
-    
     // Deferred lighting
     geometryPass.render(proj, view, nodes);
-    deferredLightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer(), lights);
+    deferredLightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer(), nodes, lights);
     
     // Draw final pass to screen    
     deferredLightingPass.bindBufferTextures();

@@ -12,10 +12,12 @@
 #include "Constants.h"
 
 void ShadowPass::render(glm::mat4 proj, glm::mat4 view, std::vector<std::shared_ptr<SceneNode>> nodes, std::shared_ptr<Light> light) {
+    glDepthMask(GL_TRUE);
+    glDisable(GL_BLEND);
     shadowBuffer->bind();
     
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    glDepthMask(GL_TRUE);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    
     shader.use();
     
     for (auto it = nodes.begin(); it != nodes.end(); it++) {

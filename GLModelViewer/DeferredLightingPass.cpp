@@ -27,6 +27,8 @@ void DeferredLightingPass::init(int width, int height, std::shared_ptr<DepthAtta
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
     unitQuad.init(mesh);
+    
+    shadowPass.init(width, height);
 }
 
 void DeferredLightingPass::resize(int width, int height) {
@@ -43,30 +45,39 @@ void DeferredLightingPass::resize(int width, int height, std::shared_ptr<DepthAt
     delete resultBuffer;
     resultBuffer = new ColorBuffer();
     resultBuffer->init(width, height, depthTexture);
+    
+    shadowPass.resize(width, height);
 }
 
 //Render lighting on geometry in gbuffer
-void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector<std::shared_ptr<Light>> lights) {
+void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector<std::shared_ptr<SceneNode>> nodes, std::vector<std::shared_ptr<Light>> lights) {
     
-    resultBuffer->bind();
-    glClear(GL_COLOR_BUFFER_BIT);
     glDepthMask(GL_FALSE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE);
+    resultBuffer->bind();
+    glClear(GL_COLOR_BUFFER_BIT);
+    
     
     gBuffer->bindAttachments();
     
-    deferredPhong.use();
-    
     glm::mat4 mat1 = glm::mat4(1.0f);
-    deferredPhong.setUniforms(proj, view, mat1);
     
     for(auto it = lights.begin(); it != lights.end(); it++) {
         std::shared_ptr<Light> light = (*it);
         
-        light->shadowTexture->bind();
+        shadowPass.render(proj, view, nodes, light);
         
+        glDepthMask(GL_FALSE);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE);
+        resultBuffer->bind();
+        
+        shadowPass.bindBufferTextures();
+        
+        deferredPhong.use();
         deferredPhong.setLight(light->properties);
+        deferredPhong.setUniforms(proj, view, mat1);
         
         glm::vec3 position = glm::vec3(light->properties.position);
         glm::vec3 lightDir = glm::vec3(light->properties.direction);
@@ -85,7 +96,8 @@ void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuff
         
         unitQuad.render();
         
-        light->shadowTexture->unbind();
+        shadowPass.unbindBufferTextures();
+        
     }
     
     
