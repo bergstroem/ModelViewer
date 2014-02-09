@@ -20,7 +20,7 @@ void SceneRenderer::init(int width, int height) {
     auto buffer = geometryPass.getBuffer();
     deferredLightingPass.init(width, height, buffer->getDepthAttachment());
     
-    passthrough.init();
+    toneMapping.init();
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
     screenNode.init(mesh);
@@ -50,11 +50,11 @@ void SceneRenderer::renderScene() {
     // Draw final pass to screen    
     deferredLightingPass.bindBufferTextures();
     
-    passthrough.use();
+    toneMapping.use();
     
     glDepthMask(GL_FALSE);
     
-    passthrough.setUniforms(proj, view, screenNode.modelMatrix);
+    toneMapping.setUniforms(proj, view, screenNode.modelMatrix);
     
     screenNode.render();
     

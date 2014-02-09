@@ -27,7 +27,7 @@
 SceneRenderer renderer;
 glm::vec3 move;
 float rotationY;
-float rotationYaw;
+float rotationPitch;
 float lastTime = 0.0;
 
 static void error_callback(int error, const char* description)
@@ -85,9 +85,9 @@ void updateInput(GLFWwindow* window) {
         rotationY += 100.0f * deltaTime;
     }
     if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-        rotationYaw -= 100.0f * deltaTime;
+        rotationPitch -= 100.0f * deltaTime;
     } else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-        rotationYaw += 100.0 * deltaTime;
+        rotationPitch += 100.0 * deltaTime;
     }
     
     lastTime = currentTime;
@@ -179,13 +179,6 @@ int main(void)
     light->properties = lightProperties;
     renderer.lights.push_back(light);
     
-    LightProperties lightProperties1 = LightFactory::Bright(glm::vec3(0.8, 0.9, 1.0));
-    lightProperties1.position = glm::vec4(3.0f, 2.0f, -3.0f, 1.0);
-    lightProperties1.direction = glm::vec4(-1.0, -0.1, 0.0, 0.0);
-    std::shared_ptr<Light> light1(new Light);
-    light1->properties = lightProperties1;
-    renderer.lights.push_back(light1);
-    
     renderer.init(width, height);
     
     lastTime = glfwGetTime();
@@ -215,7 +208,7 @@ int main(void)
         renderer.proj = glm::perspective(60.0f, ratio, 0.1f, 1000.0f);
         
         // Rotation Up/Down
-        renderer.view = glm::rotate(glm::mat4(1.0f), rotationYaw, glm::vec3(1.0f, 0.0f, 0.0f));
+        renderer.view = glm::rotate(glm::mat4(1.0f), rotationPitch, glm::vec3(1.0f, 0.0f, 0.0f));
         
         // Rotation Y
         renderer.view = glm::rotate(renderer.view, rotationY, glm::vec3(0.0f, 1.0f, 0.0f));

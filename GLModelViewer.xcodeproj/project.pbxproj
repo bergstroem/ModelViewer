@@ -47,6 +47,8 @@
 		02DB2947189C5CD30055B56F /* geometry.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2946189C5CD30055B56F /* geometry.fs */; };
 		02DB294A189C64130055B56F /* GeometryShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2949189C64130055B56F /* GeometryShader.cpp */; };
 		02DB294D189D283F0055B56F /* GeometryPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB294C189D283F0055B56F /* GeometryPass.cpp */; };
+		02EA96D818A7CD5300EC4B95 /* tone_mapping.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02EA96D718A7CD5300EC4B95 /* tone_mapping.fs */; };
+		02EA96DB18A7CD7500EC4B95 /* ToneMappingShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA96D918A7CD7500EC4B95 /* ToneMappingShader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,6 +138,9 @@
 		02DB2949189C64130055B56F /* GeometryShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryShader.cpp; sourceTree = "<group>"; };
 		02DB294B189D25520055B56F /* GeometryPass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeometryPass.h; sourceTree = "<group>"; };
 		02DB294C189D283F0055B56F /* GeometryPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometryPass.cpp; sourceTree = "<group>"; };
+		02EA96D718A7CD5300EC4B95 /* tone_mapping.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tone_mapping.fs; sourceTree = "<group>"; };
+		02EA96D918A7CD7500EC4B95 /* ToneMappingShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ToneMappingShader.cpp; sourceTree = "<group>"; };
+		02EA96DA18A7CD7500EC4B95 /* ToneMappingShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToneMappingShader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +298,8 @@
 				02C8ACEB189FD501002DC3C6 /* PassthroughShader.cpp */,
 				029D104118A25BD7009BC5DE /* PerspectivePassthroughShader.cpp */,
 				029D104218A25BD7009BC5DE /* PerspectivePassthroughShader.h */,
+				02EA96D918A7CD7500EC4B95 /* ToneMappingShader.cpp */,
+				02EA96DA18A7CD7500EC4B95 /* ToneMappingShader.h */,
 			);
 			name = shaders;
 			sourceTree = "<group>";
@@ -305,6 +312,7 @@
 				02DB2804189B2CE00055B56F /* blur_shader.fs */,
 				02DB2944189C5CC40055B56F /* geometry.vs */,
 				02DB2946189C5CD30055B56F /* geometry.fs */,
+				02EA96D718A7CD5300EC4B95 /* tone_mapping.fs */,
 			);
 			name = glsl;
 			sourceTree = "<group>";
@@ -372,6 +380,7 @@
 			files = (
 				02DB2922189B2CE10055B56F /* blur_shader.fs in Sources */,
 				027ACB2D189FEE5000B52103 /* GBuffer.cpp in Sources */,
+				02EA96D818A7CD5300EC4B95 /* tone_mapping.fs in Sources */,
 				02652E3B189FECF3003C9868 /* ColorBuffer.cpp in Sources */,
 				02DB293E189BBB0E0055B56F /* BlurPass.cpp in Sources */,
 				02DB294A189C64130055B56F /* GeometryShader.cpp in Sources */,
@@ -402,6 +411,7 @@
 				02DB2945189C5CC40055B56F /* geometry.vs in Sources */,
 				02C8ACE8189FAE67002DC3C6 /* MeshLoader.cpp in Sources */,
 				02DB292F189B2CE10055B56F /* phong_shader.fs in Sources */,
+				02EA96DB18A7CD7500EC4B95 /* ToneMappingShader.cpp in Sources */,
 				02CB52C918A12F6600083115 /* ColorAttachment.cpp in Sources */,
 				02CB52CD18A24A1E00083115 /* DepthBuffer.cpp in Sources */,
 				02D0DDB6189DB42F00CC1BE6 /* deferred_phong.fs in Sources */,
