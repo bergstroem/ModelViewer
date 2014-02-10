@@ -53,14 +53,14 @@ public:
     }
     static LightProperties Bright(glm::vec3 color) {
         LightProperties light;
-        light.intensity = glm::vec4(color, 0.7);
+        light.intensity = glm::vec4(color, 3.0);
         light.position = glm::vec4(0.0, 0.0, 0.0, 1.0);
-        light.exponentialAtt = 0.001f;
-        light.linearAtt = 0.001f;
+        light.exponentialAtt = .2f;
+        light.linearAtt = 0.1f;
         light.constantAtt = 1.0f;
         light.direction = glm::vec4(0.0, -1.0, 0.0, 0.0);
         light.angle = 45.0f;
-        light.spotExponent = 6;
+        light.spotExponent = 12;
         return light;
     }
 };

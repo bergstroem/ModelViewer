@@ -140,9 +140,9 @@ std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
     std::shared_ptr<Mesh> mesh = meshLoader.loadMesh(meshName);
 
     auto node = std::shared_ptr<SceneNode>(new SceneNode());
-    mesh->material.diffuse = glm::vec4(1.0f, 0.1f, 0.2f, 1.0f);
+    mesh->material.diffuse = glm::vec4(0.5f, 0.5f, 0.7f, 1.0f);
     mesh->material.ambient = glm::vec4(0.01f, 0.01f, 0.01f, 1.0f);
-    mesh->material.specular = glm::vec4(0.9f, 0.6f, 0.5f, 1.0f);
+    mesh->material.specular = glm::vec4(0.6f, 0.6f, 0.7f, 1.0f);
     mesh->material.shininess = 250.0f;
     
     node->init(mesh);
@@ -162,9 +162,9 @@ int main(void)
     //Floor
     std::shared_ptr<Mesh> floorMesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
     floorMesh->material.diffuse = glm::vec4(0.3f, 0.6f, 0.7f, 1.0f);
-    floorMesh->material.ambient = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+    floorMesh->material.ambient = glm::vec4(0.01f, 0.01f, 0.01f, 1.0f);
     floorMesh->material.specular = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-    floorMesh->material.shininess = 1.0f;
+    floorMesh->material.shininess = 100.0f;
     
     std::shared_ptr<SceneNode> floor(new SceneNode);
     floor->init(floorMesh);
@@ -178,6 +178,13 @@ int main(void)
     std::shared_ptr<Light> light(new Light);
     light->properties = lightProperties;
     renderer.lights.push_back(light);
+    
+    LightProperties lightProperties1 = LightFactory::Bright(glm::vec3(0.8, 0.9, 1.0));
+    lightProperties1.position = glm::vec4(4.0f, 2.0f, -3.0f, 1.0);
+    lightProperties1.direction = glm::vec4(-1.0, -0.1, 0.0, 0.0);
+    std::shared_ptr<Light> light1(new Light);
+    light1->properties = lightProperties1;
+    renderer.lights.push_back(light1);
     
     renderer.init(width, height);
     
@@ -213,6 +220,7 @@ int main(void)
         // Rotation Y
         renderer.view = glm::rotate(renderer.view, rotationY, glm::vec3(0.0f, 1.0f, 0.0f));
         renderer.view = glm::translate(renderer.view, move);
+        
         renderer.renderScene();
         
         glfwSwapBuffers(window);

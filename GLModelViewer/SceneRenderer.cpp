@@ -48,6 +48,12 @@ void SceneRenderer::renderScene() {
     geometryPass.render(proj, view, nodes);
     deferredLightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer(), nodes, lights);
     
+    // Calculate average luminance
+    auto buffer = deferredLightingPass.getBuffer();
+    buffer->bind();
+    glGenerateMipmap(GL_TEXTURE_2D);
+    buffer->unbind();
+    
     // Draw final pass to screen    
     deferredLightingPass.bindBufferTextures();
     

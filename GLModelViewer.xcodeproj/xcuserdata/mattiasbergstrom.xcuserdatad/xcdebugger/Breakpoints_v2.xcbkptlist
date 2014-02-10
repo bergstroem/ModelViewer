@@ -340,11 +340,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/DeferredLightingPass.cpp"
-            timestampString = "413648786.343215"
+            timestampString = "413727946.406595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
             landmarkType = "5">
          </BreakpointContent>
@@ -356,11 +356,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/DeferredLightingPass.cpp"
-            timestampString = "413648786.343215"
+            timestampString = "413727946.406595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
             landmarkType = "5">
          </BreakpointContent>
@@ -386,11 +386,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/DeferredLightingPass.cpp"
-            timestampString = "413648786.343215"
+            timestampString = "413727946.406595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
             landmarkType = "5">
          </BreakpointContent>
@@ -402,11 +402,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/DeferredLightingPass.cpp"
-            timestampString = "413648786.343215"
+            timestampString = "413727946.406595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
             landmarkType = "5">
          </BreakpointContent>
@@ -418,11 +418,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GLModelViewer/DeferredLightingPass.cpp"
-            timestampString = "413648786.343215"
+            timestampString = "413727946.406595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuffer, std::vector&lt;std::shared_ptr&lt;SceneNode&gt;&gt; nodes, std::vector&lt;std::shared_ptr&lt;Light&gt;&gt; lights)"
             landmarkType = "5">
          </BreakpointContent>

@@ -55,6 +55,7 @@ void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuff
     glDepthMask(GL_FALSE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE);
+    
     resultBuffer->bind();
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -68,6 +69,7 @@ void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuff
         
         shadowPass.render(proj, view, nodes, light);
         
+        // Restore gl states after shadow pass
         glDepthMask(GL_FALSE);
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
@@ -82,6 +84,7 @@ void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuff
         glm::vec3 position = glm::vec3(light->properties.position);
         glm::vec3 lightDir = glm::vec3(light->properties.direction);
         
+        // Takes [-1, 1] to [0, 1]
         glm::mat4 biasMatrix(
                              0.5, 0.0, 0.0, 0.0,
                              0.0, 0.5, 0.0, 0.0,
@@ -92,7 +95,6 @@ void DeferredLightingPass::render(glm::mat4 proj, glm::mat4 view, GBuffer* gBuff
         glm::mat4 depthProjectionMatrix = glm::perspective(light->properties.angle * 2, width/(float)height, 0.1f, 50.0f);
         glm::mat4 depthViewMatrix = glm::lookAt(position, position + lightDir, glm::vec3(0,1,0));
         deferredPhong.setLightMvp(biasMatrix * depthProjectionMatrix * depthViewMatrix);
-
         
         unitQuad.render();
         
