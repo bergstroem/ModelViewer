@@ -13,7 +13,7 @@
 void ToneMappingShader::init() {
     ShaderLoader& loader = ShaderLoader::getInstance();
     
-    this->programId = loader.loadShaderProgram("/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/passthrough.vs", "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/tone_mapping.fs");
+    this->programId = loader.loadShaderProgram("passthrough.vs", "tone_mapping.fs");
     
     this->setupBufferBindings();
 }

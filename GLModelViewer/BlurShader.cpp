@@ -14,7 +14,7 @@ void BlurShader::init() {
     this->direction = BlurShader::HORIZONTAL;
     ShaderLoader& loader = ShaderLoader::getInstance();
     
-    this->programId = loader.loadShaderProgram("/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/passthrough.vs", "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/blur_shader.fs");
+    this->programId = loader.loadShaderProgram("passthrough.vs", "blur_shader.fs");
     
     setupBufferBindings();
 }

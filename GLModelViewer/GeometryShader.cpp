@@ -13,7 +13,7 @@
 void GeometryShader::init() {
     ShaderLoader& loader = ShaderLoader::getInstance();
     
-    this->programId = loader.loadShaderProgram("/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/geometry.vs", "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/geometry.fs");
+    this->programId = loader.loadShaderProgram("geometry.vs", "geometry.fs");
     
     this->setupBufferBindings();
 }

@@ -14,8 +14,10 @@
 
 int ShaderLoader::loadShaderProgram(std::string vertexShader, std::string fragmentShader) {
     
-    unsigned int vertexShaderId = this->loadVertexShader(vertexShader);
-    unsigned int fragmentShaderId = this->loadFragmentShader(fragmentShader);
+    std::string path(SHADER_PATH);
+    
+    unsigned int vertexShaderId = this->loadVertexShader(path + vertexShader);
+    unsigned int fragmentShaderId = this->loadFragmentShader(path + fragmentShader);
     
     unsigned int shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShaderId);

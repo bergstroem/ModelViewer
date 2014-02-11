@@ -15,6 +15,14 @@
 #define SHADER_NORMAL_LOCATION      1
 #define SHADER_COLOR_LOCATION       2
 
+#ifdef __APPLE__
+#define SHADER_PATH "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/"
+#define MODEL_PATH "/Users/mattiasbergstrom/Desktop/"
+#else
+#define SHADER_PATH "./"
+#define MODEL_PATH "../off-files"
+#endif
+
 enum TextureIndex {
     TEXTURE_COLOR_INDEX,
     TEXTURE_DEPTH_INDEX,
