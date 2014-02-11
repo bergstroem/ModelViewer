@@ -38,7 +38,7 @@ std::shared_ptr<Mesh> MeshLoader::loadMeshFromFile(std::string meshName) {
     file.open(meshName);
     
     if(!file.is_open()) {
-        throw "Could not open file";
+        throw std::runtime_error("Could not open file");
         exit(EXIT_FAILURE);
     }
     

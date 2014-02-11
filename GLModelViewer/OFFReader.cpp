@@ -26,12 +26,12 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
     // Check file type
     std::string fileType;
     if(stream >> fileType && fileType != "OFF") {
-        throw fileReadError + " Did not start with OFF";
+        throw std::runtime_error(fileReadError + " Did not start with OFF");
     }
     
     int numVerts, numFaces, numEdges;
     if(!(stream >> numVerts >> numFaces >> numEdges)) {
-        throw fileReadError + " Did not contain numVertices, numFaces and numEdges";
+        throw std::runtime_error(fileReadError + " Did not contain numVertices, numFaces and numEdges");
     }
     
     std::shared_ptr<Mesh> mesh(new Mesh);
@@ -40,7 +40,7 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
     float x, y, z;
     for(int i = 0; i < numVerts; i++) {
         if(!(stream >> x >> y >> z)) {
-            throw fileReadError + " Could not read coordinates";
+            throw std::runtime_error(fileReadError + " Could not read coordinates");
         }
         Vertex vert = {{x, y, z},{0.0f,0.0f,0.0f},{1.0f,1.0f,1.0f}};
         mesh->vertexBuffer[i] = vert;
@@ -50,13 +50,13 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
     for (int i = 0; i < numFaces; i++) {
         // Read first col
         if(!(stream >> numPolygonIndices)) {
-            throw fileReadError + " Could not read number of indices on polygon.";
+            throw std::runtime_error(fileReadError + " Could not read number of indices on polygon.");
         }
         
         unsigned int polygonIndices[numPolygonIndices];
         for(int j = 0; j < numPolygonIndices; j++) {
             if(!(stream >> polygonIndices[j])) {
-                throw fileReadError + "Could not read polygon index";
+                throw std::runtime_error(fileReadError + "Could not read polygon index");
             }
         }
         
@@ -135,7 +135,7 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
                 }
                 break;
             default:
-                throw fileReadError + " Invalid number of color components.";
+                throw std::runtime_error(fileReadError + " Invalid number of color components.");
                 break;
         }
         
