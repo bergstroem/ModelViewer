@@ -10,7 +10,7 @@
 #include <fstream>
 #include "OFFReader.h"
 #include "MeshLoader.h"
-#include <stdexcept>
+
 
 std::shared_ptr<Mesh> MeshLoader::loadMesh(std::string meshName) {
     std::shared_ptr<Mesh> mesh;

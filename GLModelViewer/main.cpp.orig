@@ -197,18 +197,21 @@ int main()
     lastTime = glfwGetTime();
     
     for(int i = 0; i < 2; i++) {
+    
+<<<<<<< HEAD
+        auto node = createSceneNode("../off-files/cooldragon.off");
+=======
         std::string path(MODEL_PATH);
         path.append("cooldragon.off");
         auto node = createSceneNode(path);
+>>>>>>> f8b707e74259bc284a588f26c884a13aa32757df
+        
         node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
         
         renderer.nodes.push_back(node);
     }
     
     renderer.nodes.push_back(floor);
-    
-    glfwSwapInterval(1); //0 to disable vsync, 1 to enable it
-
     
     while (!glfwWindowShouldClose(window))
     {
@@ -226,7 +229,7 @@ int main()
         // Rotation Up/Down
         renderer.view = glm::rotate(glm::mat4(1.0f), rotationPitch, glm::vec3(1.0f, 0.0f, 0.0f));
         
-        // Rotation around Y
+        // Rotation Y
         renderer.view = glm::rotate(renderer.view, rotationY, glm::vec3(0.0f, 1.0f, 0.0f));
         renderer.view = glm::translate(renderer.view, move);
         
