@@ -42,7 +42,8 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
         if(!(stream >> x >> y >> z)) {
             throw fileReadError + " Could not read coordinates";
         }
-        mesh->vertexBuffer[i] = Vertex{{x, y, z},{0.0f,0.0f,0.0f},{1.0f,1.0f,1.0f}};
+        Vertex vert = {{x, y, z},{0.0f,0.0f,0.0f},{1.0f,1.0f,1.0f}};
+        mesh->vertexBuffer[i] = vert;
     }
     
     int numPolygonIndices;
@@ -97,6 +98,10 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
         std::vector<std::string> tokens(begin, end);
         
         bool isfloatColors = colorString.find(".") != std::string::npos;
+        
+        // Create new color stream to read form
+        std::istringstream colorStream1(colorString);
+        
         // We have colors!
         switch (tokens.size()) {
             case 0:
@@ -110,10 +115,10 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
             case 4:
                 // Reset the color stream to read from again
                 float r, g, b;
-                colorStream = std::istringstream(colorString);
+                
                 // Determine if float or int
                 if(isfloatColors) {
-                    colorStream >> r >> g >> b;
+                    colorStream1 >> r >> g >> b;
                     std::cout << r << " " << g << " " << b << std::endl;
                 } else {
                     // Convert from int (0-255) to float (0.0-1.0)
@@ -125,7 +130,8 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
                 }
                 
                 for(unsigned int& index : polygonIndices) {
-                    mesh->vertexBuffer[index].color = Color{r, g, b};
+                	Color color = {r, g, b};
+                    mesh->vertexBuffer[index].color = color;
                 }
                 break;
             default:

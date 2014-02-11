@@ -15,7 +15,13 @@
 #include "glm/gtc/type_ptr.hpp"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+#ifdef __APPLE__
 #include <OpenGL/glu.h>
+#else
+#include <GL/glu.h>
+#endif
+
 #include "OFFReader.h"
 #include "ShaderLoader.h"
 #include "SceneRenderer.h"
@@ -150,7 +156,7 @@ std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
     return node;
 }
 
-int main(void)
+int main()
 {
     GLFWwindow* window = initGLWindow();
     
@@ -192,7 +198,7 @@ int main(void)
     
     for(int i = 0; i < 2; i++) {
     
-        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/cooldragon.off");
+        auto node = createSceneNode("../off-files/cooldragon.off");
         
         node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
         
