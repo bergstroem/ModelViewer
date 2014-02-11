@@ -192,7 +192,9 @@ int main(void)
     
     for(int i = 0; i < 2; i++) {
     
-        auto node = createSceneNode("/Users/mattiasbergstrom/Desktop/cooldragon.off");
+        std::string path(MODEL_PATH);
+        path.append("cooldragon.off");
+        auto node = createSceneNode(path);
         
         node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
         

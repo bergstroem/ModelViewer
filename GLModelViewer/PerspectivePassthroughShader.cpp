@@ -12,7 +12,7 @@
 void PerspectivePassthroughShader::init() {
     ShaderLoader& loader = ShaderLoader::getInstance();
     
-    this->programId = loader.loadShaderProgram("/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/perspective_passthrough.vs", "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/perspective_passthrough.fs");
+    this->programId = loader.loadShaderProgram("perspective_passthrough.vs", "perspective_passthrough.fs");
     
     this->setupBufferBindings();
 }

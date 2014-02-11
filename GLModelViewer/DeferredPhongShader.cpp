@@ -14,7 +14,7 @@
 void DeferredPhongShader::init() {
     ShaderLoader& loader = ShaderLoader::getInstance();
     
-    this->programId = loader.loadShaderProgram("/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/passthrough.vs", "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/deferred_phong.fs");
+    this->programId = loader.loadShaderProgram("passthrough.vs", "deferred_phong.fs");
     
     this->setupBufferBindings();
 }
