@@ -20,7 +20,7 @@
 #define MODEL_PATH "/Users/mattiasbergstrom/Desktop/"
 #else
 #define SHADER_PATH "./"
-#define MODEL_PATH "../off-files"
+#define MODEL_PATH "../off-files/"
 #endif
 
 enum TextureIndex {
@@ -34,6 +34,7 @@ enum TextureIndex {
     TEXTURE_SPECULAR_INDEX,
     TEXTURE_SHININESS_INDEX,
     
+    // Shadow depth
     TEXTURE_SHADOW0_INDEX,
     
     NUM_TEXTURES
