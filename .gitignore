@@ -10,9 +10,9 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
 
-include/
-lib/
+#/backup files
+*~
+
 obj/
 bin/
