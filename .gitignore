@@ -14,5 +14,7 @@
 #/backup files
 *~
 
+include/
+lib/
 obj/
 bin/
