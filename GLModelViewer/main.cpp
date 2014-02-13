@@ -32,8 +32,8 @@
 
 SceneRenderer renderer;
 glm::vec3 move;
-float rotationY;
-float rotationPitch;
+float rotationY = 0.0f;
+float rotationPitch = 0.0f;
 float lastTime = 0.0;
 
 static void error_callback(int error, const char* description)
