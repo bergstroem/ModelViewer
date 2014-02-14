@@ -19,7 +19,7 @@
 #define SHADER_PATH "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/"
 #define MODEL_PATH "/Users/mattiasbergstrom/Desktop/"
 #else
-#define SHADER_PATH "./"
+#define SHADER_PATH "../GLModelViewer/"
 #define MODEL_PATH "../off-files/"
 #endif
 
