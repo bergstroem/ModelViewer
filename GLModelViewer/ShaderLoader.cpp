@@ -11,6 +11,7 @@
 #include <fstream>
 #include "Constants.h"
 #include "Shader.h"
+#include <stdexcept>
 
 int ShaderLoader::loadShaderProgram(std::string vertexShader, std::string fragmentShader) {
     
@@ -81,7 +82,7 @@ int ShaderLoader::loadShader(GLenum shaderType, std::string shader) {
     std::ifstream file(shader);
     
     if(!file.is_open())
-        throw "Shader file not found";
+        throw std::runtime_error("Shader file not found");
     
     std::string contentStr = std::string((std::istreambuf_iterator<char>(file)), (std::istreambuf_iterator<char>()));
     
@@ -93,7 +94,7 @@ int ShaderLoader::loadShader(GLenum shaderType, std::string shader) {
     glCompileShader(shaderId);
     
     if(!shaderStatusOK(shaderId)) {
-        throw "Shader compile error";
+        throw std::runtime_error("Shader compile error");
     }
     
     return shaderId;

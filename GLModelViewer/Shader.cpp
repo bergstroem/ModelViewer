@@ -13,6 +13,7 @@
 #include "Constants.h"
 #include "Mesh.h"
 #include <iostream>
+#include <stdexcept>
 
 Shader::Shader() {
     // Setup default values
@@ -26,7 +27,7 @@ Shader::~Shader() {
 
 void Shader::use() {
     if(programId == 0) {
-        throw "Shader not initialized, run init before calling use";
+        throw std::runtime_error("Shader not initialized, run init before calling use");
     }
     glUseProgram(this->programId);
 }
