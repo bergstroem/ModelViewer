@@ -56,9 +56,6 @@ void Shader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
     glUniformMatrix4fv(inverseViewId, 1, GL_FALSE, glm::value_ptr(inverseView));
     glUniform1f(nearZId, 0.1f);
     glUniform1f(farZId, 100.0f);
-    
-    glBindBufferBase(GL_UNIFORM_BUFFER, Shader::MATERIAL, materialBuffer);
-    glBindBufferBase(GL_UNIFORM_BUFFER, Shader::LIGHT, lightBuffer);
 }
 
 void Shader::setupBufferBindings() {
