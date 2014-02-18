@@ -13,6 +13,7 @@
 #include "Mesh.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -22,6 +23,7 @@
 #include <GL/glu.h>
 #endif
 
+
 #include "OFFReader.h"
 #include "ShaderLoader.h"
 #include "SceneRenderer.h"
@@ -29,6 +31,15 @@
 #include "GeometryShader.h"
 #include "MeshLoader.h"
 #include "LightProperties.h"
+
+// QT stuff
+#include <QtGui/QApplication>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QRadioButton>
+#include <QtGui/QWidget>
+
+#include "GLWidget.h"
+
 
 SceneRenderer renderer;
 glm::vec3 move;
@@ -141,23 +152,41 @@ GLFWwindow* initGLWindow() {
     return window;
 }
 
-std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
-    auto& meshLoader = MeshLoader::getInstance();
-    std::shared_ptr<Mesh> mesh = meshLoader.loadMesh(meshName);
 
-    auto node = std::shared_ptr<SceneNode>(new SceneNode());
-    mesh->material.diffuse = glm::vec4(0.5f, 0.5f, 0.7f, 1.0f);
-    mesh->material.ambient = glm::vec4(0.01f, 0.01f, 0.01f, 1.0f);
-    mesh->material.specular = glm::vec4(0.6f, 0.6f, 0.7f, 1.0f);
-    mesh->material.shininess = 250.0f;
-    
-    node->init(mesh);
-    
-    return node;
-}
-
-int main()
+int main(int argc, char** argv)
 {
+
+    QApplication app (argc, argv);
+
+    QWidget qwindow;
+    QVBoxLayout* layout = new QVBoxLayout;
+
+    QRadioButton* orthoButton = new QRadioButton("Orthogonal");
+    QRadioButton* obliqueButton = new QRadioButton("Oblique");
+    QRadioButton* perspButton = new QRadioButton("Perspective");
+    perspButton->setChecked(true);
+
+    // Use this to initialize opengl
+    QGLFormat glFormat;
+    glFormat.setVersion( 3, 2 );
+    glFormat.setProfile( QGLFormat::CoreProfile ); // Requires >=Qt-4.8.0
+    glFormat.setSampleBuffers( true );
+
+    GLWidget* glWidget = new GLWidget(glFormat);
+    glWidget->resize(854,480);
+    glWidget->show();
+
+
+    layout->addWidget(orthoButton);
+    layout->addWidget(obliqueButton);
+    layout->addWidget(perspButton);
+
+    //qwindow.setLayout(layout);
+    //qwindow.show();
+ 
+    return app.exec();
+
+    /*
     GLFWwindow* window = initGLWindow();
     
     initGL();
@@ -192,7 +221,7 @@ int main()
     light1->properties = lightProperties1;
     renderer.lights.push_back(light1);
     
-    renderer.init(width, height);
+    
     
     lastTime = glfwGetTime();
     
@@ -239,6 +268,5 @@ int main()
     glfwDestroyWindow(window);
     
     glfwTerminate();
-    exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);*/
 }
-
