@@ -70,7 +70,6 @@ void main() {
     
     // If depht == 1 there is nothing there. No need to bother with calculations
     if(depth == 1.0) {
-        outColor = vec4(0.0,0.0,0.0,1.0);
         discard;
     }
     
