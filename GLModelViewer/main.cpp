@@ -30,6 +30,13 @@
 #include "MeshLoader.h"
 #include "LightProperties.h"
 
+// QT stuff
+#include <QtGui/QApplication>
+#include <QtGui/QVBoxLayout>
+#include <QtGui/QRadioButton>
+#include <QtGui/QWidget>
+
+
 SceneRenderer renderer;
 glm::vec3 move;
 float rotationY = 0.0f;
@@ -156,8 +163,31 @@ std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
     return node;
 }
 
-int main()
+int main(int argc, char** argv)
 {
+
+    QApplication app (argc, argv);
+
+    QWidget qwindow;
+    QVBoxLayout* layout = new QVBoxLayout;
+
+    QRadioButton* orthoButton = new QRadioButton("Orthogonal");
+    QRadioButton* obliqueButton = new QRadioButton("Oblique");
+    QRadioButton* perspButton = new QRadioButton("Perspective");
+    perspButton->setChecked(true);
+
+
+
+    layout->addWidget(orthoButton);
+    layout->addWidget(obliqueButton);
+    layout->addWidget(perspButton);
+
+    qwindow.setLayout(layout);
+    qwindow.show();
+ 
+    return app.exec();
+
+
     GLFWwindow* window = initGLWindow();
     
     initGL();
@@ -241,4 +271,3 @@ int main()
     glfwTerminate();
     exit(EXIT_SUCCESS);
 }
-
