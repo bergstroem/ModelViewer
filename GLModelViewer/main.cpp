@@ -23,7 +23,6 @@
 #include <GL/glu.h>
 #endif
 
-
 #include "OFFReader.h"
 #include "ShaderLoader.h"
 #include "SceneRenderer.h"
@@ -32,12 +31,19 @@
 #include "MeshLoader.h"
 #include "LightProperties.h"
 
-
 SceneRenderer renderer;
 glm::vec3 move;
 float rotationY = 0.0f;
 float rotationPitch = 0.0f;
 float lastTime = 0.0;
+
+enum Projection {
+    PERSPECTIVE,
+    ORTHOGONAL,
+    OBLIQUE
+};
+
+Projection projection;
 
 static void error_callback(int error, const char* description)
 {
@@ -53,6 +59,16 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         renderer.isDeferred = !renderer.isDeferred;
 
         std::cout << "Deferred " << renderer.isDeferred << std::endl;
+    }
+    
+    if(key == GLFW_KEY_1 && action == GLFW_PRESS) {
+        projection = PERSPECTIVE;
+    }
+    if(key == GLFW_KEY_2 && action == GLFW_PRESS) {
+        projection = ORTHOGONAL;
+    }
+    if(key == GLFW_KEY_3 && action == GLFW_PRESS) {
+        projection = OBLIQUE;
     }
 }
 
@@ -221,10 +237,22 @@ int main(int argc, char** argv)
         
         glfwGetFramebufferSize(window, &width, &height);
         float ratio = width / (float)height;
+        glm::mat4 ortho = glm::ortho( -4.0f*ratio/2, 4.0f*ratio/2, -4.0f, 4.f, -100.0f, 100.f );
+        
+        glm::mat4 skew = glm::mat4(1.0f, 0.0f, -0.5f*cosf(26.565f*M_PI/180.f), 0.0f,
+                                   0.0f, 1.0f, -0.5f*sinf(26.565f*M_PI/180.f), 0.0f,
+                                   0.0f, 0.0f, 1.0f, 0.0f,
+                                   0.0f, 0.0f, 0.0f, 1.0f);
+        
+        if(projection == ORTHOGONAL) {
+            renderer.proj = ortho;
+        } else if (projection == PERSPECTIVE) {
+            renderer.proj = glm::perspective(60.0f, ratio, 0.1f, 1000.0f);
+        } else {
+            renderer.proj = ortho * glm::transpose(skew);
+        }
         
         light->properties.position = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5f +  cosf(glfwGetTime()), 0.5f, -0.0f)) * glm::vec4(1.0f);
-        
-        renderer.proj = glm::perspective(60.0f, ratio, 0.1f, 1000.0f);
         
         // Rotation Up/Down
         renderer.view = glm::rotate(glm::mat4(1.0f), rotationPitch, glm::vec3(1.0f, 0.0f, 0.0f));
