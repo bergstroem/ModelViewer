@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02652E3B189FECF3003C9868 /* ColorBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02652E39189FECF3003C9868 /* ColorBuffer.cpp */; };
+		0272234A18BCE1C700F2FADD /* GLModelViewer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */; };
 		027ACB2D189FEE5000B52103 /* GBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027ACB2B189FEE5000B52103 /* GBuffer.cpp */; };
 		029D103E18A25B84009BC5DE /* perspective_passthrough.vs in Sources */ = {isa = PBXBuildFile; fileRef = 029D103D18A25B84009BC5DE /* perspective_passthrough.vs */; };
 		029D104018A25B92009BC5DE /* perspective_passthrough.fs in Sources */ = {isa = PBXBuildFile; fileRef = 029D103F18A25B92009BC5DE /* perspective_passthrough.fs */; };
@@ -23,7 +24,6 @@
 		02CEA18C18A2C80300D026F8 /* ShadowPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CEA18A18A2C80300D026F8 /* ShadowPass.cpp */; };
 		02D0DDB6189DB42F00CC1BE6 /* deferred_phong.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB5189DB42F00CC1BE6 /* deferred_phong.fs */; };
 		02D0DDB9189DB53100CC1BE6 /* DeferredPhongShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D0DDB8189DB53100CC1BE6 /* DeferredPhongShader.cpp */; };
-		02DB27FE189B2CCC0055B56F /* GLModelViewer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */; };
 		02DB2922189B2CE10055B56F /* blur_shader.fs in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2804189B2CE00055B56F /* blur_shader.fs */; };
 		02DB2923189B2CE10055B56F /* BlurShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2805189B2CE00055B56F /* BlurShader.cpp */; };
 		02DB2924189B2CE10055B56F /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DB2808189B2CE00055B56F /* FrameBuffer.cpp */; };
@@ -55,10 +55,10 @@
 		02DB27F6189B2CCC0055B56F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			dstPath = /usr/share/man/man1;
 			dstSubfolderSpec = 0;
 			files = (
-				02DB27FE189B2CCC0055B56F /* GLModelViewer.1 in CopyFiles */,
+				0272234A18BCE1C700F2FADD /* GLModelViewer.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -67,6 +67,7 @@
 /* Begin PBXFileReference section */
 		02652E39189FECF3003C9868 /* ColorBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorBuffer.cpp; sourceTree = "<group>"; };
 		02652E3A189FECF3003C9868 /* ColorBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorBuffer.h; sourceTree = "<group>"; };
+		0272234818BCE18A00F2FADD /* cooldragon.off */ = {isa = PBXFileReference; lastKnownFileType = text; path = cooldragon.off; sourceTree = "<group>"; };
 		027ACB2B189FEE5000B52103 /* GBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GBuffer.cpp; sourceTree = "<group>"; };
 		027ACB2C189FEE5000B52103 /* GBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBuffer.h; sourceTree = "<group>"; };
 		029D103D18A25B84009BC5DE /* perspective_passthrough.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = perspective_passthrough.vs; sourceTree = "<group>"; };
@@ -157,6 +158,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0272234718BCE18A00F2FADD /* off-files */ = {
+			isa = PBXGroup;
+			children = (
+				0272234818BCE18A00F2FADD /* cooldragon.off */,
+			);
+			path = "off-files";
+			sourceTree = "<group>";
+		};
 		0278163C189FE08100770AD9 /* buffers */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +255,7 @@
 		02DB27EF189B2CCC0055B56F = {
 			isa = PBXGroup;
 			children = (
+				0272234718BCE18A00F2FADD /* off-files */,
 				02DB2938189B2F650055B56F /* libGLEW.1.10.0.dylib */,
 				02DB2936189B2F510055B56F /* libglfw3.3.0.dylib */,
 				02DB2934189B2F2E0055B56F /* OpenGL.framework */,

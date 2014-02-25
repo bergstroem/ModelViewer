@@ -16,8 +16,8 @@
 #define SHADER_COLOR_LOCATION       2
 
 #ifdef __APPLE__
-#define SHADER_PATH "/Users/mattiasbergstrom/Documents/src/GLModelViewer/GLModelViewer/"
-#define MODEL_PATH "/Users/mattiasbergstrom/Desktop/"
+#define SHADER_PATH "/Users/mattiasbergstrom/Documents/src/desktop/GLModelViewer/GLModelViewer/"
+#define MODEL_PATH "/Users/mattiasbergstrom/Documents/src/desktop/GLModelViewer/off-files/"
 #else
 #define SHADER_PATH "../GLModelViewer/"
 #define MODEL_PATH "../off-files/"
