@@ -13,6 +13,7 @@
 
 void SceneRenderer::init(int width, int height) {
     
+    
     // Init geometry pass
     geometryPass.init(width, height);
     
@@ -22,6 +23,7 @@ void SceneRenderer::init(int width, int height) {
     
     toneMapping.init();
     passthrough.init();
+    
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
     screenNode.init(mesh);
@@ -48,13 +50,7 @@ void SceneRenderer::renderScene() {
     geometryPass.render(proj, view, nodes);
     deferredLightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer(), nodes, lights);
     
-    // Calculate average luminance
-    auto buffer = deferredLightingPass.getBuffer();
-    buffer->bind();
-    glGenerateMipmap(GL_TEXTURE_2D);
-    buffer->unbind();
-    
-    // Draw final pass to screen    
+    // Draw final pass to screen
     deferredLightingPass.bindBufferTextures();
     
     toneMapping.use();

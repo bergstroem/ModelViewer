@@ -7,14 +7,16 @@
 //
 
 #include <iostream>
-#include <fstream>
 #include "glm/glm.hpp"
 #include <cmath>
 #include "Mesh.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
-
-#include <GL/glew.h>
+#include "SceneRenderer.h"
+#include "Constants.h"
+#include "MeshLoader.h"
+#include "LightProperties.h"
+#include <glew.h>
 #include <GLFW/glfw3.h>
 
 #ifdef __APPLE__
@@ -23,27 +25,12 @@
 #include <GL/glu.h>
 #endif
 
-#include "OFFReader.h"
-#include "ShaderLoader.h"
-#include "SceneRenderer.h"
-#include "Constants.h"
-#include "GeometryShader.h"
-#include "MeshLoader.h"
-#include "LightProperties.h"
-
+Camera camera;
 SceneRenderer renderer;
 glm::vec3 move;
-float rotationY = 0.0f;
+float rotationYaw = 0.0f;
 float rotationPitch = 0.0f;
 float lastTime = 0.0;
-
-enum Projection {
-    PERSPECTIVE,
-    ORTHOGONAL,
-    OBLIQUE
-};
-
-Projection projection;
 
 static void error_callback(int error, const char* description)
 {
@@ -62,13 +49,13 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     }
     
     if(key == GLFW_KEY_1 && action == GLFW_PRESS) {
-        projection = PERSPECTIVE;
+        camera.setCameraProjection(PROJECTION_PERSPECTIVE);
     }
     if(key == GLFW_KEY_2 && action == GLFW_PRESS) {
-        projection = ORTHOGONAL;
+        camera.setCameraProjection(PROJECTION_ORTHOGONAL);
     }
     if(key == GLFW_KEY_3 && action == GLFW_PRESS) {
-        projection = OBLIQUE;
+        camera.setCameraProjection(PROJECTION_OBLIQUE);
     }
 }
 
@@ -83,19 +70,19 @@ void updateInput(GLFWwindow* window) {
     
     glm::vec3 velocity;
     if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        velocity.z += cosf(rotationY * M_PI / 180);
-        velocity.x -= sinf(rotationY * M_PI / 180);
+        velocity.z -= cosf(rotationYaw);
+        velocity.x += sinf(rotationYaw);
         
     } else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        velocity.z -= cosf(rotationY * M_PI / 180);
-        velocity.x += sinf(rotationY * M_PI / 180);
+        velocity.z += cosf(rotationYaw);
+        velocity.x -= sinf(rotationYaw);
     }
     if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        velocity.z += sinf(rotationY * M_PI / 180);
-        velocity.x += cosf(rotationY * M_PI / 180);
+        velocity.z -= sinf(rotationYaw);
+        velocity.x -= cosf(rotationYaw);
     } else if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        velocity.z -= sinf(rotationY * M_PI / 180);
-        velocity.x -= cosf(rotationY * M_PI / 180);
+        velocity.z += sinf(rotationYaw);
+        velocity.x += cosf(rotationYaw);
     }
     
     if(glm::length(velocity) > 0) {
@@ -105,14 +92,14 @@ void updateInput(GLFWwindow* window) {
     }
     
     if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-        rotationY -= 100.0f * deltaTime;
+        rotationYaw -= 2.0f * deltaTime;
     } else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
-        rotationY += 100.0f * deltaTime;
+        rotationYaw += 2.0f * deltaTime;
     }
     if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-        rotationPitch -= 100.0f * deltaTime;
+        rotationPitch += 2.0f * deltaTime;
     } else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-        rotationPitch += 100.0 * deltaTime;
+        rotationPitch -= 2.0 * deltaTime;
     }
     
     lastTime = currentTime;
@@ -185,6 +172,9 @@ int main(int argc, char** argv)
     glfwGetFramebufferSize(window, &width, &height);
     renderer.init(width, height);
     
+    camera.init(width/(float)height, 60.f, .1f, 100.f);
+    camera.setCameraProjection(PROJECTION_PERSPECTIVE);
+    
     //Floor
     std::shared_ptr<Mesh> floorMesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
     floorMesh->material.diffuse = glm::vec4(0.3f, 0.6f, 0.7f, 1.0f);
@@ -212,12 +202,11 @@ int main(int argc, char** argv)
     light1->properties = lightProperties1;
     renderer.lights.push_back(light1);
     
-    
     lastTime = glfwGetTime();
     
     for(int i = 0; i < 2; i++) {
         std::string path(MODEL_PATH);
-        path.append("cooldragon.off");
+        path.append("sphere2.off");
         auto node = createSceneNode(path);
         node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
         
@@ -227,7 +216,6 @@ int main(int argc, char** argv)
     renderer.nodes.push_back(floor);
     
     glfwSwapInterval(1); //0 to disable vsync, 1 to enable it
-
     
     while (!glfwWindowShouldClose(window))
     {
@@ -235,32 +223,17 @@ int main(int argc, char** argv)
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         
-        glfwGetFramebufferSize(window, &width, &height);
-        float ratio = width / (float)height;
-        glm::mat4 ortho = glm::ortho( -4.0f*ratio/2, 4.0f*ratio/2, -4.0f, 4.f, -100.0f, 100.f );
-        
-        glm::mat4 skew = glm::mat4(1.0f, 0.0f, -0.5f*cosf(26.565f*M_PI/180.f), 0.0f,
-                                   0.0f, 1.0f, -0.5f*sinf(26.565f*M_PI/180.f), 0.0f,
-                                   0.0f, 0.0f, 1.0f, 0.0f,
-                                   0.0f, 0.0f, 0.0f, 1.0f);
-        
-        if(projection == ORTHOGONAL) {
-            renderer.proj = ortho;
-        } else if (projection == PERSPECTIVE) {
-            renderer.proj = glm::perspective(60.0f, ratio, 0.1f, 1000.0f);
-        } else {
-            renderer.proj = ortho * glm::transpose(skew);
-        }
-        
         light->properties.position = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5f +  cosf(glfwGetTime()), 0.5f, -0.0f)) * glm::vec4(1.0f);
         
-        // Rotation Up/Down
-        renderer.view = glm::rotate(glm::mat4(1.0f), rotationPitch, glm::vec3(1.0f, 0.0f, 0.0f));
         
-        // Rotation around Y
-        renderer.view = glm::rotate(renderer.view, rotationY, glm::vec3(0.0f, 1.0f, 0.0f));
-        renderer.view = glm::translate(renderer.view, move);
+        glm::vec3 direction = glm::vec3(1.0f * cosf(rotationPitch) * sinf(rotationYaw),
+                                        1.0f * sinf(rotationPitch),
+                                        -1.0f * cosf(rotationPitch) * cosf(rotationYaw));
         
+        camera.lookAt(move, direction + move, glm::vec3(0.0f, 1.0f, 0.0f));
+        
+        renderer.proj = camera.getCameraProjectionTransform();
+        renderer.view = camera.getCameraViewTransform();
         renderer.renderScene();
         
         glfwSwapBuffers(window);

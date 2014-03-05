@@ -21,6 +21,7 @@
 #include "DepthPass.h"
 #include "DeferredLightingPass.h"
 #include "Light.h"
+#include "Camera.h"
 
 class SceneRenderer {
     
@@ -42,6 +43,7 @@ public:
     std::vector<std::shared_ptr<Light>> lights;
     bool isDeferred;
     
+        
     void init(int width, int height);
     void updateResolution(int width, int height);
     void renderScene();

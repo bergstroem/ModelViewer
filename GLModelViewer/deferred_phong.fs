@@ -66,7 +66,7 @@ void main() {
     vec4 color = vec4(0.0);
     
     vec3 normal = normalize(texture(normal_sampler, uv).xyz);
-    float depth = texture(depth_sampler, uv).x * 2.0 -1.0; // IS THIS REALLY NEEDED?
+    float depth = texture(depth_sampler, uv).x * 2.0 - 1.0;
     
     // If depht == 1 there is nothing there. No need to bother with calculations
     if(depth == 1.0) {
