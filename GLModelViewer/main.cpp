@@ -131,6 +131,7 @@ int main(int argc, char** argv)
     GLFWwindow* window = initGLWindow();
     
     movement = new CameraMovement(window);
+    movement->isSmoothMovement = true;
     
     initGL();
     
@@ -141,7 +142,7 @@ int main(int argc, char** argv)
     camera.init(width/(float)height, 60.f, .1f, 100.f);
     camera.setCameraProjection(PROJECTION_PERSPECTIVE);
     
-    //Floor
+    // Floor
     std::shared_ptr<Mesh> floorMesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
     floorMesh->material.diffuse = glm::vec4(0.3f, 0.6f, 0.7f, 1.0f);
     floorMesh->material.ambient = glm::vec4(0.01f, 0.01f, 0.01f, 1.0f);
@@ -187,9 +188,9 @@ int main(int argc, char** argv)
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         
-        light->properties.position = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5f +  cosf(glfwGetTime()), 0.5f, -0.0f)) * glm::vec4(1.0f);
+        //light->properties.position = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5f +  cosf(glfwGetTime()), 0.5f, -0.0f)) * glm::vec4(1.0f);
         
-        camera.position += movement->movementDirection * movement->velocity;
+        camera.position = movement->position;//movement->movementDirection;
         camera.target = camera.position + movement->lookatDirection;
         camera.update();
         

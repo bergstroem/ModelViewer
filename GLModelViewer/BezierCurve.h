@@ -14,11 +14,11 @@
 
 class BezierCurve {
 public:
-    glm::vec4 startPoint;
-    glm::vec4 controlPoint;
-    glm::vec4 endPoint;
+    glm::vec3 startPoint;
+    glm::vec3 controlPoint;
+    glm::vec3 endPoint;
     
-    glm::vec4 getPosition(float t);
+    glm::vec3 getPosition(float t);
 };
 
 #endif /* defined(__GLModelViewer__BezierCurve__) */

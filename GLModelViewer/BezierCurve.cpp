@@ -8,7 +8,7 @@
 
 #include "BezierCurve.h"
 
-glm::vec4 BezierCurve::getPosition(float t) {
-    t = CLAMP(t, 0.f, 1.f);
+glm::vec3 BezierCurve::getPosition(float t) {
+    t = CLAMP(t, 0.0f, 1.0f);
     return (1 - t) * ((1 - t) * startPoint + t * controlPoint) + t * ((1 - t) * controlPoint + t * endPoint);
 }
