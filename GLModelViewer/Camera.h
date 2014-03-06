@@ -38,9 +38,9 @@ public:
     
     void init(float aspectRatio, float fieldOfView, float nearZ, float farZ);
     
-    void lookAt(glm::vec3 target);
-    void lookAt(glm::vec3 position, glm::vec3 target, glm::vec3 up);
     void updateProjection();
+    void updateView();
+    void update();
     
     CameraProjection getCameraProjection();
     void setCameraProjection(CameraProjection cameraProjection);

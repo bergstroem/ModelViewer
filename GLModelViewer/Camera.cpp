@@ -19,7 +19,7 @@ Camera::Camera() {
     
     this->cameraProjection = CameraProjection::PROJECTION_PERSPECTIVE;
     
-    lookAt(this->position, this->target, this->up);
+    update();
 }
 
 void Camera::init(float aspectRatio, float fieldOfView, float nearZ, float farZ) {
@@ -27,17 +27,6 @@ void Camera::init(float aspectRatio, float fieldOfView, float nearZ, float farZ)
     this->farZ = farZ;
     this->nearZ = nearZ;
     this->aspectRatio = aspectRatio;
-}
-
-void Camera::lookAt(glm::vec3 target) {
-    this->lookAt(this->position, this->target, this->up);
-}
-
-void Camera::lookAt(glm::vec3 position, glm::vec3 target, glm::vec3 up) {
-    this->up = up;
-    this->position = position;
-    this->target = target;
-    this->viewMatrix = glm::lookAt(position, target, up);
 }
 
 void Camera::updateProjection() {
@@ -60,6 +49,15 @@ void Camera::updateProjection() {
             
             break;
     }
+}
+
+void Camera::updateView() {
+    this->viewMatrix = glm::lookAt(position, target, up);
+}
+
+void Camera::update() {
+    updateView();
+    updateProjection();
 }
 
 /* Getters and setters */

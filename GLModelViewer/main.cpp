@@ -16,6 +16,8 @@
 #include "Constants.h"
 #include "MeshLoader.h"
 #include "LightProperties.h"
+#include "MathHelper.h"
+#include "CameraMovement.h"
 #include <glew.h>
 #include <GLFW/glfw3.h>
 
@@ -25,12 +27,10 @@
 #include <GL/glu.h>
 #endif
 
+CameraMovement* movement;
 Camera camera;
 SceneRenderer renderer;
-glm::vec3 move;
-float rotationYaw = 0.0f;
-float rotationPitch = 0.0f;
-float lastTime = 0.0;
+
 
 static void error_callback(int error, const char* description)
 {
@@ -65,44 +65,8 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 }
 
 void updateInput(GLFWwindow* window) {
-    double currentTime = glfwGetTime();
-    float deltaTime = float(currentTime - lastTime);
     
-    glm::vec3 velocity;
-    if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        velocity.z -= cosf(rotationYaw);
-        velocity.x += sinf(rotationYaw);
-        
-    } else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        velocity.z += cosf(rotationYaw);
-        velocity.x -= sinf(rotationYaw);
-    }
-    if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        velocity.z -= sinf(rotationYaw);
-        velocity.x -= cosf(rotationYaw);
-    } else if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        velocity.z += sinf(rotationYaw);
-        velocity.x += cosf(rotationYaw);
-    }
-    
-    if(glm::length(velocity) > 0) {
-        velocity = glm::normalize(velocity)* 4.0f;
-        
-        move += velocity * deltaTime;
-    }
-    
-    if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-        rotationYaw -= 2.0f * deltaTime;
-    } else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
-        rotationYaw += 2.0f * deltaTime;
-    }
-    if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-        rotationPitch += 2.0f * deltaTime;
-    } else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-        rotationPitch -= 2.0 * deltaTime;
-    }
-    
-    lastTime = currentTime;
+    movement->update();
 }
 
 void initGL() {
@@ -166,6 +130,8 @@ int main(int argc, char** argv)
 {
     GLFWwindow* window = initGLWindow();
     
+    movement = new CameraMovement(window);
+    
     initGL();
     
     int width, height;
@@ -202,8 +168,6 @@ int main(int argc, char** argv)
     light1->properties = lightProperties1;
     renderer.lights.push_back(light1);
     
-    lastTime = glfwGetTime();
-    
     for(int i = 0; i < 2; i++) {
         std::string path(MODEL_PATH);
         path.append("sphere2.off");
@@ -225,12 +189,9 @@ int main(int argc, char** argv)
         
         light->properties.position = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5f +  cosf(glfwGetTime()), 0.5f, -0.0f)) * glm::vec4(1.0f);
         
-        
-        glm::vec3 direction = glm::vec3(1.0f * cosf(rotationPitch) * sinf(rotationYaw),
-                                        1.0f * sinf(rotationPitch),
-                                        -1.0f * cosf(rotationPitch) * cosf(rotationYaw));
-        
-        camera.lookAt(move, direction + move, glm::vec3(0.0f, 1.0f, 0.0f));
+        camera.position += movement->movementDirection * movement->velocity;
+        camera.target = camera.position + movement->lookatDirection;
+        camera.update();
         
         renderer.proj = camera.getCameraProjectionTransform();
         renderer.view = camera.getCameraViewTransform();
@@ -239,6 +200,8 @@ int main(int argc, char** argv)
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    
+    delete movement;
     
     glfwDestroyWindow(window);
     
