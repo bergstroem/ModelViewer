@@ -131,7 +131,6 @@ int main(int argc, char** argv)
     GLFWwindow* window = initGLWindow();
     
     movement = new CameraMovement(window);
-    movement->isSmoothMovement = true;
     
     initGL();
     
@@ -171,7 +170,7 @@ int main(int argc, char** argv)
     
     for(int i = 0; i < 2; i++) {
         std::string path(MODEL_PATH);
-        path.append("sphere2.off");
+        path.append("cooldragon.off");
         auto node = createSceneNode(path);
         node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
         

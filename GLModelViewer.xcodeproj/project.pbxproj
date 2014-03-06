@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		023B43A118C8CE46002759C0 /* SkyBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 023B439F18C8CE46002759C0 /* SkyBox.cpp */; };
 		02652E3B189FECF3003C9868 /* ColorBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02652E39189FECF3003C9868 /* ColorBuffer.cpp */; };
 		0272234A18BCE1C700F2FADD /* GLModelViewer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */; };
 		027ACB2D189FEE5000B52103 /* GBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027ACB2B189FEE5000B52103 /* GBuffer.cpp */; };
@@ -68,6 +69,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		023B439F18C8CE46002759C0 /* SkyBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkyBox.cpp; sourceTree = "<group>"; };
+		023B43A018C8CE46002759C0 /* SkyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyBox.h; sourceTree = "<group>"; };
 		02652E39189FECF3003C9868 /* ColorBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorBuffer.cpp; sourceTree = "<group>"; };
 		02652E3A189FECF3003C9868 /* ColorBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorBuffer.h; sourceTree = "<group>"; };
 		0272234818BCE18A00F2FADD /* cooldragon.off */ = {isa = PBXFileReference; lastKnownFileType = text; path = cooldragon.off; sourceTree = "<group>"; };
@@ -301,6 +304,8 @@
 				02971D5618C77BD5005814BF /* MathHelper.h */,
 				02971D5718C872AC005814BF /* CameraMovement.cpp */,
 				02971D5818C872AC005814BF /* CameraMovement.h */,
+				023B439F18C8CE46002759C0 /* SkyBox.cpp */,
+				023B43A018C8CE46002759C0 /* SkyBox.h */,
 			);
 			path = GLModelViewer;
 			sourceTree = "<group>";
@@ -440,6 +445,7 @@
 				02CEA18C18A2C80300D026F8 /* ShadowPass.cpp in Sources */,
 				02DB2945189C5CC40055B56F /* geometry.vs in Sources */,
 				02C8ACE8189FAE67002DC3C6 /* MeshLoader.cpp in Sources */,
+				023B43A118C8CE46002759C0 /* SkyBox.cpp in Sources */,
 				02DB292F189B2CE10055B56F /* phong_shader.fs in Sources */,
 				02EA96DB18A7CD7500EC4B95 /* ToneMappingShader.cpp in Sources */,
 				02CB52C918A12F6600083115 /* ColorAttachment.cpp in Sources */,

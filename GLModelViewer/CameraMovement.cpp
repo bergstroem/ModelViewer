@@ -156,14 +156,14 @@ void CameraMovement::updateFPSMovement() {
     rotationPitch = CLAMP<float>(rotationPitch, -M_PI/2 + 0.02, +M_PI/2 - 0.02);
     
     if(glm::length(movement) > 0) {
-        movementDirection = glm::normalize(movement) * deltaTime;
+        movementDirection = glm::normalize(movement);
         
         velocity = glm::length(movement) * 4.0f;
     } else {
         velocity *= 0.95f;
     }
     
-    this->position += movementDirection * velocity;
+    this->position += movementDirection * velocity * deltaTime;
     
     lookatDirection = glm::vec3(1.0f * cosf(rotationPitch) * sinf(rotationYaw),
                                     1.0f * sinf(rotationPitch),
