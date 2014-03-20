@@ -9,6 +9,8 @@
 #include <iostream>
 #include "Mesh.h"
 
+#include <glew.h>
+
 void Mesh::init(std::size_t numVertices, Vertex* vertexData) {
     this->vertexBuffer.resize(numVertices);
     for (int i = 0; i < numVertices; i++) {
@@ -16,7 +18,18 @@ void Mesh::init(std::size_t numVertices, Vertex* vertexData) {
     }
 }
 
-
+void Mesh::flipNormals() {
+    // Flip ALL the normals
+    for(auto it = vertexBuffer.begin(); it != vertexBuffer.end(); it++) {
+        (*it).normal.x *= -1;
+        (*it).normal.y *= -1;
+        (*it).normal.z *= -1;
+    }
+    
+    glBindBuffer(GL_ARRAY_BUFFER, this->bufferId);
+    glBufferData(GL_ARRAY_BUFFER, this->vertexBuffer.size()*sizeof(Vertex), &(this->vertexBuffer[0]), GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
 
 void Mesh::loadBufferData() {
     // Create VAO to keep buffer and attribute states

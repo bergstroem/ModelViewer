@@ -10,15 +10,19 @@
 #define __GLModelViewer__SkyBox__
 
 #include "Mesh.h"
+#include <memory>
+#include "SceneNode.h"
+#include "glm/gtc/type_ptr.hpp"
 
 class SkyBox {
     unsigned int textureId;
-    Mesh mesh;
+    
 public:
+    SceneNode node;
     
     void init();
     void createTextures();
-    
+    void render();
 };
 
 #endif /* defined(__GLModelViewer__SkyBox__) */

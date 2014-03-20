@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <thread>
 #include "glm/glm.hpp"
 #include <cmath>
 #include "Mesh.h"
@@ -16,10 +17,11 @@
 #include "Constants.h"
 #include "MeshLoader.h"
 #include "LightProperties.h"
-#include "MathHelper.h"
 #include "CameraMovement.h"
+#include "ModelViewerWindow.h"
 #include <glew.h>
 #include <GLFW/glfw3.h>
+#include <gtkmm/application.h>
 
 #ifdef __APPLE__
 #include <OpenGL/glu.h>
@@ -30,7 +32,9 @@
 CameraMovement* movement;
 Camera camera;
 SceneRenderer renderer;
-
+bool shouldFlipNormals;
+bool shouldLoadFile;
+std::string filename;
 
 static void error_callback(int error, const char* description)
 {
@@ -41,12 +45,6 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
-    
-    if(key == GLFW_KEY_U && action == GLFW_PRESS) {
-        renderer.isDeferred = !renderer.isDeferred;
-
-        std::cout << "Deferred " << renderer.isDeferred << std::endl;
-    }
     
     if(key == GLFW_KEY_1 && action == GLFW_PRESS) {
         camera.setCameraProjection(PROJECTION_PERSPECTIVE);
@@ -70,15 +68,12 @@ void updateInput(GLFWwindow* window) {
 }
 
 void initGL() {
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
 }
 
 GLFWwindow* initGLWindow() {
     GLFWwindow* window;
-    
     
     glfwSetErrorCallback(error_callback);
     
@@ -126,6 +121,21 @@ std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
     return node;
 }
 
+int startGui(int argc, char** argv) {
+    Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.modelviewer");
+    
+    ModelViewerWindow gui;
+    gui.movement = movement;
+    gui.lightProperties = &renderer.lights[0]->properties;
+    gui.material = &renderer.nodes[0]->mesh->material;
+    gui.flipNormals = &shouldFlipNormals;
+    gui.fileName = &filename;
+    gui.shouldLoadFile = &shouldLoadFile;
+    
+    //Shows the window and returns when it is closed.
+    return app->run(gui);
+}
+
 int main(int argc, char** argv)
 {
     GLFWwindow* window = initGLWindow();
@@ -170,7 +180,7 @@ int main(int argc, char** argv)
     
     for(int i = 0; i < 2; i++) {
         std::string path(MODEL_PATH);
-        path.append("cooldragon.off");
+        path.append("space_station.off");
         auto node = createSceneNode(path);
         node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
         
@@ -179,17 +189,36 @@ int main(int argc, char** argv)
     
     renderer.nodes.push_back(floor);
     
+    std::thread first (startGui, argc, argv);
+    
     glfwSwapInterval(1); //0 to disable vsync, 1 to enable it
     
     while (!glfwWindowShouldClose(window))
     {
+        if(shouldFlipNormals) {
+            renderer.nodes[0]->mesh->flipNormals();
+            shouldFlipNormals = false;
+        }
+        
+        if(shouldLoadFile) {
+            auto& meshLoader = MeshLoader::getInstance();
+            std::string path(MODEL_PATH);
+            path.append(filename);
+            renderer.nodes[0] = createSceneNode(path);
+            renderer.nodes[0]->position = glm::vec3(-2.0f, -0.5f, -3.0f);
+            shouldLoadFile = false;
+        }
+        
         updateInput(window);
         
+        glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glClearColor(0.0, 0.0, 0.0, 0.0);
         
         //light->properties.position = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5f +  cosf(glfwGetTime()), 0.5f, -0.0f)) * glm::vec4(1.0f);
         
-        camera.position = movement->position;//movement->movementDirection;
+        
+        camera.position = movement->position;
         camera.target = camera.position + movement->lookatDirection;
         camera.update();
         
@@ -204,7 +233,6 @@ int main(int argc, char** argv)
     delete movement;
     
     glfwDestroyWindow(window);
-    
     glfwTerminate();
     exit(EXIT_SUCCESS);
 }

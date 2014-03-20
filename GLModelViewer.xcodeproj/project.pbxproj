@@ -8,9 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		023B43A118C8CE46002759C0 /* SkyBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 023B439F18C8CE46002759C0 /* SkyBox.cpp */; };
+		024FA8A418CA0D4700D34745 /* SkyBoxShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024FA8A218CA0D4700D34745 /* SkyBoxShader.cpp */; };
+		024FA8A618CA0DEC00D34745 /* skybox.fs in Sources */ = {isa = PBXBuildFile; fileRef = 024FA8A518CA0DEC00D34745 /* skybox.fs */; };
+		024FA8A818CA0F2500D34745 /* skybox.vs in Sources */ = {isa = PBXBuildFile; fileRef = 024FA8A718CA0F2500D34745 /* skybox.vs */; };
 		02652E3B189FECF3003C9868 /* ColorBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02652E39189FECF3003C9868 /* ColorBuffer.cpp */; };
 		0272234A18BCE1C700F2FADD /* GLModelViewer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */; };
 		027ACB2D189FEE5000B52103 /* GBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027ACB2B189FEE5000B52103 /* GBuffer.cpp */; };
+		02948DD918D855CD00E858AE /* libgtkmm-3.0.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 02948DD818D855CD00E858AE /* libgtkmm-3.0.1.dylib */; };
+		02948DDC18D8726000E858AE /* ModelViewerWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02948DDA18D8726000E858AE /* ModelViewerWindow.cpp */; };
 		02971D5218C734EA005814BF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02971D5018C734EA005814BF /* Camera.cpp */; };
 		02971D5518C76F21005814BF /* BezierCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02971D5318C76F21005814BF /* BezierCurve.cpp */; };
 		02971D5918C872AC005814BF /* CameraMovement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02971D5718C872AC005814BF /* CameraMovement.cpp */; };
@@ -71,11 +76,18 @@
 /* Begin PBXFileReference section */
 		023B439F18C8CE46002759C0 /* SkyBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkyBox.cpp; sourceTree = "<group>"; };
 		023B43A018C8CE46002759C0 /* SkyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyBox.h; sourceTree = "<group>"; };
+		024FA8A218CA0D4700D34745 /* SkyBoxShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkyBoxShader.cpp; sourceTree = "<group>"; };
+		024FA8A318CA0D4700D34745 /* SkyBoxShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyBoxShader.h; sourceTree = "<group>"; };
+		024FA8A518CA0DEC00D34745 /* skybox.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.fs; sourceTree = "<group>"; };
+		024FA8A718CA0F2500D34745 /* skybox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.vs; sourceTree = "<group>"; };
 		02652E39189FECF3003C9868 /* ColorBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorBuffer.cpp; sourceTree = "<group>"; };
 		02652E3A189FECF3003C9868 /* ColorBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorBuffer.h; sourceTree = "<group>"; };
 		0272234818BCE18A00F2FADD /* cooldragon.off */ = {isa = PBXFileReference; lastKnownFileType = text; path = cooldragon.off; sourceTree = "<group>"; };
 		027ACB2B189FEE5000B52103 /* GBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GBuffer.cpp; sourceTree = "<group>"; };
 		027ACB2C189FEE5000B52103 /* GBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBuffer.h; sourceTree = "<group>"; };
+		02948DD818D855CD00E858AE /* libgtkmm-3.0.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgtkmm-3.0.1.dylib"; path = "../../../../../../usr/local/Cellar/gtkmm3/3.10.1/lib/libgtkmm-3.0.1.dylib"; sourceTree = "<group>"; };
+		02948DDA18D8726000E858AE /* ModelViewerWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelViewerWindow.cpp; sourceTree = "<group>"; };
+		02948DDB18D8726000E858AE /* ModelViewerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelViewerWindow.h; sourceTree = "<group>"; };
 		02971D5018C734EA005814BF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		02971D5118C734EA005814BF /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		02971D5318C76F21005814BF /* BezierCurve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierCurve.cpp; sourceTree = "<group>"; };
@@ -162,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02948DD918D855CD00E858AE /* libgtkmm-3.0.1.dylib in Frameworks */,
 				02DB2939189B2F650055B56F /* libGLEW.1.10.0.dylib in Frameworks */,
 				02DB2937189B2F510055B56F /* libglfw3.3.0.dylib in Frameworks */,
 				02DB2935189B2F2E0055B56F /* OpenGL.framework in Frameworks */,
@@ -270,6 +283,7 @@
 		02DB27EF189B2CCC0055B56F = {
 			isa = PBXGroup;
 			children = (
+				02948DD818D855CD00E858AE /* libgtkmm-3.0.1.dylib */,
 				0272234718BCE18A00F2FADD /* off-files */,
 				02DB2938189B2F650055B56F /* libGLEW.1.10.0.dylib */,
 				02DB2936189B2F510055B56F /* libglfw3.3.0.dylib */,
@@ -306,6 +320,8 @@
 				02971D5818C872AC005814BF /* CameraMovement.h */,
 				023B439F18C8CE46002759C0 /* SkyBox.cpp */,
 				023B43A018C8CE46002759C0 /* SkyBox.h */,
+				02948DDA18D8726000E858AE /* ModelViewerWindow.cpp */,
+				02948DDB18D8726000E858AE /* ModelViewerWindow.h */,
 			);
 			path = GLModelViewer;
 			sourceTree = "<group>";
@@ -332,6 +348,8 @@
 				029D104218A25BD7009BC5DE /* PerspectivePassthroughShader.h */,
 				02EA96D918A7CD7500EC4B95 /* ToneMappingShader.cpp */,
 				02EA96DA18A7CD7500EC4B95 /* ToneMappingShader.h */,
+				024FA8A218CA0D4700D34745 /* SkyBoxShader.cpp */,
+				024FA8A318CA0D4700D34745 /* SkyBoxShader.h */,
 			);
 			name = shaders;
 			sourceTree = "<group>";
@@ -345,6 +363,8 @@
 				02DB2944189C5CC40055B56F /* geometry.vs */,
 				02DB2946189C5CD30055B56F /* geometry.fs */,
 				02EA96D718A7CD5300EC4B95 /* tone_mapping.fs */,
+				024FA8A518CA0DEC00D34745 /* skybox.fs */,
+				024FA8A718CA0F2500D34745 /* skybox.vs */,
 			);
 			name = glsl;
 			sourceTree = "<group>";
@@ -418,7 +438,9 @@
 				02DB293E189BBB0E0055B56F /* BlurPass.cpp in Sources */,
 				02DB294A189C64130055B56F /* GeometryShader.cpp in Sources */,
 				02DB2924189B2CE10055B56F /* FrameBuffer.cpp in Sources */,
+				024FA8A618CA0DEC00D34745 /* skybox.fs in Sources */,
 				029D104618A26248009BC5DE /* DeferredLightingPass.cpp in Sources */,
+				024FA8A818CA0F2500D34745 /* skybox.vs in Sources */,
 				02D0DDB9189DB53100CC1BE6 /* DeferredPhongShader.cpp in Sources */,
 				02DB2947189C5CD30055B56F /* geometry.fs in Sources */,
 				02CB52D018A2564800083115 /* DepthPass.cpp in Sources */,
@@ -435,6 +457,7 @@
 				02C9108F18A10ED7004A6C91 /* DepthAttachment.cpp in Sources */,
 				02DB292B189B2CE10055B56F /* SceneNode.cpp in Sources */,
 				029D103E18A25B84009BC5DE /* perspective_passthrough.vs in Sources */,
+				024FA8A418CA0D4700D34745 /* SkyBoxShader.cpp in Sources */,
 				02DB2930189B2CE10055B56F /* phong_shader.vs in Sources */,
 				02DB2923189B2CE10055B56F /* BlurShader.cpp in Sources */,
 				02DB2933189B2CE10055B56F /* UnitQuad.cpp in Sources */,
@@ -446,6 +469,7 @@
 				02DB2945189C5CC40055B56F /* geometry.vs in Sources */,
 				02C8ACE8189FAE67002DC3C6 /* MeshLoader.cpp in Sources */,
 				023B43A118C8CE46002759C0 /* SkyBox.cpp in Sources */,
+				02948DDC18D8726000E858AE /* ModelViewerWindow.cpp in Sources */,
 				02DB292F189B2CE10055B56F /* phong_shader.fs in Sources */,
 				02EA96DB18A7CD7500EC4B95 /* ToneMappingShader.cpp in Sources */,
 				02CB52C918A12F6600083115 /* ColorAttachment.cpp in Sources */,
@@ -537,9 +561,92 @@
 					"/usr/local/Cellar/glm/0.9.4.6/include/**",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					usr/local/Cellar/glfw3/3.0.3/lib,
 					/usr/local/Cellar/glew/1.10.0/lib,
 					/usr/local/Cellar/glfw3/3.0.3/lib,
+					/usr/local/Cellar/gtkmm3/3.10.1/lib,
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-D_REENTRANT",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/cairo",
+					"-I/opt/X11/include/pixman-1",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/freetype2",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/freetype2",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/libpng15",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/libpng15",
+					"-I/usr/local/Cellar/gtkmm3/3.10.1/include/gtkmm-3.0",
+					"-I/usr/local/Cellar/gtkmm3/3.10.1/lib/gtkmm-3.0/include",
+					"-I/usr/local/Cellar/atkmm/2.22.7/include/atkmm-1.6",
+					"-I/usr/local/Cellar/gtk+3/3.10.6/include/gtk-3.0/unix-print",
+					"-I/usr/local/Cellar/gtkmm3/3.10.1/include/gdkmm-3.0",
+					"-I/usr/local/Cellar/gtkmm3/3.10.1/lib/gdkmm-3.0/include",
+					"-I/usr/local/Cellar/glibmm/2.38.1/include/giomm-2.4",
+					"-I/usr/local/Cellar/glibmm/2.38.1/lib/giomm-2.4/include",
+					"-I/usr/local/Cellar/pangomm/2.34.0/include/pangomm-1.4",
+					"-I/usr/local/Cellar/pangomm/2.34.0/lib/pangomm-1.4/include",
+					"-I/usr/local/Cellar/glibmm/2.38.1/include/glibmm-2.4",
+					"-I/usr/local/Cellar/glibmm/2.38.1/lib/glibmm-2.4/include",
+					"-I/usr/local/Cellar/gtk+3/3.10.6/include/gtk-3.0",
+					"-I/usr/local/Cellar/at-spi2-atk/2.10.2/include/at-spi2-atk/2.0",
+					"-I/usr/local/Cellar/gtk+3/3.10.6/include/gtk-3.0",
+					"-I/usr/local/Cellar/glib/2.38.2/include/gio-unix-2.0/",
+					"-I/usr/local/Cellar/pango/1.36.1/include/pango-1.0",
+					"-I/usr/local/Cellar/harfbuzz/0.9.25/include/harfbuzz",
+					"-I/usr/local/Cellar/pango/1.36.1/include/pango-1.0",
+					"-I/usr/local/Cellar/atk/2.10.0/include/atk-1.0",
+					"-I/usr/local/Cellar/cairo/1.12.16/include/cairo",
+					"-I/usr/local/Cellar/cairomm/1.10.0/include/cairomm-1.0",
+					"-I/usr/local/Cellar/cairomm/1.10.0/lib/cairomm-1.0/include",
+					"-I/usr/local/Cellar/libsigc++/2.3.1/include/sigc++-2.0",
+					"-I/usr/local/Cellar/libsigc++/2.3.1/lib/sigc++-2.0/include",
+					"-I/usr/local/Cellar/gdk-pixbuf/2.30.1/include/gdk-pixbuf-2.0",
+					"-I/usr/local/Cellar/glib/2.38.2/include/glib-2.0",
+					"-I/usr/local/Cellar/glib/2.38.2/lib/glib-2.0/include",
+					"-I/usr/local/opt/gettext/include",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/X11/lib",
+					"-L/usr/local/Cellar/gtkmm3/3.10.1/lib",
+					"-L/usr/local/Cellar/atkmm/2.22.7/lib",
+					"-L/usr/local/Cellar/gtkmm3/3.10.1/lib",
+					"-L/usr/local/Cellar/glibmm/2.38.1/lib",
+					"-L/usr/local/Cellar/pangomm/2.34.0/lib",
+					"-L/usr/local/Cellar/glibmm/2.38.1/lib",
+					"-L/usr/local/Cellar/gtk+3/3.10.6/lib",
+					"-L/usr/local/Cellar/pango/1.36.1/lib",
+					"-L/usr/local/Cellar/atk/2.10.0/lib",
+					"-L/usr/local/Cellar/cairo/1.12.16/lib",
+					"-L/usr/local/Cellar/glib/2.38.2/lib",
+					"-L/usr/local/Cellar/cairomm/1.10.0/lib",
+					"-L/usr/local/Cellar/libsigc++/2.3.1/lib",
+					"-L/usr/local/Cellar/gdk-pixbuf/2.30.1/lib",
+					"-L/usr/local/Cellar/glib/2.38.2/lib",
+					"-L/usr/local/opt/gettext/lib",
+					"-lgtkmm-3.0",
+					"-latkmm-1.6",
+					"-lgdkmm-3.0",
+					"-lgiomm-2.4",
+					"-lpangomm-1.4",
+					"-lglibmm-2.4",
+					"-lgtk-3",
+					"-lgdk-3",
+					"-lpangocairo-1.0",
+					"-lpango-1.0",
+					"-latk-1.0",
+					"-lcairo-gobject",
+					"-lgio-2.0",
+					"-lcairomm-1.0",
+					"-lcairo",
+					"-lsigc-2.0",
+					"-lgdk_pixbuf-2.0",
+					"-lgobject-2.0",
+					"-lglib-2.0",
+					"-lintl",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -556,9 +663,92 @@
 					"/usr/local/Cellar/glm/0.9.4.6/include/**",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					usr/local/Cellar/glfw3/3.0.3/lib,
 					/usr/local/Cellar/glew/1.10.0/lib,
 					/usr/local/Cellar/glfw3/3.0.3/lib,
+					/usr/local/Cellar/gtkmm3/3.10.1/lib,
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-D_REENTRANT",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/cairo",
+					"-I/opt/X11/include/pixman-1",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/freetype2",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/freetype2",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/libpng15",
+					"-I/opt/X11/include",
+					"-I/opt/X11/include/libpng15",
+					"-I/usr/local/Cellar/gtkmm3/3.10.1/include/gtkmm-3.0",
+					"-I/usr/local/Cellar/gtkmm3/3.10.1/lib/gtkmm-3.0/include",
+					"-I/usr/local/Cellar/atkmm/2.22.7/include/atkmm-1.6",
+					"-I/usr/local/Cellar/gtk+3/3.10.6/include/gtk-3.0/unix-print",
+					"-I/usr/local/Cellar/gtkmm3/3.10.1/include/gdkmm-3.0",
+					"-I/usr/local/Cellar/gtkmm3/3.10.1/lib/gdkmm-3.0/include",
+					"-I/usr/local/Cellar/glibmm/2.38.1/include/giomm-2.4",
+					"-I/usr/local/Cellar/glibmm/2.38.1/lib/giomm-2.4/include",
+					"-I/usr/local/Cellar/pangomm/2.34.0/include/pangomm-1.4",
+					"-I/usr/local/Cellar/pangomm/2.34.0/lib/pangomm-1.4/include",
+					"-I/usr/local/Cellar/glibmm/2.38.1/include/glibmm-2.4",
+					"-I/usr/local/Cellar/glibmm/2.38.1/lib/glibmm-2.4/include",
+					"-I/usr/local/Cellar/gtk+3/3.10.6/include/gtk-3.0",
+					"-I/usr/local/Cellar/at-spi2-atk/2.10.2/include/at-spi2-atk/2.0",
+					"-I/usr/local/Cellar/gtk+3/3.10.6/include/gtk-3.0",
+					"-I/usr/local/Cellar/glib/2.38.2/include/gio-unix-2.0/",
+					"-I/usr/local/Cellar/pango/1.36.1/include/pango-1.0",
+					"-I/usr/local/Cellar/harfbuzz/0.9.25/include/harfbuzz",
+					"-I/usr/local/Cellar/pango/1.36.1/include/pango-1.0",
+					"-I/usr/local/Cellar/atk/2.10.0/include/atk-1.0",
+					"-I/usr/local/Cellar/cairo/1.12.16/include/cairo",
+					"-I/usr/local/Cellar/cairomm/1.10.0/include/cairomm-1.0",
+					"-I/usr/local/Cellar/cairomm/1.10.0/lib/cairomm-1.0/include",
+					"-I/usr/local/Cellar/libsigc++/2.3.1/include/sigc++-2.0",
+					"-I/usr/local/Cellar/libsigc++/2.3.1/lib/sigc++-2.0/include",
+					"-I/usr/local/Cellar/gdk-pixbuf/2.30.1/include/gdk-pixbuf-2.0",
+					"-I/usr/local/Cellar/glib/2.38.2/include/glib-2.0",
+					"-I/usr/local/Cellar/glib/2.38.2/lib/glib-2.0/include",
+					"-I/usr/local/opt/gettext/include",
+				);
+				OTHER_LDFLAGS = (
+					"-L/opt/X11/lib",
+					"-L/usr/local/Cellar/gtkmm3/3.10.1/lib",
+					"-L/usr/local/Cellar/atkmm/2.22.7/lib",
+					"-L/usr/local/Cellar/gtkmm3/3.10.1/lib",
+					"-L/usr/local/Cellar/glibmm/2.38.1/lib",
+					"-L/usr/local/Cellar/pangomm/2.34.0/lib",
+					"-L/usr/local/Cellar/glibmm/2.38.1/lib",
+					"-L/usr/local/Cellar/gtk+3/3.10.6/lib",
+					"-L/usr/local/Cellar/pango/1.36.1/lib",
+					"-L/usr/local/Cellar/atk/2.10.0/lib",
+					"-L/usr/local/Cellar/cairo/1.12.16/lib",
+					"-L/usr/local/Cellar/glib/2.38.2/lib",
+					"-L/usr/local/Cellar/cairomm/1.10.0/lib",
+					"-L/usr/local/Cellar/libsigc++/2.3.1/lib",
+					"-L/usr/local/Cellar/gdk-pixbuf/2.30.1/lib",
+					"-L/usr/local/Cellar/glib/2.38.2/lib",
+					"-L/usr/local/opt/gettext/lib",
+					"-lgtkmm-3.0",
+					"-latkmm-1.6",
+					"-lgdkmm-3.0",
+					"-lgiomm-2.4",
+					"-lpangomm-1.4",
+					"-lglibmm-2.4",
+					"-lgtk-3",
+					"-lgdk-3",
+					"-lpangocairo-1.0",
+					"-lpango-1.0",
+					"-latk-1.0",
+					"-lcairo-gobject",
+					"-lgio-2.0",
+					"-lcairomm-1.0",
+					"-lcairo",
+					"-lsigc-2.0",
+					"-lgdk_pixbuf-2.0",
+					"-lgobject-2.0",
+					"-lglib-2.0",
+					"-lintl",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

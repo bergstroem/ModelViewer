@@ -10,7 +10,7 @@
 #define __GLModelViewer__BezierCurve__
 
 #include "glm/gtc/type_ptr.hpp"
-#include "MathHelper.h"
+
 
 class BezierCurve {
 public:

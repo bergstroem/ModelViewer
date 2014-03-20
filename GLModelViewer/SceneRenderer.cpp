@@ -13,7 +13,6 @@
 
 void SceneRenderer::init(int width, int height) {
     
-    
     // Init geometry pass
     geometryPass.init(width, height);
     
@@ -23,7 +22,6 @@ void SceneRenderer::init(int width, int height) {
     
     toneMapping.init();
     passthrough.init();
-    
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(UnitQuad::CreateUnitQuad());
     screenNode.init(mesh);
@@ -62,6 +60,7 @@ void SceneRenderer::renderScene() {
     screenNode.render();
     
     glDepthMask(GL_TRUE);
-    deferredLightingPass. unbindBufferTextures();
+    
+    deferredLightingPass.unbindBufferTextures();
 }
 

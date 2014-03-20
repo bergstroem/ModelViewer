@@ -7,6 +7,7 @@
 //
 
 #include "BezierCurve.h"
+#include "MathHelper.h"
 
 glm::vec3 BezierCurve::getPosition(float t) {
     t = CLAMP(t, 0.0f, 1.0f);

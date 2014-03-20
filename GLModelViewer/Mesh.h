@@ -10,7 +10,6 @@
 #define ModelViewer_Mesh_h
 
 #include <vector>
-#include <GL/glew.h>
 #include "Constants.h"
 #include "Material.h"
 
@@ -49,6 +48,7 @@ public:
     void init(std::size_t numVertices, Vertex* vertexData);
     void loadBufferData();
     void unloadBufferData();
+    void flipNormals();
     
     void bind();
     void unbind();

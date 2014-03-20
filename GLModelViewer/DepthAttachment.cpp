@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include "DepthAttachment.h"
-
+#include <glew.h>
 
 DepthAttachment::~DepthAttachment() {
     glDeleteTextures(1, &textureId);

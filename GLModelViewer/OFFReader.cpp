@@ -18,7 +18,10 @@
 #include "glm/glm.hpp"
 #include "OFFReader.h"
 
+
 std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
+    
+    glm::vec3 largestVec;
     
     std::map<Vertex*, std::list<glm::vec3>> normalizationInfo;
     
@@ -43,6 +46,12 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
         if(!(stream >> x >> y >> z)) {
             throw std::runtime_error(fileReadError + " Could not read coordinates");
         }
+        glm::vec3 vec(x, y, z);
+        
+        if(glm::length(vec) > glm::length(largestVec)) {
+            largestVec = vec;
+        }
+        
         Vertex vert = {{x, y, z},{0.0f,0.0f,0.0f},{1.0f,1.0f,1.0f}};
         mesh->vertexBuffer[i] = vert;
     }
@@ -83,6 +92,11 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
             
             glm::vec3 triNormal = glm::cross(vec1, vec2);
             
+            Vector3 norm = {triNormal.x, triNormal.y, triNormal.z};
+            vertex1->normal = norm;
+            vertex2->normal = norm;
+            vertex3->normal = norm;
+            
             normalizationInfo[vertex1].push_back(triNormal);
             normalizationInfo[vertex2].push_back(triNormal);
             normalizationInfo[vertex3].push_back(triNormal);
@@ -107,7 +121,7 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
         switch (tokens.size()) {
             case 0:
                 // No colors!
-
+                
                 break;
             case 1:
                 // TODO: Color map? What color map?!
@@ -142,8 +156,16 @@ std::shared_ptr<Mesh> OFFReader::read(std::istream& stream) {
         
     }
     
+    double scaleFactor = glm::length(largestVec);
+    std::cout << scaleFactor << std::endl;
+    // Normalize mesh size
+    for (auto it = mesh->vertexBuffer.begin(); it != mesh->vertexBuffer.end(); it++) {
+        (*it).position.x /= scaleFactor;
+        (*it).position.y /= scaleFactor;
+        (*it).position.z /= scaleFactor;
+    }
     
-    //Normalize mesh
+    //Smooth mesh normals
     for(auto iterator = normalizationInfo.begin(); iterator != normalizationInfo.end(); iterator++) {
         
         glm::vec3 weightedNormal;

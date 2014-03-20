@@ -9,8 +9,6 @@
 #ifndef ModelViewer_Constants_h
 #define ModelViewer_Constants_h
 
-#include <GL/glew.h>
-
 #define SHADER_POSITION_LOCATION    0
 #define SHADER_NORMAL_LOCATION      1
 #define SHADER_COLOR_LOCATION       2
@@ -37,8 +35,12 @@ enum TextureIndex {
     // Shadow depth
     TEXTURE_SHADOW0_INDEX,
     
+    
+    
     NUM_TEXTURES
 };
+
+#define TEXTURE_CUBEMAP_INDEX 12
 
 
 #endif

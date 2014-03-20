@@ -68,6 +68,7 @@ void main() {
     vec3 normal = normalize(texture(normal_sampler, uv).xyz);
     float depth = texture(depth_sampler, uv).x * 2.0 - 1.0;
     
+    
     // If depht == 1 there is nothing there. No need to bother with calculations
     if(depth == 1.0) {
         discard;
@@ -88,7 +89,6 @@ void main() {
     vec3 shadow_coords = projectedPosLightPovNormal;
     
     // This 'normalization' is done after using it for light perspective retrival
-    // TODO: Find out why.
     worldSpace.xyz/=worldSpace.w;
     
     // Specular Lighting
@@ -140,5 +140,6 @@ void main() {
     }
     
     outColor = max(color, ambient);
+    outColor.a = 1.0;
 }
 
