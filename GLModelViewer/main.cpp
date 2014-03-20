@@ -126,7 +126,7 @@ int startGui(int argc, char** argv) {
     
     ModelViewerWindow gui;
     gui.movement = movement;
-    gui.lightProperties = &renderer.lights[0]->properties;
+    gui.lightProperties = &renderer.lights[1]->properties;
     gui.material = &renderer.nodes[0]->mesh->material;
     gui.flipNormals = &shouldFlipNormals;
     gui.fileName = &filename;
@@ -178,9 +178,9 @@ int main(int argc, char** argv)
     light1->properties = lightProperties1;
     renderer.lights.push_back(light1);
     
-    for(int i = 0; i < 2; i++) {
+    for(int i = 0; i < 1; i++) {
         std::string path(MODEL_PATH);
-        path.append("space_station.off");
+        path.append("cooldragon.off");
         auto node = createSceneNode(path);
         node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
         
@@ -215,7 +215,7 @@ int main(int argc, char** argv)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         glClearColor(0.0, 0.0, 0.0, 0.0);
         
-        //light->properties.position = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5f +  cosf(glfwGetTime()), 0.5f, -0.0f)) * glm::vec4(1.0f);
+        light->properties.position = glm::translate(glm::mat4(1.0f), glm::vec3(-2.5f +  cosf(glfwGetTime()), 0.5f, -0.0f)) * glm::vec4(1.0f);
         
         
         camera.position = movement->position;
