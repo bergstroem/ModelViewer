@@ -6,6 +6,8 @@ out vec4 outColor;
 
 uniform sampler2D color_sampler;
 
+uniform float exposure;
+
 #define A 0.15
 #define B 0.50
 #define C 0.10
@@ -25,7 +27,7 @@ void main()
     if(texColor.w == 0.0) {
         discard;
     }
-    texColor *= 64;
+    texColor *= exposure;
     float ExposureBias = 0.2f;
     vec4 curr = tonemap(ExposureBias*texColor);
     

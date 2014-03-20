@@ -17,7 +17,7 @@ void PassthroughShader::init() {
     this->setupBufferBindings();
 }
 
-void PassthroughShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
+void PassthroughShader::setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model) {
     Shader::setUniforms(proj, view, model);
     
     GLint colorSamplerId = glGetUniformLocation(this->programId, "color_sampler");

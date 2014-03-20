@@ -56,6 +56,7 @@ void SceneRenderer::renderScene() {
     glDepthMask(GL_FALSE);
     
     toneMapping.setUniforms(proj, view, screenNode.modelMatrix);
+    toneMapping.setExposure(exposure);
     
     screenNode.render();
     

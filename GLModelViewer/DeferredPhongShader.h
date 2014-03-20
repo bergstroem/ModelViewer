@@ -16,7 +16,7 @@
 class DeferredPhongShader : public Shader {
 public:
     void init();
-    void setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model);
+    void setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model);
     void setLightMvp(glm::mat4 mvp);
     void setLight(LightProperties light);
 };

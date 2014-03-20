@@ -33,6 +33,7 @@ protected:
     void on_smooth_movement_clicked();
     void on_light_position_digits_changed();
     void on_light_color_digits_changed();
+    void on_exposure_digits_changed();
     
     void on_material_digits_changed();
     
@@ -51,6 +52,9 @@ protected:
     
     Gtk::CheckButton flipNormalsCheckButton;
     Gtk::CheckButton smoothMovement;
+    
+    Gtk::SpinButton exposureSpinButton;
+    
     Gtk::Notebook settingsNotebook;
     
     Gtk::Box lightContainer;
@@ -102,6 +106,7 @@ public:
     bool* flipNormals;
     bool* shouldLoadFile;
     std::string* fileName;
+    float* exposure;
 };
 
 #endif /* defined(__GLModelViewer__ModelViewerWindow__) */

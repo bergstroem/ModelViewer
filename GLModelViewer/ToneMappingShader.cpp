@@ -18,10 +18,16 @@ void ToneMappingShader::init() {
     this->setupBufferBindings();
 }
 
-void ToneMappingShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
+void ToneMappingShader::setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model) {
     Shader::setUniforms(proj, view, model);
     
     GLint colorSamplerId = glGetUniformLocation(this->programId, "color_sampler");
     
     glUniform1i(colorSamplerId, TEXTURE_COLOR_INDEX);
+}
+
+void ToneMappingShader::setExposure(float exposure) {
+	GLint exposureId = glGetUniformLocation(this->programId, "exposure");
+    
+    glUniform1f(exposureId, exposure);
 }
