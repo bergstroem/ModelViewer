@@ -20,7 +20,7 @@ void PhongShader::init() {
     setupBufferBindings();
 }
 
-void PhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
+void PhongShader::setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model) {
     Shader::setUniforms(proj, view, model);
     
     GLint shadowSamplerId = glGetUniformLocation(this->programId, "shadow_sampler");

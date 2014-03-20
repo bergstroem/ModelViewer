@@ -26,9 +26,10 @@ void Mesh::flipNormals() {
         (*it).normal.z *= -1;
     }
     
+    bind();
     glBindBuffer(GL_ARRAY_BUFFER, this->bufferId);
     glBufferData(GL_ARRAY_BUFFER, this->vertexBuffer.size()*sizeof(Vertex), &(this->vertexBuffer[0]), GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    unbind();
 }
 
 void Mesh::loadBufferData() {

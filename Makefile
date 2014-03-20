@@ -1,9 +1,9 @@
-CC = clang
+CC = g++
 CPP_FILES = $(wildcard GLModelViewer/*.cpp)
 OBJ_FILES = $(addprefix obj/,$(notdir $(CPP_FILES:.cpp=.o)))
-INCLUDE = -I ./include -I /usr/include/qt4/
-LIBS = -L /usr/lib/x86_64-linux-gnu -L ./lib -lQtDeclarative -lQtGui -lQtCore -lQtOpenGL -lpthread -lglfw3 -lm -lGLEW -lGL -lGLU -lX11 -lXrandr -lXi
-CFLAGS = -std=c++11 -g -Wall $(INCLUDE) 
+INCLUDE = -I ./include -I ./include/GL
+LIBS = -L /usr/lib/x86_64-linux-gnu -L ./lib -lpthread -lglfw3 -lm -lGLEW -lGL -lGLU -lX11 -lXrandr -lXi `pkg-config gtkmm-3.0 --libs`
+CFLAGS = -std=c++11 -g -Wall $(INCLUDE) `pkg-config gtkmm-3.0 --cflags`
 
 bin/ModelViewer: $(OBJ_FILES)
 	$(CC) -o $@ $^ $(LIBS)

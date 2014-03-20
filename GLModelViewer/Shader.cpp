@@ -32,7 +32,7 @@ void Shader::use() {
     glUseProgram(this->programId);
 }
 
-void Shader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
+void Shader::setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model) {
     GLint projId = glGetUniformLocation(this->programId, "proj");
     GLint viewId = glGetUniformLocation(this->programId, "view");
     GLint modelId = glGetUniformLocation(this->programId, "model");

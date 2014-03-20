@@ -8,9 +8,7 @@
 
 #include "ModelViewerWindow.h"
 
-
-
-ModelViewerWindow::ModelViewerWindow()   // creates a new button with label "Hello World".
+ModelViewerWindow::ModelViewerWindow()
 {
     // Sets the border width of the window.
     set_border_width(10);
@@ -47,6 +45,10 @@ ModelViewerWindow::ModelViewerWindow()   // creates a new button with label "Hel
     flipNormalsCheckButton.signal_clicked().connect(sigc::mem_fun(*this, &ModelViewerWindow::on_flip_normals_clicked));
     flipNormalsCheckButton.show();
     
+   	initSpinButton(exposureSpinButton);
+    exposureSpinButton.show();
+    exposureSpinButton.signal_value_changed().connect( sigc::mem_fun(*this, &ModelViewerWindow::on_exposure_digits_changed) );
+    
     settingsNotebook.show();
     
     
@@ -62,6 +64,7 @@ ModelViewerWindow::ModelViewerWindow()   // creates a new button with label "Hel
     container.pack_start(settingsLabel, Gtk::PACK_SHRINK);
     container.pack_start(smoothMovement, Gtk::PACK_SHRINK);
     container.pack_start(flipNormalsCheckButton, Gtk::PACK_SHRINK);
+   	container.pack_start(exposureSpinButton, Gtk::PACK_SHRINK);
     container.pack_start(settingsNotebook);
     settingsNotebook.add(lightContainer);
     settingsNotebook.add(objectContainer);
@@ -243,6 +246,10 @@ void ModelViewerWindow::on_open_file_clicked() {
     // Open file
     (*fileName) = openFileEntry.get_text();
     (*shouldLoadFile) = true;
+}
+
+void ModelViewerWindow::on_exposure_digits_changed() {
+	(*exposure) = exposureSpinButton.get_value();
 }
 
 

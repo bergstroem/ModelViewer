@@ -19,7 +19,7 @@ void DeferredPhongShader::init() {
     this->setupBufferBindings();
 }
 
-void DeferredPhongShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
+void DeferredPhongShader::setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model) {
     Shader::setUniforms(proj, view, model);
     
     GLint normalSamplerId = glGetUniformLocation(this->programId, "normal_sampler");

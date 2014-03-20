@@ -17,7 +17,7 @@ class GeometryShader : public Shader {
 public:
     void setMaterial(Material material);
     void init();
-    void setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model);
+    void setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model);
 };
 
 #endif

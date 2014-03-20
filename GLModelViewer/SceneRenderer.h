@@ -22,8 +22,6 @@
 #include "DeferredLightingPass.h"
 #include "Light.h"
 #include "Camera.h"
-#include "SkyBox.h"
-#include "SkyBoxShader.h"
 
 class SceneRenderer {
     
@@ -44,6 +42,7 @@ public:
     glm::mat4 view;
     std::vector<std::shared_ptr<SceneNode>> nodes;
     std::vector<std::shared_ptr<Light>> lights;
+    float exposure;
         
     void init(int width, int height);
     void updateResolution(int width, int height);

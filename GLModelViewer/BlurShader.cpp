@@ -19,7 +19,7 @@ void BlurShader::init() {
     setupBufferBindings();
 }
 
-void BlurShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
+void BlurShader::setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model) {
     Shader::setUniforms(proj, view, model);
     
     GLint textureSamplerId = glGetUniformLocation(this->programId, "texture_sampler");

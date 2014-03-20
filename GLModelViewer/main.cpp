@@ -32,9 +32,10 @@
 CameraMovement* movement;
 Camera camera;
 SceneRenderer renderer;
-bool shouldFlipNormals;
-bool shouldLoadFile;
-std::string filename;
+bool shouldFlipNormals = false;
+bool shouldLoadFile = false;
+std::string filename = "cooldragon.off";
+ModelViewerWindow* gui;
 
 static void error_callback(int error, const char* description)
 {
@@ -124,16 +125,17 @@ std::shared_ptr<SceneNode> createSceneNode(std::string meshName) {
 int startGui(int argc, char** argv) {
     Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.modelviewer");
     
-    ModelViewerWindow gui;
-    gui.movement = movement;
-    gui.lightProperties = &renderer.lights[1]->properties;
-    gui.material = &renderer.nodes[0]->mesh->material;
-    gui.flipNormals = &shouldFlipNormals;
-    gui.fileName = &filename;
-    gui.shouldLoadFile = &shouldLoadFile;
+    gui = new ModelViewerWindow();
+    gui->movement = movement;
+    gui->lightProperties = &renderer.lights[1]->properties;
+    gui->material = &renderer.nodes[0]->mesh->material;
+    gui->flipNormals = &shouldFlipNormals;
+    gui->fileName = &filename;
+    gui->shouldLoadFile = &shouldLoadFile;
+    gui->exposure = &renderer.exposure;
     
     //Shows the window and returns when it is closed.
-    return app->run(gui);
+    return app->run(*gui);
 }
 
 int main(int argc, char** argv)
@@ -206,6 +208,8 @@ int main(int argc, char** argv)
             path.append(filename);
             renderer.nodes[0] = createSceneNode(path);
             renderer.nodes[0]->position = glm::vec3(-2.0f, -0.5f, -3.0f);
+            
+            gui->material = &renderer.nodes[0]->mesh->material;
             shouldLoadFile = false;
         }
         

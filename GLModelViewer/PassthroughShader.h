@@ -14,7 +14,7 @@
 class PassthroughShader : public Shader {
 public:
     void init();
-    void setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model);
+    void setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model);
 };
 
 

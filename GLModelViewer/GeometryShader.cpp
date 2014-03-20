@@ -23,7 +23,7 @@ void GeometryShader::setMaterial(Material material) {
     glBufferData(GL_UNIFORM_BUFFER, sizeof(Material), &material, GL_DYNAMIC_DRAW);
 }
 
-void GeometryShader::setUniforms(glm::mat4& proj, glm::mat4& view, glm::mat4& model) {
+void GeometryShader::setUniforms(glm::mat4 proj, glm::mat4 view, glm::mat4 model) {
     Shader::setUniforms(proj, view, model);
     
     // Move to base class?
