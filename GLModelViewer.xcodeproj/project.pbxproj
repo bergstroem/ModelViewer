@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		024FA8A418CA0D4700D34745 /* SkyBoxShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 024FA8A218CA0D4700D34745 /* SkyBoxShader.cpp */; };
-		024FA8A618CA0DEC00D34745 /* skybox.fs in Sources */ = {isa = PBXBuildFile; fileRef = 024FA8A518CA0DEC00D34745 /* skybox.fs */; };
-		024FA8A818CA0F2500D34745 /* skybox.vs in Sources */ = {isa = PBXBuildFile; fileRef = 024FA8A718CA0F2500D34745 /* skybox.vs */; };
 		02652E3B189FECF3003C9868 /* ColorBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02652E39189FECF3003C9868 /* ColorBuffer.cpp */; };
 		0272234A18BCE1C700F2FADD /* GLModelViewer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02DB27FD189B2CCC0055B56F /* GLModelViewer.1 */; };
 		027ACB2D189FEE5000B52103 /* GBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027ACB2B189FEE5000B52103 /* GBuffer.cpp */; };
 		02948DD918D855CD00E858AE /* libgtkmm-3.0.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 02948DD818D855CD00E858AE /* libgtkmm-3.0.1.dylib */; };
 		02948DDC18D8726000E858AE /* ModelViewerWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02948DDA18D8726000E858AE /* ModelViewerWindow.cpp */; };
+		02948DE218DB200600E858AE /* HDRPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02948DE018DB200600E858AE /* HDRPass.cpp */; };
+		02948DE518DB255000E858AE /* BloomPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02948DE318DB255000E858AE /* BloomPass.cpp */; };
+		02948DE918DB281700E858AE /* BloomShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02948DE718DB281700E858AE /* BloomShader.cpp */; };
 		02971D5218C734EA005814BF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02971D5018C734EA005814BF /* Camera.cpp */; };
 		02971D5518C76F21005814BF /* BezierCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02971D5318C76F21005814BF /* BezierCurve.cpp */; };
 		02971D5918C872AC005814BF /* CameraMovement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02971D5718C872AC005814BF /* CameraMovement.cpp */; };
@@ -73,10 +73,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		024FA8A218CA0D4700D34745 /* SkyBoxShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkyBoxShader.cpp; sourceTree = "<group>"; };
-		024FA8A318CA0D4700D34745 /* SkyBoxShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyBoxShader.h; sourceTree = "<group>"; };
-		024FA8A518CA0DEC00D34745 /* skybox.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.fs; sourceTree = "<group>"; };
-		024FA8A718CA0F2500D34745 /* skybox.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.vs; sourceTree = "<group>"; };
 		02652E39189FECF3003C9868 /* ColorBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorBuffer.cpp; sourceTree = "<group>"; };
 		02652E3A189FECF3003C9868 /* ColorBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorBuffer.h; sourceTree = "<group>"; };
 		0272234818BCE18A00F2FADD /* cooldragon.off */ = {isa = PBXFileReference; lastKnownFileType = text; path = cooldragon.off; sourceTree = "<group>"; };
@@ -85,6 +81,13 @@
 		02948DD818D855CD00E858AE /* libgtkmm-3.0.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgtkmm-3.0.1.dylib"; path = "../../../../../../usr/local/Cellar/gtkmm3/3.10.1/lib/libgtkmm-3.0.1.dylib"; sourceTree = "<group>"; };
 		02948DDA18D8726000E858AE /* ModelViewerWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelViewerWindow.cpp; sourceTree = "<group>"; };
 		02948DDB18D8726000E858AE /* ModelViewerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelViewerWindow.h; sourceTree = "<group>"; };
+		02948DE018DB200600E858AE /* HDRPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HDRPass.cpp; sourceTree = "<group>"; };
+		02948DE118DB200600E858AE /* HDRPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDRPass.h; sourceTree = "<group>"; };
+		02948DE318DB255000E858AE /* BloomPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomPass.cpp; sourceTree = "<group>"; };
+		02948DE418DB255000E858AE /* BloomPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BloomPass.h; sourceTree = "<group>"; };
+		02948DE618DB266A00E858AE /* bloom_shader.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bloom_shader.fs; sourceTree = "<group>"; };
+		02948DE718DB281700E858AE /* BloomShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomShader.cpp; sourceTree = "<group>"; };
+		02948DE818DB281700E858AE /* BloomShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BloomShader.h; sourceTree = "<group>"; };
 		02971D5018C734EA005814BF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		02971D5118C734EA005814BF /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		02971D5318C76F21005814BF /* BezierCurve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierCurve.cpp; sourceTree = "<group>"; };
@@ -261,6 +264,10 @@
 				029D104518A26248009BC5DE /* DeferredLightingPass.h */,
 				02CEA18A18A2C80300D026F8 /* ShadowPass.cpp */,
 				02CEA18B18A2C80300D026F8 /* ShadowPass.h */,
+				02948DE018DB200600E858AE /* HDRPass.cpp */,
+				02948DE118DB200600E858AE /* HDRPass.h */,
+				02948DE318DB255000E858AE /* BloomPass.cpp */,
+				02948DE418DB255000E858AE /* BloomPass.h */,
 			);
 			name = passes;
 			sourceTree = "<group>";
@@ -343,8 +350,8 @@
 				029D104218A25BD7009BC5DE /* PerspectivePassthroughShader.h */,
 				02EA96D918A7CD7500EC4B95 /* ToneMappingShader.cpp */,
 				02EA96DA18A7CD7500EC4B95 /* ToneMappingShader.h */,
-				024FA8A218CA0D4700D34745 /* SkyBoxShader.cpp */,
-				024FA8A318CA0D4700D34745 /* SkyBoxShader.h */,
+				02948DE718DB281700E858AE /* BloomShader.cpp */,
+				02948DE818DB281700E858AE /* BloomShader.h */,
 			);
 			name = shaders;
 			sourceTree = "<group>";
@@ -358,8 +365,7 @@
 				02DB2944189C5CC40055B56F /* geometry.vs */,
 				02DB2946189C5CD30055B56F /* geometry.fs */,
 				02EA96D718A7CD5300EC4B95 /* tone_mapping.fs */,
-				024FA8A518CA0DEC00D34745 /* skybox.fs */,
-				024FA8A718CA0F2500D34745 /* skybox.vs */,
+				02948DE618DB266A00E858AE /* bloom_shader.fs */,
 			);
 			name = glsl;
 			sourceTree = "<group>";
@@ -433,12 +439,11 @@
 				02DB293E189BBB0E0055B56F /* BlurPass.cpp in Sources */,
 				02DB294A189C64130055B56F /* GeometryShader.cpp in Sources */,
 				02DB2924189B2CE10055B56F /* FrameBuffer.cpp in Sources */,
-				024FA8A618CA0DEC00D34745 /* skybox.fs in Sources */,
 				029D104618A26248009BC5DE /* DeferredLightingPass.cpp in Sources */,
-				024FA8A818CA0F2500D34745 /* skybox.vs in Sources */,
 				02D0DDB9189DB53100CC1BE6 /* DeferredPhongShader.cpp in Sources */,
 				02DB2947189C5CD30055B56F /* geometry.fs in Sources */,
 				02CB52D018A2564800083115 /* DepthPass.cpp in Sources */,
+				02948DE218DB200600E858AE /* HDRPass.cpp in Sources */,
 				02DB2927189B2CE10055B56F /* main.cpp in Sources */,
 				02DB292E189B2CE10055B56F /* ShaderLoader.cpp in Sources */,
 				02971D5218C734EA005814BF /* Camera.cpp in Sources */,
@@ -448,11 +453,12 @@
 				02DB2929189B2CE10055B56F /* OFFReader.cpp in Sources */,
 				02A467A218A3E712002B4164 /* Light.cpp in Sources */,
 				02DB292C189B2CE10055B56F /* SceneRenderer.cpp in Sources */,
+				02948DE918DB281700E858AE /* BloomShader.cpp in Sources */,
 				029D104318A25BD7009BC5DE /* PerspectivePassthroughShader.cpp in Sources */,
 				02C9108F18A10ED7004A6C91 /* DepthAttachment.cpp in Sources */,
 				02DB292B189B2CE10055B56F /* SceneNode.cpp in Sources */,
 				029D103E18A25B84009BC5DE /* perspective_passthrough.vs in Sources */,
-				024FA8A418CA0D4700D34745 /* SkyBoxShader.cpp in Sources */,
+				02948DE518DB255000E858AE /* BloomPass.cpp in Sources */,
 				02DB2930189B2CE10055B56F /* phong_shader.vs in Sources */,
 				02DB2923189B2CE10055B56F /* BlurShader.cpp in Sources */,
 				02DB2933189B2CE10055B56F /* UnitQuad.cpp in Sources */,

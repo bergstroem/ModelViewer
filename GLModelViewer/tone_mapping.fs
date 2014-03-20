@@ -36,4 +36,5 @@ void main()
     
     // Account for gamma (2.2)
     outColor = vec4(pow(color,vec4(1/2.2)));
+    outColor.a = 1.0;
 }

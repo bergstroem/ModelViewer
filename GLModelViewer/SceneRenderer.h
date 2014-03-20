@@ -22,12 +22,14 @@
 #include "DeferredLightingPass.h"
 #include "Light.h"
 #include "Camera.h"
+#include "HDRPass.h"
 
 class SceneRenderer {
     
     // Render passes
     GeometryPass geometryPass;
     DeferredLightingPass deferredLightingPass;
+    HDRPass hdrPass;
     
     ToneMappingShader toneMapping;
     PassthroughShader passthrough;

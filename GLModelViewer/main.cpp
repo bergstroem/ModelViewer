@@ -166,14 +166,14 @@ int main(int argc, char** argv)
     floor->rotation = glm::rotate(glm::mat4(1.0f),-90.0f, glm::vec3(1.0, 0.0, 0.0));
     floor->scale = glm::scale(glm::mat4(1.0), glm::vec3(100.0f));
     
-    LightProperties lightProperties = LightFactory::Bright(glm::vec3(0.8, 0.9, 1.0));
+    LightProperties lightProperties = LightFactory::Bright(glm::vec3(1.0, 1.0, 1.0));
     lightProperties.position = glm::vec4(-2.0f, 2.0f, -1.0f, 1.0);
     lightProperties.direction = glm::vec4(0.0, -0.1, -1.0, 0.0);
     std::shared_ptr<Light> light(new Light);
     light->properties = lightProperties;
     renderer.lights.push_back(light);
     
-    LightProperties lightProperties1 = LightFactory::Bright(glm::vec3(0.8, 0.9, 1.0));
+    LightProperties lightProperties1 = LightFactory::Bright(glm::vec3(1.0, 1.0, 1.0));
     lightProperties1.position = glm::vec4(4.0f, 2.0f, -3.0f, 1.0);
     lightProperties1.direction = glm::vec4(-1.0, -0.1, 0.0, 0.0);
     std::shared_ptr<Light> light1(new Light);
@@ -203,7 +203,6 @@ int main(int argc, char** argv)
         }
         
         if(shouldLoadFile) {
-            auto& meshLoader = MeshLoader::getInstance();
             std::string path(MODEL_PATH);
             path.append(filename);
             renderer.nodes[0] = createSceneNode(path);

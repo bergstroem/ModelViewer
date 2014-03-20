@@ -20,6 +20,8 @@ void SceneRenderer::init(int width, int height) {
     auto buffer = geometryPass.getBuffer();
     deferredLightingPass.init(width, height, buffer->getDepthAttachment());
     
+    hdrPass.init(width, height, buffer->getDepthAttachment());
+    
     toneMapping.init();
     passthrough.init();
     
@@ -38,6 +40,8 @@ void SceneRenderer::updateResolution(int width, int height) {
     auto buffer = geometryPass.getBuffer();
     deferredLightingPass.resize(width, height, buffer->getDepthAttachment());
     
+    hdrPass.resize(width, height, buffer->getDepthAttachment());
+    
     this->width = width;
     this->height = height;
 }
@@ -48,20 +52,6 @@ void SceneRenderer::renderScene() {
     geometryPass.render(proj, view, nodes);
     deferredLightingPass.render(proj, view, (GBuffer*)geometryPass.getBuffer(), nodes, lights);
     
-    // Draw final pass to screen
-    deferredLightingPass.bindBufferTextures();
-    
-    toneMapping.use();
-    
-    glDepthMask(GL_FALSE);
-    
-    toneMapping.setUniforms(proj, view, screenNode.modelMatrix);
-    toneMapping.setExposure(exposure);
-    
-    screenNode.render();
-    
-    glDepthMask(GL_TRUE);
-    
-    deferredLightingPass.unbindBufferTextures();
+    hdrPass.render(proj, view, (ColorBuffer*)deferredLightingPass.getBuffer(), exposure);
 }
 
