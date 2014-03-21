@@ -179,15 +179,13 @@ int main(int argc, char** argv)
     std::shared_ptr<Light> light1(new Light);
     light1->properties = lightProperties1;
     renderer.lights.push_back(light1);
-    
-    for(int i = 0; i < 1; i++) {
-        std::string path(MODEL_PATH);
-        path.append("cooldragon.off");
-        auto node = createSceneNode(path);
-        node->position = glm::vec3(-2.0f, -0.5f, -3.0f * (i + 1));
+
+    std::string path(MODEL_PATH);
+    path.append("cooldragon.off");
+    auto node = createSceneNode(path);
+    node->position = glm::vec3(0.0f, 0.0f, -3.0f);
         
-        renderer.nodes.push_back(node);
-    }
+    renderer.nodes.push_back(node);
     
     renderer.nodes.push_back(floor);
     
